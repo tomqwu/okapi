@@ -1,0 +1,541 @@
+## gsl.med
+##
+## Sample gsl for med database. Although mostly meaningful, the entries
+## are meant as examples 
+##
+## Don't include terms ending in apostrophe as there's a bug (May 96)
+Fafter,:
+Fand,:
+Fanything,:
+Fbefore,:
+Fin,:
+Fnor,:
+Fnot,:
+Fof,:
+For,:
+Gblood glucose,:
+Gcesarean section,:
+Gfatty acid,:
+Gcatch up,:
+Gtracheal fluid,:
+Gvitamin a,:
+Gvitamin b,:
+Gvitamin c,:
+Gvitamin d,:
+Gvitamin e,:
+Ha,:
+Habout,:
+Hacross,:
+Hagain,:
+Hall,:
+Halmost,:
+Halong,:
+Halready,:
+Halso,:
+Halthough,:
+Halways,:
+Ham,:
+Hamong,:
+Han,:
+Hanother,:
+Hany,:
+Hare,:
+Harent,:
+Haround,:
+Has,:
+Hat,:
+Haway,:
+Hbe,:
+Hbecame,:
+Hbecause,:
+Hbecome,:
+Hbeen,:
+Hbegan,:
+Hbegin,:
+Hbehind,:
+Hbelieve,:
+Hbelow,:
+Hboth,:
+Hbrought,:
+Hbut,:
+Hby,:
+Hcame,:
+Hcan,:
+Hcannot,:
+Hcant,:
+Hcent,:
+Hcome,:
+Hcould,:
+Hdai,:
+Hdespite,:
+Hdid,:
+Hdidnt,:
+Hdo,:
+Hdoesnt,:
+Hdone,:
+Hdont,:
+Hdown,:
+Hduring,:
+Heach,:
+Hearlier,:
+Heither,:
+Henough,:
+Hetc,:
+Heven,:
+Hever,:
+Hevery,:
+Hfor,:
+Hfound,:
+Hfrom,:
+Hgave,:
+Hget,:
+Hgiven,:
+Hgo,:
+Hgone,:
+Hgot,:
+Hhad,:
+Hhadnt,:
+Hhas,:
+Hhasnt,:
+Hhave,:
+Hhavent,:
+Hhe,:
+Hheld,:
+Hher,:
+Hhere,:
+Hhes,:
+Hhim,:
+Hhimself,:
+Hhis,:
+Hhow,:
+Hhowever,:
+Hi'm,:
+Hif,:
+Himmediately,:
+Hinc,:
+Hindeed,:
+Hinstead,:
+Hinto,:
+His,:
+Hisnt,:
+Hit,:
+Hits,:
+Hitself,:
+Hlater,:
+Hlatest,:
+Hlet,:
+Hlike,:
+Hlonger,:
+Hlook,:
+Hlower,:
+Hmade,:
+Hmake,:
+Hmany,:
+Hmay,:
+Hmeanwhile,:
+Hmet,:
+Hmight,:
+Hmore,:
+Hmy,:
+Hnearly,:
+Hnever,:
+Hno,:
+Hnothing,:
+Hnow,:
+Hoff,:
+Hoften,:
+Hon,:
+Honli,:
+Hour,:
+Hout,:
+Hover,:
+Hparticular,:
+Hparticularly,:
+Hper,:
+Hpossible,:
+Hprobable,:
+Hprobably,:
+Hput,:
+Hquickly,:
+Hrather,:
+Hreally,:
+Hsaid,:
+Hsay,:
+Hsaying,:
+Hsee,:
+Hseek,:
+Hseem,:
+Hseen,:
+Hsent,:
+Hseveral,:
+Hshe,:
+Hshould,:
+Hshown,:
+Hsinc,:
+Hsmaller,:
+Hso,:
+Hsome,:
+Hsomething,:
+Hsoon,:
+Hspecial,:
+Hsuch,:
+Htake,:
+Htaken,:
+Htalk,:
+Htell,:
+Hthan,:
+Hthat,:
+Hthe,:
+Htheir,:
+Hthem,:
+Hthemselves,:
+Hthen,:
+Hthere,:
+Htherefore,:
+Hthese,:
+Hthey,:
+Htheyre,:
+Hthink,:
+Hthis,:
+Hthose,:
+Hthough,:
+Hthrough,:
+Hthus,:
+Hto,:
+Htold,:
+Htoo,:
+Htook,:
+Htry,:
+Huntil,:
+Hup,:
+Hupon,:
+Hwant,:
+Hwas,:
+Hwasnt,:
+Hwe're,:
+Hwe've,:
+Hwe,:
+Hwent,:
+Hwere,:
+Hwerent,:
+Hwhat,:
+Hwhen,:
+Hwhere,:
+Hwhether,:
+Hwhich,:
+Hwhile,:
+Hwho,:
+Hwhose,:
+Hwhy,:
+Hwill,:
+Hwith,:
+Hwithin,:
+Hwont,:
+Hwould,:
+Hwouldnt,:
+Hyet,:
+Hyou,:
+Hyour,:
+I0,:
+I1,:
+I10,:
+I100,:
+I1000,:
+I10000,:
+I11,:
+I12,:
+I13,:
+I14,:
+I15,:
+I16,:
+I17,:
+I18,:
+I19,:
+I1980,:
+I1981,:
+I1982,:
+I1983,:
+I1984,:
+I1985,:
+I1986,:
+I1987,:
+I1988,:
+I1989,:
+I1990,:
+I1991,:
+I1992,:
+I1993,:
+I1994,:
+I1995,:
+I1996,:
+I1997,:
+I1998,:
+I1999,:
+I2,:
+I20,:
+I200,:
+I2000,:
+I20000,:
+I21,:
+I22,:
+I23,:
+I24,:
+I25,:
+I26,:
+I27,:
+I28,:
+I29,:
+I3,:
+I30,:
+I300,:
+I31,:
+I35,:
+I4,:
+I40,:
+I400,:
+I45,:
+I5,:
+I50,:
+I500,:
+I6,:
+I60,:
+I7,:
+I70,:
+I8,:
+I80,:
+I89,:
+I9,:
+I90,:
+Iable,:
+Iabove,:
+Iactual,:
+Iagainst,:
+Iago,:
+Iallow,:
+Ianalysis,:
+Iappear,:
+Iask,:
+Iattempt,:
+Ib,:
+Iback,:
+Ibetween,:
+Ic,:
+Icall,:
+Icarry,:
+Iclose,:
+Icompare,:
+Icon,:
+Iconcern,:
+Iconsider,:
+Icost,:
+Id,:
+Idate,:
+Iday,:
+Idescribe,:
+Idollar,:
+Ie,:
+Iearly,:
+# Problem as effect also gsclass. Parse finds it here but it's indexed
+# as gsclass
+#Ieffect,:
+Iespecial,:
+Iexpect,:
+If,:
+Ifell,:
+Ifew,:
+Ifirst,:
+Ifollow,:
+Ifurther,:
+Ig,:
+Igive,:
+Igood,:
+Igreater,:
+Ih,:
+Ihappen,:
+Ihigh,:
+Ihigher,:
+Ihope,:
+Ii,:
+Iinclude,:
+Iinvolve,:
+Ij,:
+Ijust,:
+Ik,:
+Ikeep,:
+Iknow,:
+Il,:
+Ilarger,:
+Ilast,:
+Ilate,:
+Ileast,:
+Iless,:
+Ilikely,:
+Ilittle,:
+Ilong,:
+Im,:
+Imajor,:
+Ime,:
+Imonth,:
+Imost,:
+Imove,:
+Imuch,:
+Imust,:
+In,:
+Inear,:
+Ineed,:
+Inew,:
+Inext,:
+Inumber,:
+Io,:
+Iobtain,:
+Ionce,:
+Iorder,:
+Iother,:
+Iown,:
+Ip,:
+Ipart,:
+Ipeople,:
+Ipercent,:
+Iprevious,:
+Ipro,:
+Iproblem,:
+Iq,:
+Ir,:
+Irecent,:
+Irequire,:
+Iright,:
+Irun,:
+Is,:
+Isame,:
+Ishow,:
+Isold,:
+Ispecial,:
+Ist,:
+Istill,:
+Istudy,:
+Isure,:
+Isystem,:
+It,:
+Ithrough,:
+Itime,:
+Itoday,:
+Itogether,:
+Itoward,:
+Iu,:
+Iunder,:
+Iuse,:
+Iusual,:
+Iv,:
+Ivarious,:
+Ivery,:
+Iw,:
+Iway,:
+Iweek,:
+Iwell,:
+Iwithout,:
+Ix,:
+Iy,:
+Iyear,:
+Iyesterday,:
+Iz,:
+Sadministrative, administration,:
+Sadvertising, advertisement, adverts,:
+Saesthetic, esthetic,:
+Safrican, africa,:
+Salcoholism, drunkeness,:
+Saluminium, aluminum,:
+Samerican, america,:
+Sanalytical, analytic,:
+Santhropological, anthropology,:
+Santi smoking, no smoking, no-smoking, nonsmoking, non smoking, antismoking,:
+Sargentina, argentinian,:
+Sasia, asian, asiatic,:
+Sauto immune, autoimmune,:
+Sblow up, blowup,:
+Sbreak down, breakdown,:
+Sbreak off, breakoff,:
+Sbreak up, breakup,:
+Sbuild up, buildup,:
+Sbuilt in, builtin,:
+Schild, children, childhood,:
+Sclassify, classification,:
+Scleanup, clean up,:
+Sclose up, closeup,:
+Sco, company,:
+Scomparison, compare,:
+Scomputation, computational,:
+Scut back, cutback,:
+Scut off, cutoff,:
+Scut out, cutout,:
+Sdata base, database,:
+Sdie, dying, death,:
+Sdrop out, dropout,:
+Sdropin, drop in,:
+Senvironment, environmental,:
+Serosion, erode,:
+Sfade out, fadeout,:
+Sfailure, fail,:
+Sfall out, fallout,:
+Sfiber, fibre,:
+Sfoot, feet,:
+Sgases, gassing, gaseous, gas,:
+Sgrown up, grownup, adult,:
+Shaemophiliac, haemophilia,:
+Shandicapped, disadvantaged,:
+Shold out, holdout,:
+Simpact, effect,:
+Sin house, inhouse,:
+Sindustrial, industry,:
+Sinfra red, infrared,:
+Siq, intelligence quotient,:
+Sknock down, knockdown,:
+Sknock out, knockout,:
+Slay off, layoff,:
+Slay out, layout,:
+Slifesupport, life support,:
+Sline up, lineup,:
+Slongterm, longer term, long term,:
+Slook up, lookup,:
+Slow down, lowdown,:
+Sltd, limited,:
+Slunacy, lunatic, mad, madness, insane, insanity,:
+Smark up, mark-up, mark up,:
+Smouse, mice,:
+Snear-death, near death,:
+Snhs, national health service,:
+Soap, senior citizen, old age pensioner,:
+Spartially sighted, blind,:
+Sper cent, percent,:
+Sphenomenon, phenomena,:
+Sphilosophical, philosophy,:
+Sphysiological, physiology,:
+Spick up, pickup,:
+Spolymerisation, polymer,:
+Spsychiatric, psychiatry,:
+Spurchase, buying, bought, buyer, buy,:
+Sreligious, religion,:
+Sset up, setup,:
+Sshortterm, shorter term, short term,:
+Sshut down, shutdown,:
+Sshut off, shutoff,:
+Sshut out, shutout,:
+Sslow down, slowdown,:
+Sspeed up, speedup,:
+Sspin off, spinoff,:
+Sstd, sexually transmitted diseases, vd, venereal disease,:
+Stake off, takeoff,:
+Stake up, takeup, take-up,:
+Sturn off, turnoff,:
+Stv, television,:
+Suk, united kingdom, britain, great britain, british isles, gb, british,:
+Sunesco, united nations educational scientific and cultural organization,:
+Sup to date, up-to-date,:
+Susa, us of a, us, united states, united states of america,:
+Suv, ultra violet, ultraviolet,:
+Swarm up, warmup,:
+Swoman, women,:
+Sworldwide, world wide,:
+Swrite down, writedown,:
+Swrite off, writeoff,:
+Swrite up, writeup,:
+Sx ray, x-ray, xray,:

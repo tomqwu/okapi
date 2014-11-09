@@ -1,0 +1,1789 @@
+March 03
+
+bibdir. Note that 1-field dbs don't actually need a field number field
+in bibdir records. However, for simplicity, 1-field xml1 dbs will have
+one.
+
+bibdir. To accommodate XML-type Dbs with field lengths in the bibdir and
+fields not necessarily in the same order have introduced new db struct field
+dir_fdnumsize. This is 1 or 0. XML1-type bibdir looks like
+
+  <doc offset>[<fdnum><fdlen>] [nf repeats]
+
+All dbs now have dir_recsize (size of offset field -- 4 or 5);
+dir_lensize (size of field length field -- 0 for old dbs with more than
+1 field, 2 or 3 for others); and dir_fdnumsize (0 for old dbs, 1 for
+others). (2.5 6 Mar 03)
+
+Feb 03
+
+CTTF. There's no function which properly gets this. It should be a
+command as needed for term-pair scoring. (2.411)
+
+read_pf. Minor corrections. Not sure this is useful anyway.
+
+Jan 03
+
+read_mergefile. No longer produces empty line at start, and a separator
+char may be specified (default colon). Also Usage message extended. 22
+Jan 03.
+
+expand_pos..() functions. Altered field separator from : to . as colon
+often used in scripts as separator. 2.411 22/1/03
+
+read_si_new -> read_si and read_si -> read_si.old. These should be
+functionally identical anyway.
+
+get_dummyset(). Corrected bug in combining sets with no save. Sometime
+in the fairly recent past deletion of sets involved freeing their memory
+instead of just zeroing it as previously. This meant that get_dummyset()
+didn't allocate memory after the first call.
+
+Truth values in commands. N/n are not acceptable as n is a recognised
+WORD
+token. FALSE or NO are OK. This means some old progs and scripts may not
+work. I've modified expd.c, get_rs.c and rtgterms_pass2.c
+
+Nov 02
+
+phase2 (etc). While making a simplified version of this at least two
+shortcomings noticed: (1) initial decimal point not retained (.3 -> 3
+but 0.3 -> 0.3) and (2) "mixed style" initialisms get concatenated
+(B.B.C. I T V fails but B.B.C. ITV is fine). Second one would rarely
+happen. Treatment of hyphens is not good either.
+
+Oct 02
+
+EXTRACT. Bug discovered after 2.32b and up to 4.11 20021010. Coding typo
+in output_extracted_term. Corrected 11/10 on sanda and home Linux machine.
+
+In-memory indexes. Working on conversion between conventional indexes and
+in-memory ones of the type which have been used for this year's TREC filtering
+profile databases. There is an existing function ix_deconstruct() which
+reads secondary index and postings files and produces a streamer
+(i.e. the inverse of the ixf program). Output is a sequence of term
+records of the form
+
+  [<tl><term>[<posting>]<termstopper>]
+
+where <posting> is either <recnum><tf> (index type 10 or 11) or
+<recnum>[<pos>]<posstopper> (index type 8, 9, 12, 13)
+
+<recnum> may be 3 (index type 8, 9, 10) or 4 (11, 12, 13) bytes long
+(and in the future variable), and termstopper is an infinite recnum of
+the same length. The function has a facility for converting recnums from
+3 to 4 or 4 to 3 bytes.
+
+Existing <pos> records are always 32 bits, so <posstopper> is a 4-byte
+infinite value.
+
+The function is being extended to allow conversion from an index type
+with pos records to one without, the motivation being that at least
+initially memory indexes will not have positional information.
+
+There will then be a function which reads a streamer and constructs an
+in-memory index, arguments to include input and output index types.
+
+Aug 02
+
+Set type PARTIAL should indicate it shouldn't be used in a further merge
+operation, but it's never been implemented. In particular it applies to
+EPHEMERAL sets (latter new, for rapid throwaway merge and
+output). (2.411)
+
+July 02
+
+get_qterms. Note it only works for numeric query numbers in ascending
+order. 
+
+oldrscore. Removed (2.41)
+
+info attr=<name> written at last (2.41)
+
+May 02
+
+In-memory indexes. Working on conversion between conventional indexes and
+in-memory ones of the type which have been used for this year's TREC filtering
+profile databases. There is an existing function ix_deconstruct() which
+reads secondary index and postings files and produces a streamer
+(i.e. the inverse of the ixf program). Output is a sequence of term
+records of the form
+
+  [<tl><term>[<posting>]<termstopper>]
+
+where <posting> is either <recnum><tf> (index type 10 or 11) or
+<recnum>[<pos>]<posstopper> (index type 8, 9, 12, 13)
+
+<recnum> may be 3 (index type 8, 9, 10) or 4 (11, 12, 13) bytes long
+(and in the future variable), and termstopper is an infinite recnum of
+the same length. The function has a facility for converting recnums from
+3 to 4 or 4 to 3 bytes.
+
+Existing <pos> records are always 32 bits, so <posstopper> is a 4-byte
+infinte value.
+
+The function is being extended to allow conversion from an index type
+with pos records to one without, the motivation being that at least
+initially memory indexes will not have positional information.
+
+There will then be a function which reads a streamer and constructs an
+in-memory index, arguments to include input and output index types.
+
+New posting type bit HAS_INDEX_WT. This is used where termweights vary
+from document to document, as in databases of queries, but docs are to
+be SHOWn in natural order. (There ought to be some way of SHOWing in
+natural order anyway; unfortunately SHOW always uses get_pstg_n() which
+relies on there being an index into either weight-order or natural order
+postings, so would either have to re-sort or else introduce an
+additional set of pointers into the setrecs.
+
+Alternative might be a way of copying the set into one of the other
+type. 
+
+
+BM25/2500 etc. Up to now 25 (etc) have used default k1 and b values
+regardless of any specified values; 2500 (etc) have used default only if
+there are no specified values. From 2.41_alpha 24 May 02 both 25 and
+2500 behave as 2500 has up to now (2500 etc are obsolete but will be
+accepted and translated automatically to, and logged as, 25 etc).
+
+April 02
+
+ix_volsize. Provided LARGEFILES is specified (and supported) at compile
+time default is 4095 (MB), and this is as much as can be addressed with
+a 32-bit file offset in the SI. However, larger values are not rejected
+(by read_db_desc()) and overflows are not detected (by ixf). Index types
+could be automatically converted from 8/9/10 to 12/13/11 (resp) with an
+advisory message output.
+
+Inappropriate index types. There doesn't seem to be anything even to
+warn that index types 9 and 13 don't really have the right type of
+positional records for text-type databases.
+
+Profile-type databases. Note read_db_desc should correct some fields
+(e.g. nf must be 1) and issue warnings if the db_type field contains
+"profile".
+
+One-field dbs. Now by default have length as well as offset stored in
+separate directory-type file (called .bibdrl to distinguish it from
+.bibdir), so docs have no header section. The directory records are 6,
+7 or 8 bytes long according as the address field is 4 or 5 bytes and
+the data type is text or non-text. For simplicity, rec_mult is forced
+to 1 and fixed to zero (latter is obsolete anyway and will soon be
+removed). All new one-field dbs will be of this type, but existing
+ones with .bibdir file are usable provided no_drl=1 is specified. 
+
+"Info rn=..." command. Gives incorrect record length for non-text
+dbs. Has probably been like this for some time, up to early
+2.4. Corrected in 2.4_alpha 27 Apr 02.
+
+Function extract() (bss_extract.c). Altered "literal" case so that (1)
+trailing white space is removed and (2) treated "no source" case
+separately.
+
+Strip trailing white space. New function (utils.c) stws() removes trailing white space from string of given length, returning new length.
+
+Reading file into buffer. New function (utils.c) readcstr() reads from
+a stream into a buffer until a terminating character has been read or
+MAX - 1 chars have been read.
+
+Index status files. There is a new file <index stem>.st containing cttf,
+tnp, tnt, total_termlength (one per line, the first token on the
+line). ixf will generate these in future, but there is a script
+$OKAPI/lib/make_st_file which will generate it retrospectively using
+read_si_new. read_si_new (and read_si) for some reason is giving
+incorrect results with the very large vlc98 secondary index.
+
+Term extraction/parsing. See note at head of extract_text().
+
+Mar 02
+
+read_si_new. New version of read_si ($OKAPI/src/misc) using new
+functions read_itr_seq() (ixsubs.c) and parse_itr()
+(bss_lookup.c). These functions (and the prog) only work for index types
+>=8 and <=13.
+
+Secondary index chunksize. This is now a field in the index
+struct. Previously it's always been a define SCHUNKSIZE (8K). However,
+until it's incorporated in a parameter ixinit() always sets it to
+SCHUNKSIZE, and it's also fixed in ixf. In deconstruct_index it's an
+argument, but giving zero defaults it to SCHUNKSIZE. (2.4_alpha
+20020307)
+
+Jan 02
+
+New conversion script line_to_exch takes single line input and outputs
+1-field Okapi exchange format (used for making trial filtering profile
+databases).
+
+Dec 01
+
+New script get_wordlist_from_si. Produces <term>:<np>:<ttf> from .si
+file.
+
+expand_query script. Should be able to specify opcode for the pilot
+search. Needs another arg. (Though can be done using env BSS_OP.)
+
+Sep 01
+
+prepare_paras() & db struct. Deleted nopars and replaced with parstat
+which holds a number of possible values which are the return values from
+prepare_paras(). Now much better passage file error
+trapping. (prepare_paras() is only used from bss_do_combine() and
+get_rec_info_text().) 2.32b 5 Sep 01.
+
+open_db(). Flags argument no longer has any effect; not needed as files
+are opened/read etc if and when required. 2.32b 5 Sep 01
+
+2.32a closed 4 Sep 01. Started 2.32b. There is a windows version of
+almost the most recent 2.32a.
+
+Aug 01
+
+ix1 memory allocation. Increased default memory allocation from 4 to 20
+MB.
+
+ix1. New header file bss_indexing.h. 
+
+SHOWing IRNs only. Formats 253/4/5 don't show any of the document
+content, just info from postings, but SHOW has always read at least part
+of the record, redundantly. To speed these formats bss_show() and
+bss_getrec_raw() have been altered so that the doc is not read
+(bss_getrec_raw with fdnum = -2 does it). 2.32a from late 20010828 on
+Solaris.
+
+Combining sets which have passage info. THe passage info is lost and
+weights spurious as it adds the weight of best passage in one set to
+ditto in the other, which may of course not be the same passage. Told
+Sue Dumais not an easy thing to get round. must do passage combine in
+single go on atomic sets. However, BSS should intercept, warn and do
+something appropriate.
+
+SHOW command; passage searching. Sue Dumais asks for format which just
+outputs best passage.
+
+Indexing regimes. Sue Dumais has asked for retention of case info.
+
+weights of absent terms. Discussion with SER. Some argument for cutting
+off at some small n, or at least treat n=0 as n=1. Haven't altered
+weight function but in extract_from_docs have treated n=0 as n=1.
+
+convert_runtime: As it stands I think it would terminate a record and
+perhaps a run if getchar() returned EOF (-1). It should be checking file
+condition instead.
+
+Memory in ix1. I think default should be at least 20 (present 4MB) in
+view of few machines now having less than 64MB and most 128 or more.
+
+July 01
+
+expand_query. How does it behave with "genuine" term-pair input queries?
+
+gq (etc). If pairs (-p) specified and there's only one term an error
+message is output by gawk, although result is OK. Also, should obtain
+CTTF for itself (though makes incompatible with BSS pre-2.29 -- Feb
+2000).
+
+make_parafile. I believe coredumps if invoked with no args.
+
+June 01
+
+EXTRACT command. Can now specify field by mnemonic (case independent) as
+well as by number. Later I might allow synonymous names separated by
+vertical bar (as for attributes). (2.32a late June 01, installed 29
+June)
+
+rscore(). Incorrect call of n_choose_r() with args cast to doubles (but
+it didn't weem to make any difference). Corrected. (2.32a 29/6/01)
+
+convert_runtime (Windows version at least). Doesn't appear to work
+properly with large files, at least when appending.
+
+SHOWing passage search output (e.g. format 100). Records not sequenced
+in descending weight order because I missed altering pstg.weight to
+pstg.score when implementing new score functions. (2.32a to 29/6/01)
+This has been done.
+
+May 01
+
+bss_show(). RECORD_OUT_OF_RANGE error doesn't occur because
+check_set_rec() returns NO_SUCH_RECORD before getrec_raw() is
+called. Tidy this up sometime.
+
+SHOW command, NOERROR=<tvalue> qualifier. From 2.32a 220501 you can
+specify NOERROR=<tvalue> in a SHOW command. This cancels the error
+condition only in the case of NO_SUCH_RECORD, not
+RECORD_OUT_OF_RANGE_DB. 
+
+SHOW command. Users are advised not to use the "n" qualifier as there's
+no overflow check, rather just to call SHOW n times. However, in a
+script overrunning the end of a set produces error messages, which
+doesn't happen using the qualifier. See above.
+
+sscanf(). %[ doesn't work with empty input. Wrote strdcpy() (utils.c) to
+get round this (for extract_from_docs).
+
+stem with portspell. Initial "ae" not changed to "e" although "oe"
+is. This looks to be intentional, but I can't think why.
+
+gq. There's a missed colon in the USAGE message (output).
+
+get_qterms scripts (used by gq etc). If env var TREC_TOPICFILE is set
+it's supposed to use this instead of the standard topic files. If the
+file isn't readable it silently uses the standard one for the topic
+number. If the file is readable but doesn't contain the topic number
+get_qterms silently outputs nothing. Probably in both these cases an
+error should be reported.
+
+COMBINE. bss_combine() doesn't seem to trap trying to combine too many
+sets. 
+
+Apr 01
+
+rscore. Note bss_get_tnt() is a complete bodge. (2.32a) 
+
+Suggest if udq reused rename new_udq udq and amend newrscore to
+rscore. Note that extract_from_docs produces rscore (not oldrscore or
+newrscore) by default.
+
+oldrscore will be withdrawn when I get round to it.
+
+i1_main.c. Other minor changes (besides below).
+
+BSS command SILENT. Inhibits user prompt, equiv to doing i1+
+-silent. (2.32a 20010402, i1_main.c)
+
+Enhanced WEIGHT conmmand. Weight commands (actually done a few months
+ago) can take an argument wtfactor=<positive real>. This multiplies the
+weight. 
+
+Term weighting script weight_terms. Now exits with EM if no database in
+env or specified. However, like many other scripts, doesn't trap BSS
+errors. Note script could be simplified now by giving qtf, k3 and
+wtfactor at BSS level instead of in awk. (2.32a)
+
+Mar 01
+
+Set combination and weighting preliminaries. bss_combine() renamed
+bss_do_combine() to avoid confusion with the functions which actually do
+the combine. Set record may now under appropriate conditions record all
+the weighting parameters including k3. For atomic input sets query term
+frequency may be given and if qtf > 1 and k3 > 0 weights are
+recalculated before entering the merge. (The qtf are of course function
+arguments.) Motivation for this is possible requirement that auxiliary
+weight (score function != 0 ) shall not depend on tf and possibly not on
+qtf. 
+
+Duplicate sets in combine op: bug: ADJ fails to output positional info
+when set is ADJed with itself. (But AND, SAMEF, SAMES and NEAR all OK.)
+Certainly back to 2.3 and probably earlier, maybe always. Should we
+disallow repeated set, ignore (but some ops don't make sense with single
+set), or warn? I incline towards counting as error.
+
+adj_no_good field in setrec. Obsolescent. In effect to be replaced by
+not Q_ATOMIC. 
+
+Log regression ops. All references removed (2.32a).
+
+New weight function k3mult(k3, qtf) returns (k3+1)qtf/(k3+qtf), possibly
+to be used with new score functions.
+
+SER's new score functions have been added to bss_combine_pass() only,
+for evaluation (initially not very encouraging). They are only
+implemented for combinations of weighted (quasi-)atomic sets.
+
+Several additions have been made to bss_setrec struct and the posting
+struct. 
+
+In particular, a QA set may now need to know its query term weight,
+possibly without any query term frequency modification. All postings now
+store what used to be weight in a score field. Postings scored using
+score functions other than zero also have weight (wt) and auxiliary
+weight (auxwt) fields.
+
+Jan 01
+
+String storage for parser. _q_attr etc could surely be pointer not
+array, speeding initialization.
+
+Dec 00
+
+New term weighting script. This is weight_terms. It provides a facility
+for applying an "importance factor" to each term, which multiplies any
+of the standard BSS weights. Minimum input is term, but in addition to
+importance factor one can specify qtf and r. Optional arguments include
+k3 and R. Output lines are just <term>:<weight>. It's likely, though,
+that a weight importance factor will be added as an optional argument to
+the WEIGHT command in the next BSS minor release (2.32).
+
+Nov 00
+
+NOT3. Could it work on unweighted sets? (If all positional records
+belong to the "negative" set this presumably implies that the posting
+can be removed. Wouldn't work if no positional info of course. Also
+necessary that any part of a document gives rise to a unique set of
+index terms (e.g. could fail if stems and unstemmed terms in same index.))
+
+Oct 00
+
+get_qterms scripts. Dave Ellworthy pointed out that the Cygwin version
+doesn't remove "Topic:" from the title field of topics 1 - 200. The
+Solaris version is OK, but the intermediate versions .strictly_neg (same
+as get_qterms but no removal of negatives) and .intermediate (same as
+get_qterms but slightly smaller narr and desc stoplist) were not
+right. Altered "Topic:" to "Topic" in both these and in the Cygwin
+version. (I don't suppose the "intermediate" will ever be needed.)
+
+Posting types. Should a posting know its own type? 255 would probably be
+enough but would this be a wasted byte since a posting always belongs to
+a set, and a set has a pstgtype field? It's neater though, makes
+functions more self-contained, more OO, ..
+
+Sep 00
+
+SHOW. Added format 36: whole raw doc (same as format 3 without
+header). Highlighting would work. (2.31 27/9/00). Note format 37, whole
+raw doc with default field and record marks, was added sometime in the
+last year or two and isn't documented (believe no highlighting in 37).
+
+rscore etc. SER pointed out a mistake: it should use TNT (vocab size)
+not CTTF. The correct version was named newrscore in ?late 2.291 and
+2.3. In 2.31 the correct version is rscore and the old one has been temp
+retained as oldrscore.
+
+setup_pstgs(), open_pstgs(), close_pstgs(). Tidied up for case where MEM
+is specified but mmap() not supported. Added s_free() called by
+close_pstgs() when SET_BIGREAD has been done (so sflags[0] and
+MEM_MALLOC). It might be a good idea to be able to specify BIGREAD for
+individual sets (even when memory mapping supported). Also, sometime,
+check if KEEP works... (2.31 13/9/00)
+
+cpwd() (utils.c). Cast void * to char ** to avoid compiler warnings
+(also bss_protos.c) (arg was void **). (2.31 7/9/00)
+
+i1+. Every time choose command issued it looks for BSS_ATTRIBUTE and
+sets it if present. (2.31 7/9/00)
+
+i1+. Flag -diag removed (didn't do anything). (2.31 7/9/00)
+
+i1+ now supports -v[ersion] -- outputs BSS version and date to stdout
+and exits. (2.31 7/9/00)
+
+Aug-Sep 00
+
+Many minor BSS code changes during porting to Windows. These should not
+have caused any functional changes, though some features don't work on
+Windows (e.g. automatic STOP signal to ix1 when disk space low).
+
+July 00
+
+ix1. The -trial <trialnum> arg doesn't work so defining NO_TRIAL for
+now. 
+
+extwd() function. Could do with an additional arg containing chars which
+can start a word (in addition to alphanumerics). This could be used to
+allow tokens starting with e.g. $, %, _.. (There could be predefined
+classes of acceptable tokens to reduce character processing to a single
+logical op, along the lines of isalnum() etc.)
+
+Changes 2.291-2.3. These are mostly in connection with porting to
+Windows (NT and 2000). Top of defines.h now has a lot of O/S dependent
+stuff, some of which was previously and wrongly in site.*.h
+
+Concatenation of databases (suggestion of SER). Provided the parameters
+are compatible there's nothing I can see against concatenating docs and
+bibdirs, also para files and pardirs. New parameter file could be
+constructed using a script.
+
+June 00
+
+The get_qterms scripts have all been altered so that they work with
+alphanumeric topic "numbers" and unsorted topic files. Could be slightly
+slower. Note there are about 5 scripts with slight differences. Only two
+are SCCSed. Silly, but I haven't time to rationalise them.
+
+WEIGHT command. Forced k3 = 0 for functions 5 and 6 as makes no sense
+(func bss_assign_weight_ln()). (2.291 28/6)
+
+WEIGHT command. For functions 5 and 6 (ops bm40/bm41) tnp and cttf
+should be obtained automatically. At present there's no way of getting
+tnp, so I've left them both as arguments to the WEIGHT command (and so
+of bss_assign_weight_ln()).
+
+
+Most LIMIT functions restored (2.291 12/6). (Though not the actual LIMIT
+command.)
+
+New SHOW format 253 outputs IRN and weight (cf 254) (2.291 13/6)
+
+May 00
+
+COMBINE. The varieties using gqsort with the existing comparison
+function failed sometimes when sorting positional records for a fourth
+field (bss_combine_bm() was OK as it used gqsort_int(), which has an
+internal unsigned compare). All now use gqsort_int (2.291 20000531), and
+the comparison function has also been corrected so that it could be used
+if desired. (The mistake was returning the difference of two unsigned
+values as an int.)
+
+April 00
+
+Libraries. Have been using shared objects instead of static libraries.
+
+DOCLENS: treatment of absence of doclens files. bss_combine() now bums
+out with DOCLENS_MIXED_ATTRIBUTE or CANT_GET_DOCLENS -- errors, not
+warnings. (2.291 4/4/00)
+
+March 00
+
+DUMP & DISPLAY. Has been for some time a command DUMP [set=<>] TTF/NP
+with response ttf <ttf> etc. Now in 2.291 have DISPLAY TTF/NP which
+outputs the saved values of last_ttf, last_n as <ttf> etc (can't specify
+a set); but the DUMP commands were deleted. This prevented the n_ttf
+script from working, also made it impossible to go directly to a
+specified set. Restored 28/3/00 2.291.
+
+extract(). For conformity with the BSS daemon, the arrays buf2 and
+outtokens made static and malloc'd instead of on stack; they're never
+freed at the moment (nor realloc'd). 2.291
+
+BM40. See bm40.txt
+
+GSL errors should be handled (see read_gsl() and email to Efthimis
+20/3/00).
+
+EXTRACT command should know which field(s) to use, based on the
+attribute (if one is specified). Also it should be possible to
+EXTRACT specifying GSL, regime and stem function instead of an
+attribute; in such a case field(s) would have to be given, of
+course. See, e.g., the script get-irn_term_tf
+
+get_qterms script (and thence gq). Since changes aimed at isolating
+words from topic fields "Topic:" in title field wasn't being
+matched. Hence removed colon from match string. This affects topics1-6,
+not the more recent ones.
+
+Feb 00
+
+
+cttf: collection total term frequency, # indexed tokens. Needed for new
+Robertson term selection score rscore (but see above, it should have
+been CTTF not TNT). Realised that doclens in terms of indexed tokens no
+good for paragraph scoring (since paragraph makeup file contains byte
+offsets and byte lengths). Hence reverting for now to old type doclens
+and calculating cttf by dividing avedoclen by a factor LEN_TO_TOK_FACTOR
+(in bss_funcs.c, currently 11) and multiplying by N. This seemed
+approximately right for a selection of three databases, at least for
+keyword indexes. (2.29 from 18 Feb 00). Sometime we might start keeping
+both types of doclength as part of an index. Supersedes note below under
+Dec 99.
+
+Saving sets. A method for saving sets from a BSS session and using them
+as input in a subsequent session ("reconstituting" them), is
+needed. I've always shied off designing this; the complications are
+considerable. Probably the thing to do is to save a packed image of all
+the postings, perhaps together with a weight-order map if applicable,
+preceded by a header giving time, database, makeup?, .. ??
+
+Allocating more than MAXINT bytes of memory. None of malloc, sbrk, mmap
+allow this to be done inone go (as far as I can see). I haven't done
+anything about this, but something is needed (e.g. a set could possibly
+need more memory than this).
+
+4 Jan 00
+
+Passage searches. Doclengths file now indexed terms instead of raw
+characters. But paragraph file (has to) record contain character
+offsets. Therefore passage lengths and average doclength are not
+compatible. Must do something urgently!
+
+Dec 99
+
+Doclens and cttf (see below). I've made read_pf output doclens records
+consisting of the number of indexed terms for each document for the
+attribute. It should be possible to use these new-type doclens files
+with old releases. Note that for passage searching passage_avedoclen
+must be set to something sensible (as a proportion of the new doclength).
+
+Extract command with "sources=0". Header (number of terms) has been
+wrong as it counts stop terms which aren't in the output. I've put this
+right in 2.29_beta 991206.
+
+Indexes with no positional info. There may be a rather obscure bug
+somewhere in the indexing. These indexes tend to have a few more
+postings than ones with positional info and on examining specific cases
+the term in question can't be found. Differences are likely in numbers
+(e.g. 0 or 1). I have also found cases where a posting appears only in
+an index with pos info. The diagnosis isn't obvious.
+
+Doclens & cttf. Doclens have up to now been total length in characters of
+the indexed fields. So that cttf can be calculated without scanning
+right through the dictionary file (as sigma(doclens)), and it's also in
+some sense more realistic, I think doclen should be measured by the
+number of indexed terms. There is a possible problem if it came to
+alternative or duplicated keys. Running ix1 with arg -termunit (and
+-doclens) makes this kind of doclens file. A cttf command has been
+added. This gives results up to about ten times too large if the doclens
+file is of the old type. See above under Feb 00.
+
+Nov 99
+
+Extract BSS command. If sources=0 now outputs just
+
+  <num>
+  <GSL class><term>
+  ....
+
+instead of all that t= stuff (and gsclass blank is output as 'N').
+
+New script ($OKAPI/lib/)get_idf <stemmed term> <db>
+
+Incomplete indexes. These don't work for best match ops unless doclens
+file (.dlens) is complete. Arguably, doclens files covering just the
+portion(s) indexed should be OK (and effective big N wd just be for those
+portions).
+
+Read_db_desc(). Simpler if parm checking was entirely external -- could
+be a script or a separate C program. Read_db_desc() cd just return OK or
+not. Anyway, current checking and defaults are not at all right (orig
+1991 + bodges since).
+
+Oct 99
+
+Errors from low level. Have just started a bit rationalising e.g. can't
+open file or no memory errors. See calls of read_db_desc. There are
+defines in bss_errors.h for ST_FAIL_OPEN, ST_FAIL_MEM, ST_FAIL_MISC (and
+ST_OK). Need to look more at bss_describe_database() to differentiate
+self call from calls from bss_describe_databases().
+
+SHOW format 10. For 2.29 added Set to header line (of format 1) and
+replaced <fdnum>: by line consisting of FIELD <fdnum> only. Now used by
+script bss_to_text (see below).
+
+Highlighting. Commented out obsolete highlighting stuff (2.29_alpha).
+
+find_para(). `Rule' for identifying paragraphs has to be given. This is
+hard coded everywhere as IDENT|GAP. I think it should rather be a
+database (possibly field, possibly index) parameter. Connects with
+similar problem for sentences, where there is just one universal rule at
+present. 
+
+New script bss_to_text ($OKAPI/src/trec/convert) makes textfile from BSS
+internal db with docs delimited by <DOC> </DOC> and the DOCNO on a
+single line in <DOCNO> </DOCNO>
+
+Speed comparisons. Ran i1+ 2.22, 2.23, 2.24, 2.25, 2.26, 2.27, 2.28 and
+interim 2.29 (presume all optimised) on the TREC-8 ad hoc long queries
+on gigha. Got the following cpu times: 126, 83, 86, 79, 94, 100, 83, 78
+secs for 50 queries. Maybe the 2.22 wasn't optimised!?
+
+Stem function I/O arrays. It is assumed that any stem function can
+overwrite its input. This might not always be true. stem_phrase_token()
+is one function which would need to be called differently if overwriting
+proves to be dodgy sometime in the future. See also extwd(), but I guess
+this must be OK.
+
+SHOW format 254. Gives internal record number only. Not sure if it's
+documented. Gives coredump if done with document given by IRN (unless
+you do a F IRN=<irn> first). Corrected 2.29 6/10/99. Also format 255 now
+does nothing if record given by IRN.
+
+Index "compression". Still haven't implemented variable length coding or
+difference encoding. Could do this and next 2 items in one fell swoop.
+
+Storing tf in 1 or 2 bytes: for some reason this is limited to 16383 (or
+4); surely it ought to be 32767 (or 8)? Trouble is it means temporarily
+keeping two schemes going while everything is reindexed.
+
+Index structure. At a cost of 5 bytes per ITR positional info other than
+tf could be stored separately from the main postings file. Need to think
+about whether this would be as fast as storing pointer in postings file
+with each posting (an unacceptable overhead which I thought about years
+ago).
+
+The get_qterms script(s). Arguments need to be modified so can make
+independent of database/attribute -- i.e. must be able to specify
+regime, GSL and extraction regime instead of database. This is fiddly as
+gq has to be modified to suit, and also the old ('neg') get_qterms.
+
+Sep 99
+
+bss_limit(). This has not been used recently and is at best out of
+date. It should be called from bss_combine() and the code should be in
+bss_combine.c 
+
+July 99
+
+Cured bug in 2.28. Term freq exceeding maxpos (16383 for text indexes)
+in combining few sets (bss_combine_pass()) was not trapped, giving
+"mput_vshort() returned 0" followed by memory fault from
+prepare_set_for_output().
+
+Serious bug. Type 11 index (at least). If specify nopos=1 in lookup (and
+mem=0) set is not formed properly -- can't show docs. OK if mem=1. 
+Not checked for index type 10.
+
+Bug. There's still a problem in constructing .si and .pi pathnames for
+indexes which have a multivolume postings file. See, for example,
+vlc98.thin 
+
+Added SER's new ops bm30/3000 in temporary form (changes to
+bss_combine(), bss_combine_bm(), bss_combine_pass(), the parser and
+bss.h (still 2.28)
+
+Bug. Info databases coredumps if db_avail lists a database which has no
+parameter.
+
+June 99
+
+TREC scripts: get_qterms (and hence gq) has been modified to (1) remove
+negative-type text from <nar> field (SER script topic_negations.pl) and
+to be better at removing "scope"-type words from <nar> and <desc>. When
+tested this gained about 8/244 avep on T7 ad hoc TND queries (see
+trec7/results/adhoc/preconf and ../queries. The old script has been
+retained as get_qterms.neg ($OKAPI/src/trec only).
+
+bss_show(). Correction to avoid coredump on out-of-range set
+number. (2.28 990623)
+
+Mar 99
+
+GSLs. There is a global array of 16 (BSS_MAXIX) Gsl structs. This should
+be replaced by a much larger array of pointers, and a make_gsl()
+function. (16 is OK so long as only one Db can be open at a time)
+
+The i0() EXTRACT command (undocumented) should by default extract from
+all fields which contribute to this attribute's index. Present version
+only extracts from one specified field. Also we need a version which
+(doesn't output sources but) conflates term/GSLclass records and gives
+tf etc. (Cf the script uex -- universal extract.)
+
+
+Parse. Airbus's goes to airbuss because phase2_token() elides the apos
+and stem doesn't remove terminal s from ss. Arguably phase2() should
+leave 's but needs looking into (as then counts as 2 tokens).
+
+
+Feb 99
+
+
+bss_setenv source file. Added BSS_DN_ATTRIBUTE, default dn. Could be
+used in a number of scripts I think. Current one is get_docstats.
+
+Sorting indexing output runs. Some (at least) terms longer than 127
+bytes incorrectly sorted in cases where the comp_itr() funcs had had the
+macro len() replaced by assignment of (signed) char. This may only have
+affected comp_itr_10(). It should be OK now, all comp_itr()s checked.
+
+2.26_alpha late Feb. There's been a lot of tidying up in the parser and
+reader. One which needs doing sometime to bring into line with DISPLAY
+STATS is DISPLAY TREC_STATS or whatever (used by routing selection
+progs).
+
+BM ops on peculiar sets. Often not trapped. I think at least
+bss_combine_pass() still counts zero tf as 1. Thus if no tf in set
+(e.g.) BM25 goes by doclen alone. This particularly applies to set made
+from implied or specified doc. Also should a trap or warning be issued
+if BM on e.g. AND?
+
+Absence of doclens. Must treat doclen and avedoclen as equal, and warn
+properly. 
+
+Attributes. Some notes. At present all search groups are read from
+.search_groups file when Db is opened, but indexes are not initialized
+(ixinit()) and GSLs are not setup (setup_gsl_sg() or
+setup_gsl_ix()). When any reference is made to an attribute, a check
+(check_attr()) is made that it exists (has been read in and attached to
+the database struct), and its GSL is setup (or attached if already setup
+for a different attribute). Its index is not initialized. Thus if
+check_attr() returns non-NULL PARSE can be done but not, without
+ixinit(), lookup. Check_attr() can set NO_SUCH_ATTRIBUTE or
+CANT_SETUP_ATTRIBUTE, latter if GSL setup fails.
+
+EXTRACT command. Want a version which sorts and uniqs by term class/term
+and gives TF (but not sources).
+
+GSLs. Do something about allocating as required -- in particular allow
+long names and function names. At present a global array of 16 structs
+with max name lengths 16. Would affect (at least) find_gsl, free_gsl,
+bss_globs and the struct itself (in defines.h for some reason).
+
+Document lengths. Now (2.25_alpha 990202) have a working doclength
+command. It accepts setnum and recnum or irn but can get a little
+confused if you mix them. Examples
+
+  doclen s=10 r=20
+  doclen irn=500000
+  doclen a=kwle s=10 r=20
+
+When there is no doclens file for the attribute it doesn't try to work
+it out but simply outputs a CANT_GET_DOCLENS error.
+
+Note that what is in doclens files is the number of bytes that was
+processed for indexing for the attribute for the document. Thus it
+includes length of stopwords and other unindexed portions.
+
+Jan 89 (99 I presume)
+
+Corrected horrid mistake in phase2_token (2.24_beta 18 Jan). When number
+with decimal point follows initialism it split at the dp. This was
+introduced (I think) sometime between about July 98 and Dec 98.
+
+IRNs. Does it make any sense to consider unique across databases?
+
+Indexing. Material in <...>, which is supposed to be stopped by
+phase2_token(), has only the first "sentence" stopped (unless phase2 is
+called with more than one sentence -- which it isn't). Hence, in
+particular, most of the LA Times <SUBJECT> fields have been
+indexed. This affects TREC-7 ad hoc and probably TREC-6 ad hoc. Need to
+look also at Ziff and WSJ. A hasty patch has been applied by giving
+phase2_token() the address of an arg 'stopped' which it can set and
+reset. The arg is passed to phase2 by extract() which itself receives it
+from whatever isolates paragraphs or documents.
+
+Dec 98
+
+17 Dec. 2.24 BSS and many of the scripts now working under Cygwin bash
+under NT 4.0. File sharing is by Samba. Samba handles large files but
+Cygwin doesn't though (appears it would do 4GB - 1 but it's hardly worth
+modifying for this).
+
+Parser. Bits of an erroneous command appear to be left in the
+buffer. E.g. "s s" gives interface syntax error, "s" but then the next
+command is ignored. "s s s" is analogous (next two commands
+ignored). This one cured in 2.24 (16 Dec 98); in parser, request may now
+be error ENDOFQUERY instead of just error.
+
+Memory: allocated or mapped. Making version for NT using Cygwin I find
+although mmap() exists it seems to give access violations. Implementing
+a define NO_MMAP which renders all allocation done by malloc.
+
+
+Parse, superparse, indexing. Noticed parse or superparse on phrase
+attribute didn't work on non-text databases. Bodged up by using
+extract_text() instead of extract_field() or just extract() even for
+parse. Extract_field() I think no longer used. On a quick trial this all
+works OK on text and nontext and on words3 or phrase. (2.23_beta
+981201). It is find_sentence() which gets the next unit for extraction
+(as the old phase1() used to); different args for find_sentence() are
+needed to replace the no-longer-used field type codes. No, I'm not sure
+this is right -- there's some reason why the sentence-number mapping
+should be universal. But extract() can't deal with it if phase2() has
+already been done. The whole thing is a shambles and needs redesigning!
+
+Nov 98
+
+Adjacencies of adjacencies may not work! Help! (see buglist)
+
+Chunksize. This used to be a database parameter, but now a compile-time
+constant (has been 8192 bytes for a long time). Should it again be a
+database parameter, not normally specified and defaulting to the
+constant CHUNKSIZE? -- there are obvious arguments for, and no serious
+ones against that I can see.
+
+Passage searching. Is tot_tfs buffer freed when database closed?
+
+Max doc length. What is it for text dbs? At least 4MB - 1, prob 8??
+
+Oct 98
+
+bss_free() (etc) doesn't reduce Allocated_mem unless Dbg has suitable
+value, so report mem command is usually wrong.
+
+Note on database name in parameter file. The stem part of the bibdir
+name has to have this value, as do .par and .pardir.
+
+Sep 98
+
+Indexing. Put magic number (MAGIC_MERGEFILE) at start of each indexing
+runfile (single or results of merge). ixf accepts this or the old
+"OK\n". The magic number is different for BE and LE input. I think we
+should do something similar for the other index files. (Originally the
+purpose of the OK header was to prevent deletion of an existing index by
+ixf if ix1 had in fact failed -- output files are not opened by ixf
+until it has read the header. Header was only put on final output, not
+on runfiles or intermediate mergefiles -- can't think why not as any
+runfile can be used to produce an index.)
+
+Parse. Sequence of dots in a number is parsed down to a single decimal
+point. I think ..* should go to blank or possibly hyphen.
+
+Passage searching type 2 files perhaps about 30% faster than type 1
+(don't know comparison with type 0). The difference is I think just on
+system read calls, the decoding time is not noticeably different.
+
+Passage searches. The tot_tfs array is now allocated as required, by
+setup_tot_tfs(). The memory is never recovered, 
+
+Passage searching. Doesn't always report when unable to do it because no
+pos in index. See wsj where default index has no pos.
+
+Making paragraph files. make_parafile will do any type, but I don't
+think convert_runtime can do either of the new ones. There needs to be a
+make_parafile(type) function.
+
+Paragraph record buffer. Db now has fields for this and its
+length. Seems to work OK with parafiles of types 0, 1 and 2
+
+Paragraph files can now be type 0, 1 or 2. 2 is preferred as less than
+1/2 the size of the old type 0. Not much difference in speed. Type 2
+uses variable length 1-4 byte records. There is a problem with
+overflowing parabuf with certain very large records (noticed in
+vlc98-10pc). Really para record length should be calculated or estimated
+and buffer extended when necessary.
+
+Aug 98
+
+Numbers starting with dp have this removed by parse and
+superparse. There has been a bug when such a number which follows
+another number is superparsed resulting always in coredump. phase2_token
+modified so flags are reset every time a blank is output.
+
+gsl command doesn't work until a lookup has been done for the attribute.
+
+July 98
+
+bibsize in db struct now defaults to 4095 if LARGEFILES otherwise 2047.
+If other values are wanted they must for now be put into the parameter
+for the duration of convert_runtime. Eventually the whole thing should
+be dealt with by convert_runtime, not the parameter.
+
+Jan 98
+
+Db.dir_recsize and fddir_recsize now set in read_db_desc() instead of
+open_db(). Dir_recsize is 5 for LARGE Dbs. This is not fully implemented
+yet.
+
+select_topn() coredumps occasionally. I think this is from
+prepare_set...() and probably connected with the old problem of num_out
+becoming greater than num_to_do. This will overflow the output set's
+posting memory (although it's catered for in the sort buffer).
+
+Target unimplemented in bss_conmbine_pass(). Must have got lost during
+changeover to selection trees last year.
+
+Coredumps if mem=1 on index type 10. This is problem with
+setup_pstgs(). Hack correction made (2.20 8 Jan 98). Look at it
+sometime. (Applied to vlc and d12357_97 databases.)
+
+Hung trying to produce positional info but only on non-text
+databases. I've cured this just by tidying up the code in a few places
+starting with bss_highlight_field(). I couldn't see why it worked for
+text but not nontext so a bit worrying.
+
+Dec 97
+
+Incomplete doclens file. Gives core dump on something to do with
+avedoclens. Ought to be trapped and treated as no doclens file (which
+works I think).
+
+Debug message " .. no maxtf info" shouldn't appear when empty set.
+
+Dec 22
+
+Byte order. Current position is that text and bibdir are always HILO
+(i.e. offsets in bibdir and record directory fields) -- convert_runtime
+has not yet been altered to produce this from LOHI -- but indexes are
+HILO or LOHI depending on processor type generated on, EXCEPT the <tf>
+field of postings which is always the same (i.e. first byte is high if
+there are two bytes -- this could easily be altered but I can't see it
+makes any difference). Paragraphs not done.
+
+New field in index struct: byteorder. Must be B_HILO or B_LOHI. Not
+properly implemented yet. Real problem is positional records: much too
+slow to use wrong type in combine -- they won't sort properly in
+combine() funcs and very slow and wasteful to convert on the fly. Wish
+we could get a "neutral" structure. Would like to put header in postings
+files, difficult to do in SI, PI is neutral anyway. Point is, could do
+NOPOS searches fairly cheaply on index of wrong byteorder. Just thought,
+could indicate in filename: <stem>.<ixnum>.[so]i becomes
+<stem>.<ixnum>.[hl].[so]i...  For now I think make non-index files
+universal, store recnums HILO in dir file and directory fields in
+internal databases HILO -- overheads for reversiong when LOHI not
+great. (19 Dec: have got ix1 working OK in LOHI I think.)
+
+k1, k2, b. These are no longer in parameter files but are defaults in
+bss_defaults.h. If not specified for the "0" and "00" ops they come to
+bss_combine() as 0 and it inserts the defaults. Any can be set, but the
+set value will be used whatever the (0 or 00) op.
+
+(We think b and perhaps k1 should depend on the number of terms in the
+search, not the database.)
+
+Nov 97
+
+BSS error file and syslog default to stderr but will log to file
+bss_syslog.... in BSS_LOGPATH if latter in environment.
+
+BSS seems to compile and run OK on LOHI machine (Pentium processor with
+Solaris 2.5.1) provided positional records in index are LOHI (there is
+a postings file conversion program which must be run on a LOHI machine).
+
+Parse etc. Perhaps indexing. Terms of the form .<num> may give erroneous
+source. Terms +.<num> don't seem to go into index. I think they get a
+token number of -1 and large nt.
+
+Script rtgterms.  I don't think the min_rtf thing works unless -a is
+also specified. Anyway it should be modified to use nonrels if required
+(could be more efficient than the script (can't remember name just now)
+used for TREC-6 ad hoc).
+
+
+Oct 97
+
+FIND save=0 and nonzero limit. I've bodged it up and now MUCH quicker,
+but would give spurious result if some sort of nonstandard index or with
+an existing set.
+
+*** rather urgent. FIND save=0 with nonzero limit. Uses bss_getnump()
+which is very inefficient. It's far quicker to make a set. Also it
+wouldn't work properly if NOTF. 
+
+Aug 97
+
+ixf doesn't always name files as requested. I think it doesn't look at
+the basename part for pi and si.
+
+June 97
+
+info rn= again. There was a bug, recently introduced I think, which
+meant that the first call gave spurious record length. This has been
+corrected (2.11_alpha 970611).
+
+do_trec_stats: added "short" pr "brief" and "long" or "full" version.
+
+Passages. Bug? On DOE, where all recs I think have only one (real) para,
+the paragraph algorithm sometimes finds 2 or 3. Look at algorithm
+sometime. 
+
+info rn=...  Bug. If a text database has no paragraph info this just
+gives an error message. But should behave as a non-text db.
+
+May 97
+
+Opening index files.
+
+Now assuming (first) that every ix_stem is a pathname wanting only
+.<num>.?i.
+  Primary and secondary files are canonically on the FIRST ix_stem for the
+index. Postings files use up to eight (I think). Not assuming vol
+numbers any more. Each file is tried for first on BSS_TEMPPATH then on
+LOCALBIB, (at present this defaults to . and we use links from TEMPPATH
+otherwise).
+  If trying the full ixstem fails, then the database name is appended to
+the DIRNAME(ix_stem), and opening is retried. This may be discontinued
+when the new separate index parameters are introduced: we'll probably
+have separate ix_dir and ix_basename, as for the text files.
+
+db->db_type needs a HASPARS or something, just checking DB_TEXT_TYPE not
+adequate.
+
+ix1 and mergeonly: corrected df() business in ix1, also made recheck
+space on temp filesystems after process stopped and
+restarted. mergeonly: put in check on terms and recs out of sequence
+(arises if files in wrong sequence). Ought to make a version of merge()
+which allows arbitrary file names instead of the standard ix1.*.dddd
+
+NB SysV "a" mode fopen will only write at end of file. Daft! Made change
+in the way SysV ix1 writes doclens file.
+
+convert_runtime: see just below. I think I've spotted the problem. If a
+db has no limits fflush(limp) is an fflush(NULL), which may cause
+incoming data to be lost. I've corrected this.
+
+Average doclen. This is now and has been for some time worked out as
+required, which can take some seconds (it's saved for the run once
+done). Since most searches use zero limit I think database parameters
+should store an avedoclen for each attribute for zero limit. (Note will
+go over to index parameters when I get time. Avedoclen would then belong
+to one of these. It should be worked out at indexing time. (This means
+ix1 would have to write to parameter file, something it hasn't done for
+a very long time.)
+
+convert_runtime: for some reason a nonzero checkpoint value sometimes
+causes corrupted output; this happened when making a 3-field "thin"
+database. Looking at the code I can't see any reason.
+
+Corrections to convert_runtime to prevent deletion of existing links to
+.dir, .par, .lims (by opening them "w" instead of unlinking then opening
+"a") [unless, of course, appending].
+
+Added op bm251, same as bm250 except the weight of the doc is always the
+weight of the best passage.
+
+Apr 97
+
+BSS_MEM=1 in BM250 search. This used to coredump because no allowance
+was made for the size of the passage records in the postings. This has
+been corrected (2.095 970404), seems OK. NB MAXPARRECS reduced from 255
+to 2 (bss.h) (we've only ever used 2). But might increase sometime when
+decided how to do it (do_passages()).
+
+March 97
+
+Info db needs a field "type=..."
+
+An "echo" command added to i1. Literally echoes what follows "echo
+". Purpose: to put in markers so that particular types of output can be
+recognised by scripts. Not really part of BSS.
+
+The "thin" databases should be amalgamated with their parents as "fofs"
+or something, could be (at least) one fof for each field. Need
+getrec_by_recnum(renum, fdnum), and if fdnum is not 0 (etc) check
+whether the appropriate fof is open and use it if it is (rather, open it
+if it exists and isn't open). This looks slightly complicated to set up
+and I'll have to leave it for now.
+
+Feb 97
+
+diff_results (script), at least on Gladys, no longer prints out docs
+which are in only one of the files... - Have a look.
+
+Buffer for database names etc increased from 1024 to 2048. Should be
+allocated as required, do it sometime. (2.095)
+
+Apostrophe problem if second character in superparse (only?). What about
+in indexing? Thought this was OK provided GSL contains no such terms.
+
+write_db_desc(). This has now been corrected I hope.
+
+write_db_desc(). Doesn't work properly. Have to patch database parameter
+by hand after convert_runtime. (Only used by convert_runtime.)
+
+Another BM1 bug in bss_combine() corrected (2.095)
+
+Combine: BM1. Bug: k2 applied, but there were no values for doclen or
+avedoclen. Corrected for 2.094. If you want BM1 with a k2 correction use
+e.g. BM2500 with zero k1.
+
+Combine: all float vars made double, as the manual says C does double
+arithmetic on floats anyway. Hope was to get the weight "boxes"
+consistent (you get weights slightly less than the floor weight of the
+box they're going into -- differ in about 16th dp only), but it didn't
+cure this. Possibly there is a very slight increase in processing time,
+ran some tests on dotty.
+
+bss_setenv now sets BSS_ENV=1 so can tell if it's been done or not.
+
+Combine comand now accepts s=.. w=$ ..
+The value inserted for weight is the last weight found by the weight
+command.
+
+get_qterms. Comma-punctuated number loses ? all but the first bit. Not
+too easy to do anything about this.
+
+weight function now takes additional args k3 and qtf, ignored unless qtf
+> 1). Beware of doing this twice, once internally and once
+externally. k3 defaults to 0 and qtf to 1. In the command, the args
+are "k3=.." and "qtf=..". (2.093_alpha). k3 is settable.
+
+weight command. N < n now quietly returns a zero weight (any
+function). (2.092_alpha) 
+
+i1 ignores all environment except BSS_DEBUG unless BSS_DB is set and the
+database can be opened. (Previously setting e.g. BSS_ATTRIBUTE without
+BSS_DB resulted in it trying to set the attribute without a database
+open, giving an error result.)
+
+i0 parser now accepts for the COMBINE command f s=.. w=$ (reader returns
+DOLLAR). This causes it to use the last weight calculated. Useful in
+scripts.
+
+Every lookup command (even if save=0) saves a copy of np. If no n= is
+given in a subsequent weight command this saved np value is used. Useful
+in scripts.
+
+Every parse command copies its FIRST returned term value into the default term which is
+used by the next lookup command which has an empty term (i.e. parse and
+superparse behave like lookup except that they do not use the default
+term value if called with no term arg. Useful in scripts.
+
+i1+ (etc) now has an OUTPUT command, which sets output to /dev/null,
+stdout (default), stderr or a named file, according as the string
+immediately following 'output=' is 0, 1, 2 or something else. Output
+will remain the same (and an error message be printed) if a named file
+cannot be opened for writing. If current output is not to 0, 1 or 2 the
+previous output file will be closed after successful opening of a new
+one. Output is appended if a named file already exists.
+
+i0 now has a var lastweight, init 0, which holds the last "weight"
+command output. "display lastweight [etc]". (2.092_alpha)
+
+Jan 97
+
+Added -l <mask> to ix1. This might enable making indexes which only
+access docs for this mask. Tried on d1234_96, mask 1
+
+Beware running i1+++ (etc) when on directory containing a file with the
+same name as the database. Is this a feqture or a bug?
+
+i1+. Traps a command "output=0|1|2" (no spaces). If 0, throws it away,
+if 1, goes to stdout, if 2 to Err_file (which is probably
+stderr). Starts at default stdout.
+
+i1+. Shouldn't look at BSS_LIMIT etc unless BSS_DB is set. Causes
+problems in scripts etc.
+
+Dec 96
+
+FIND with save=0 and a nonzero limit. Done a bodgeup in
+bss_getnump(). (2.09_alpha) 
+
+WARNING! i1+. If BSS_DB is set it sets attribute, limit etc if they are
+set; but if another choose command is issued these env vars are not
+looked at again. Put this right sometime ? at the i1 level.
+
+Put a few arithmetic short cuts in bss_combine_bm(). Makes no
+appreciable difference.
+
+Function get_rec_addr() in bss_show.c not required. Make direct calls of
+subfunctions (when I get round to it).
+
+Should get_pstg_n() call prepare_set_for_output()?
+
+Nov 96
+
+New command provisionally "f rn=". No error checking. bss_sets:
+make_set_from_irn(). 2.06_alpha
+
+Displaying document length. New command "display doclen". Does 
+--unfinished
+
+To save network traffic it should be possible to have local copies of
+bib and index files. At present, the BSS looks on TEMPDIR, and there
+should also be an environment variable BSS_LOCALPATH or something. It
+does more or less by chance look in the current directory. This caused a
+problem when Mike tried to search dra from a directory where there was a
+(binary) file called dra. This should be documented, and administrators
+advised to give database files "unlikely" names.
+
+Have just come up against the restriction of .dir records to 30 bits
+(rec addresses divided by rec_mult are stored in 30 bits, or at least
+the top two bits are masked out when the directory files are read). The
+implication was that with a rec_mult of 4 one couldn't go above a 4 gig
+total. Changed so now using 31 bits (would rather have used rec_mult 8
+for TREC but would have to write a messy program to convert existing
+databases); that means we can now go up to 8 gig on rec_mult 4 (2 ^
+33). 
+
+Oct 96
+
+Indexing, characters with high bit set. There's a real puzzle showed up
+on d6_96 (TREC-5 routing). In the real (first) index, which we used for
+the official runs there seems no problem -- the high-bit characters have
+been skipped by the indexing but remain in the text. In another index
+run recently they remain in the extracted terms. Since the sort function
+compitr_4() uses strncmp() presumably they come out negative so
+e.g. "m\346" comes before "m0". But then read_mergefile, which uses
+strcmp, detects them as out of sequence, so I don't understand this. The
+next puzzle is that they were extracted using phase2_token() which
+shouldn't let them through anyway. merge(), on the other hand, when
+finding the minimum term uses an unsigned comparison. I've now written
+something into phase2_token which if Dbg & HD_TEXT records control and
+"high" characters if they are skipped (but this should make -- must make
+-- no functional difference. Another run of indexing seems to be comiung
+through all right, with "high" chars simply being dropped by
+phase2_token(). Could there be a difference between libraries on
+different machines. Could phase2.. have picked them up as alphanumeric,
+somehow? read_mergefile is now not detecting any "spurious characters"
+-- everything being done on Dotty.
+
+OK I think I've solved the above! Characters with high bit set index
+negatively into the Toktab array and so read "random" memory. If the
+memory has the appropriate bit set they may be taken as alpha, numeric
+of whatever, and so get into index terms. It's unfortunate that both
+memcmp and strcmp compare as signed characters (bcmp doesn't but we
+haven't got it any more with SysV). Have now made all the charclass
+macros do as unsigned.
+
+New field in index struct: lims_invalid. If true, lookup ignores limits
+field in SI and simply checks postings for a term (only applies to
+search types other than 0). Haven't yet decided on a way of tying up an
+index and a limits file.
+
+Sept 96
+
+DB_FLAGS. Some values prevent database from opening in latest version
+(2.034). I think this is to do with read_doclens().
+
+Atomic or quasi-atomic sets cannot be combined using a BM op other than
+BM1 if they are not all from the same index. E.g. if you want to treat
+two ORed attributes as a single feature each atomic set must be weighted
+first, then combined. bss_combine() will check that the atomic input
+sets all come from the same index. More precisely, an input stream for a
+non-BM1 BM op which has no posting weights must have an attr_num entry
+other than MIXED_ATTRIBUTE.
+
+Avedoclen and big N are now calculated as and when required.
+
+Avedoclens. Analogously to big N, these should be calculated when
+required. It is most economical to do it while the big N is being
+done. Depends on the doclens file having been read. Only needed by BM
+combine operations. Problem is handling e.g. fixed length fields where
+no doclens file -- think about it..
+
+BigN. Values (except for the limit 0 one) can be calculated when needed
+at smallish cost. They could then be stored, either for a session, or,
+if BSS runs setuid they could be written out to an array and at close, a
+file. This is now done. Only the one corresponding to the current limit
+is stored (calculation takes a fraction of a second on an SS10 for a
+million documents).
+
+Sets for terms which exist for some limit but have no postings. These
+have some redundant memory attached. (See changelog for 6/9/96.)
+
+Limits. Read July limits entry first. Each limits file would need its
+own Ns file, there'd have to be some way of tying them up. Seems a bit
+messy. Also, it's not true that indexes are entirely independent of
+limits: secondary index term records have a 16-bit field containing the
+OR of all limit masks for documents containing the term, so a lookup
+function can determine without counting postings whether there are or
+aren't any postings for the term given a limit. This may not be worth
+bothering about.
+
+July 96
+
+Little bug in ds_trec(). If setsize < bigr gives zero for
+Rprec. Corrected. This will be right in 2.035.
+
+BM250 (passage weighting). This has been restored to BSS 2.0.. more or
+less just by copying in the old code, so it doesn't use the same
+function as the other BMs. It doesn't work if nopos or notf is
+specified. 
+
+Bib_basename. This ought to be but wasn't, an array, which meant a
+multi-vol bibfiles must be in separate directories. I've now made it an
+array. At the same time, .dir, .lims, .par and .newNs must be on
+bib_dir[0] (if not on $TMPDIR) and have db->name as basename. Probably
+they all are, but may need to check. This is version 2.034_alpha
+
+
+Convert_runtime. Noticed that even if database parameter contains
+has_lims=1 convert_runtime doesn't write any limits file unless input
+(exchange) records have an additional field after the "last" one
+containing a limit value. Maybe we should go over to writing scripts to
+produce limit files. NB it now looks as if it would be good to allow
+a database to have a number of alternative limit files, perhaps even
+swapping them during a session -- look at the implications of this
+sometime. It doesn't affect indexes at all, it's simply a mapping of
+record number to limit mask.
+
+June 96
+
+Should a lookup of type 0 output the term looked for even if not found?
+(Cropped up in connection with eval_adj, can't display terms unless
+they're found).
+
+NOPOS and NOTF give incorrect ttf fields for output postings in ADJ. (12
+June -- I think this is now OK after some hasty patching in bss_combine.c)
+On a second look I think there's still a discrepancy between nopos=1 and
+nopos=0.
+
+Collection total term frequencies. Are needed for evaluation of
+term-pairs as terms. Obviously depends on limit as well as database so
+needs to be generated and stored in the same way as the big Ns. Do
+something about this sometime. Meanwhile, for d1234_96 it is about
+300000000, and can be divided by 2 or 3 as appropriate for the
+partitioning limits 1, 2, 4, 8, 16. bss_setenv sets if to 300000000.
+Hang on! Surely it's enough just to hold real CTTF and divide it in the
+same ratio as the N value for the given limit is to N for the
+collection.
+
+2.031_alpha allows about 512 sets to be merged, but it fails with a
+"can't read posintgs" error if there are more than 108, unless they are
+in memory. Do a better trap and error message sometime.
+
+May 96
+
+Release 2. SHOWing by record number in formats 3 or 4 core dumps because
+set -1 has no posting record.
+
+Parsing. A hyphen following an initialism should become a
+blank. (E.g. U.S.-USSR). 
+
+SHouldn't do get_avedoclens() when index isn't even available, a
+database should open even if no indexes at all, let alone doclens files
+etc. A bug.
+
+If a limit is specified and Db has no limits, limit is always
+satisfied. 
+
+If no op specified in a combine and there's only one set and no weight
+is given, do OP_COPY. Document this change.
+
+If sets' tempfiles get lost don't get sensible error message.
+
+Ops topn and copy are trapped with ONLY_ONE_SET error if more than one
+set is given. Document. [Sorry: top is trapped by the parse anyway.]
+
+If try to combine more sets thaan there are descriptors available system
+could use mem for the excess. Still have to put some limit on the number
+though.
+
+Limit command doesn't work. Needs rewriting. Thinking of making it a
+sort of "combine", e.g. "f s=. l=. [args]" and calling it from
+bss_combine(). Associated: should get_next_pstg take a limit (or use its
+set's limit field as limit)? Neat, but might slow things a bit; could
+then do any combine with a limit set (perhaps have to exclude this from
+R-limit ops).
+
+get_rec_info() doesn't seem to work? Later: OK, cured (but ? doesn't
+issue linefeed at end).
+
+April 96
+
+Interface bug (unimportant). Following some erroneous "show" commands
+the interface seems to increment the set number (_q_set got spurious
+value?). Later (may 2): this is connected with parser problems, not
+waiting for ENDOFQUERY. I'm working through this. So far done choose,
+find, delete, stem. Later: hope have done all commands, also simplified
+the parser somewhat, or made it less unreadable.
+
+The document length problem. If merging sets from more than one index
+what does one use for doclength? Theoretically, should have individual
+doclength array for each stream, and this works OK (at the cost of
+slowing things slightly) provided none of the streams are already
+"mixed" -- i.e. an OR of streams from different indexes. (Of course a
+stream from an already "mixed" BM is OK, just needs weights adding.) The
+solution is either (1) disallow BM ops other than BM1 if there are mixed
+streams (2) just silently leave out anything that depends on doclengths
+as applied to a mixed stream
+
+Memory error handling. Needs some consistent way of handling this. Not
+necessarily always fatal, but easier to handle it as such.
+
+BigN. Don't know if it's documented that you can give it as an argument
+in weight commands, also set it. (Object: correct value for Robertson
+limited sets.) To unset it, set it to zero.
+
+Pos field overflows in combine(). This is coped with OK, but could be
+more sensible when debug is set. Do sometime.
+
+NOTF. Document setting of NOTF etc.
+
+
+March 96
+
+Numpos. Limited for some reason to 16383. Could it not be 32767? We get
+overflows on the big TREC merges sometimes.
+
+Merging. If pos fields are being output they are just memcpy()ed in and
+then finally quicksorted. This is a big timewaster. Merging them might
+be quicker (note that in best match none of the original postings are
+available by that time so there's no obvious way of doing a merge
+
+NOT3. A posting is removed iff its weight is non-positive after removing
+the contribution from the rh operand. This procedure doesn't work
+properly unless all postings in the lh operand have positive weights
+(think about it). In fact as written NOT3 won't output anything with
+weight < 0 anyway.
+
+Should we try to get pstgtype before calling get_setrec(), then it can
+set up initial values for things like maxweight and minweight
+(e.g. these depend on HASWT). However, for now could just set them to
+MINWEIGHT and MAXWEIGHT.
+
+Setrecs. Do we use p_lengths[1]?
+
+OR2 withdrawn!
+
+Robertson limit ops and topn and mark. Nopos or [fullposting] is
+ignored. Outpstgtype is always the same as the left operand's pstgtype
+(except in mark case).
+
+The operation OR2. This was supposed to output postings with more than
+the usual amount of information (coord level, and tf from each of up to
+255 streams). Something to do with Rachel's logistic regression stuff. I
+think this info might be useful at times, but full postings should be
+signalled by a find_flags bit (e.g.FULLPOSTING). I don't think it makes
+sense unless an OR or a BM, definitely not a Robertson limit. Also, set
+constituent removal couldnt be made to work properly unless it was know
+which constituent (stream number) was being removed. Latter not worth
+bothering about. There's a problem estimating memory requirement for raw
+postings, probably have to do file not memory output.
+
+The postings index memory: should it be released by default when
+postings are closed (i.e if flags don't say KEEP)? Probably.
+
+Specifying NOPOS for atomic sets. Making explicit tempfiles (or reading
+into memory) actually slows it, even if it is to be used in a merge
+after. However, if there is a limit (or a field restriction) it's
+obviously worth doing. Hence, if it's specified for a lookup it will be
+done, but users should be advised not to specify nopos unless there's a
+nonzero limit.
+
+Opening indexes. Should only open index for current or required
+attribute?
+
+Big N. This is now passed as an arg to the weight function. If passed as
+zero (the default), the weight function fetches the "correct" value in
+accordance with the current database and limit. Otherwise the passed
+value is used. A nonzero value of big N may be set ("SET BIGN=..."),
+whereupon this will be used by the weight function regardless of limit,
+and thereafter "bign=..." will be reported by a "SET" comand. To return
+to "natural" big N bign must be reset to zero. "DISPLAY BIGN" will
+report the set value if it is nonzero, otherwise the "natural" one.
+
+Feb 96
+
+Logfile. There is now bss_syslog. This defaults to stderr, and nothing
+is written to it anyway unless global Dbg != 0. bss_startup() looks for
+environment variable BSS_LOGPATH and wil use this instead of stderr if
+it is present. Can set debug, lots of bit values in bss_errors.h, should
+have a translation function (e.g. to do set dbg=sets or whatever, need
+to OR the bits for a series of keys).
+
+Going to assume all the natural order postings (naw of them) are always
+available either in file or mem. Not bother about f_np[0],
+m_np[0]. Simplifies things a bit.
+
+Weights and best match ops. In the past a set which is to take part in a
+BM combination either has to have posting weights already or to have
+been given a set-weight (term-weight if you like); and there has been no
+direct way to make a set with posting weights disregard them and behave
+like a quasi-atomic set (one could of course get round this by ORing the
+set with the empty set to make a new set which was identical apart from
+the absence of posting weights). The system recognized absence of
+term-weight by the set being given (notionally) a weight of zero. Now
+that weights will be reals instead of integers this doesn't really make
+sense (some languages won't let you test reals for equality anyway). It
+may well make sense, sometime, to include terms with negative weights in
+merges, and although terms with "precisely" zero weights don't
+contribute anything to output weights it seems wrong to force the user
+process to specify a nonzero weight for every set. In this connection
+there may be an argument for preventing terms with nonpositive weights
+from contributing positional and term frequency information, so long as
+term weights are supposed to bear the usual sort of relation to
+probability of relevance. I suggest any reasonable weight should be
+acceptable, positive or negative or notionally zero, but that for the
+existing BM ops failure to supply a "reasonable" weight is still an
+error. I've set the parser so if a setweight isn't given for
+i0_do_combine the corresponding weight is set to MAXWEIGHT * 2
+(MAXWEIGHT etc in bss.h), MAXWEIGHT and MINWEIGHT are +-10^20 and
+there's a macro Legalweight(w) which returns 1 if between these values
+otherwise 0.
+
+"Nopos=1" may now be specified for term lookups as well as for term
+combination output. It slows lookups somewhat, but more than compensates
+by speeding following combine operations. [Later: no it doesn't!]
+
+Positional fields in postings (see also Jan 96). Postings now record the
+total term frequency even when they haven't actually got any positional
+records (this is done without additional storage because the set has a
+flag which says whether it has positional info or not). This means that
+it will be possible to do BM ops which need term frequency even on sets
+which were created with, or made from existing sets with, no positional
+information. So, unless adjacency-type searches or highlighted displays
+may be needed, "nopos=1" may be specified for any "find" operation
+("nopos" is settable). This saves up to about 3/4 of the output,
+depending on the database, and speeds things quite a lot (more
+precisely, it slows the production of atomic sets, but more than
+compensates by speeding merges.
+
+madvise(..., MAP_SEQUENTIAL) makes a big difference to the number of
+pages retained.
+
+Introducing a nopos flag value in lookup. In this case set makes its own
+file analogously to the non-zero limit case. Obviously slows lookup but
+must speed subsequent merges, and worth doing if atomic sets are
+repeatedly used.
+
+Mapping posting files into memory for atomic sets seems to give about
+5% - 10% speed improvement on large merges.
+
+get_setrec() in bss_lkup. At present set's posting struct is created for
+zero positional fields. This is of course correct if nopos is
+specified. Otherwise, some reasonable over-estimate should be made,
+depending on np for the term and big N and avedoclen or perhaps
+maxreclen.
+
+New fields in index struct: attr_num and pstgtype. Filled in by
+ixinit().
+
+FILE_FLAGS_RECOVER_MEM needs to be implemented (and put into
+interface). See bss.h
+
+Positional fields are repeated if a set is (effectively) repeated. This
+doesn't seem to upset highlighting, but it does affect ttf.
+
+Number of open files. BSS needs to check how many sets it can
+combine. If using memory input there shouldn't be a serious limit. A
+suitable error message should be issued, check number of open files on
+call of bss_combine().
+
+ttf is wrong in atomic sets just now: seems OK in nonatomic.
+
+There's a parsing problem with e.g. D'Alembert if "d'" is stopped. Parse
+MAY sometimes work all right, but superparse gets the source fields
+wrong. You should be suspicious of d'anything in the TREC databases (in
+buglist also).
+
+Jan 96
+
+Could have NOPOS on lookup? Does that mean it would make a file or write
+postings out to memory anyway (as in case of a limit)?
+
+Should be possible to have (types 4-7) indexes with no positional fields
+if wanted. (I think it wouldn't be difficult to add this.)
+
+Now the numpos field of a posting stores number of positional fields in
+the posting if the posting type has the HASPOS bit set, otherwise it
+stores the term frequency. So you know term frequency even for streams
+which don't actually have positional fields. Affects bss_combine...()
+and posting read and write functions.
+
+Index file names. 
+
+Dec 95
+
+A bss_close_pf() function is needed, which sets srec->pfile[] to NULL,
+as if this is not numm the file is assumend to be open.
+
+Nov 95
+
+top=n on an empty set produces nothing -- should produce an empty set.
+
+Length of postings for a set. Needed for memory mapping. ixf could write
+such a field into the secondary index, presumably following the addr
+field. This would mean a new set of index numbers (8-11) during the
+changeover, until all databases have been reindexed. Alternatively,
+could be worked out at lookup time, by bss_lkup().
+
+New minweight field in sets. Only put into the new macro DO_WEIGHTS() so
+far, not really used yet but could be for setting weight distribution
+info etc.
+
+Sorting postings for output. Still a problem with the weight
+dist. stuff. Patched it up again, but do this properly sometime!
+
+"Marking" postings. Check in bss_combine() the way marks are carried
+over from inpupt to output sets. Tentatively, limit-type ops and NOT
+carry over from lh operand only, all other ops carry over if any
+nonempty input set has marks -- this is fine for and-like but might be
+dodgy for or- or bm-like, as marking may not be complete. NB this
+doesn't work yet as needs mods in bss_combine.c to logically or the
+marks from input postings into the output posting
+
+Highlighting. What should be highlighted from a proximity search in
+general (i.e. other than strict adjacency). Should it be from the first
+to the last occurrence of search terms which are "proximate"? Could
+there be two levels of highlighting? (but I think an interface should
+handle this).
+
+Parameters. ix_stem should be directory only. For now full path is OK
+provided it ends with <db->name> or <db->name>.v<n> -- open_db() will
+try removing the basename if all else fails.
+
+Look at sys_err() and amalgamate it with internal_err()
+
+July 95
+
+OP_NOT3 doesn't remove positional records (because of time, for TREC4
+only using it on NOPOS sets)
+
+Setrec. Important. Should store for each weight_dist the minimum weight
+counted therein, instead of relying on applications calculating it from
+mpw or whatever.
+
+2 Dec 94
+
+Doclens etc
+
+doclens and avedoclens really belong to an attribute not an index. But
+we've moved so far towards one index per attribute that I don't know
+it's worth correcting now. 
+
+If we did this, doclens files (e.g.) would have to be attached to a
+search_groups struct instead of to an index struct. Imagine extending
+type 1 postings (as in indexes of type 1) to contain full positional as
+well as beast information (might get away with 5 bytes per positional /
+beast record). This doclen stuff is a bit horrifying, imagine combining
+streams from 8 different attributes and 8 doclen arrays in core.
+
+Certainly the k and b-parameters for BM ops should belong to attributes
+not indexes as a whole.
+
+Type 3 index
+
+ix1_ex seems not to have put doclengths in the postings when run
+recently on experimental database city.exp. I believe the regime was
+words3. (I think this was put right.)
+
+May 95
+
+1
+
+Convert_runtime should make the .lims and .N_s files. (This has always
+been done by ix1_ex.) Limits needn't be stored in bib recs (at present
+the first 2 bytes are the limit mask).  But how to handle it when a file
+is constructed a bit at a time and appended?
+
+.lims file is OK: open it "a+" and just write. Probably need a call of
+prepare_lims() after reading the database parameter (db isn't actually
+opened by convert_runtime).
+
+N_s is a bit less simple. For each possible (or vaguely plausible) limit
+value L (e.g. 2^n - 1 if there are n limits) add 1 to N(L) if the
+current record's limit satisfies L. Also add 1 to N(0) (=Db.big_n). This
+is best done by opening "a+", rewinding, and reading to EOF into a
+zeroed array. Note for each record this involves a loop of size
+max_num_lims (perhaps taking abround 10ms for the loop).
+
+2
+
+Types 6 and 7 index are so similar to types 4 and 5 that they should be
+amalgamated. Either the existence of a "vol" field in ITRs should
+automatically depend on last_index_vol > 0, or they should all have a
+vol field so 4 and 5 would disappear. I favour the former, the overhead
+seems to be only in stype012() [check this though] and it saves a byte
+per index term at very low cost. The only difference between 4/6 and 5/7
+is that they have different positional record structures.
+
+3
+
+There seems to be some confusion between TEXTPSTGTYPE and
+db.type="indirect" -- sort it out!
+
+4
+
+Index numbers in Setrecs. Adj never works unless within one index. Or
+does, but then an adj .... ? I'm confused!
+
+
+5
+
+Do something about setting limit to something with avedoclen 0 and then
+doing combines on previously made sets. (Or indeed any avedoclen).
+Should (a) set_limit warn or refuse if avedoclen is 0 on the assumption
+that there isn't anything which satisfies this limit -- problem is it
+doesn't know in case of index with absent doclens file -- should look at
+big_n I think; and/or (b) (I like this) (atomic) setrec hold its
+avedoclen [May have done this -- I think it is working oK
+
+6
+
+convert_runtime should write .lims file.
+
+.par file should be made compact now it's debugged.
+
+
+7
+
+ix1_ex. Could use read_doclens?
+
+
+8
+
+Modify types 6 and 7 index ( and 4 & 5 as well if we're going to keep
+them) to store genuine integer ttf instead of log_tf. Setrecs should
+store unlogged ttf as well.
+
+9 Consider storing tnp for primary limit values in SI ITRs (can be very
+slow counting them).
+
+
+10
+
+Do something about the index vol numbers etc so that each index can have
+more than one, etc.
+

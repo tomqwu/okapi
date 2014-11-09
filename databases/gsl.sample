@@ -1,0 +1,1015 @@
+##  gsl.sample
+##
+##  Sample gsl file
+##
+##  Each (uncommented) line contains:
+##
+##     <gsl_class><term_list>:
+##
+##  where <gsl_class> IN [FGHIPS]
+##
+##     F: stop-term
+##     G: a set of two or more terms to be indexed as a phrase
+##     H: stop-term
+##     I: semi-stop-term
+##     P: pre-fix
+##     S: synonym group
+##
+##  and <term_list> is a <space> separated list of terms, each
+##  ending in a comma. e.g.
+##
+##     advertising, advertisement, adverts,:
+##
+##  Only when <gsl_class> = 'S' will <term_list> contain more
+##  than one term.
+##
+##  NOTE: Don't include anything ending in apostrophe as there
+##  is a bug that causes a fault in the index.
+
+Fafter,:
+Fand,:
+Fanything,:
+Fbefore,:
+Fin,:
+Fnor,:
+Fnot,:
+Fof,:
+For,:
+Gacid rain,:
+Gagent orange,:
+Gask computer systems,:
+Gblack monday,:
+Gcatch up,:
+Gcivil service,:
+Gcold war,:
+Gcomputer aided software engineering,:
+Gcost benefit analysis,:
+Gdes moines,:
+Gdress up,:
+Geast germany,:
+Gexpert system,:
+Gfat cat,:
+Gfort worth,:
+Gfriendly fire,:
+Ggenetic engineering,:
+Gglobal warming,:
+Ghi tech enterprises,:
+Gindustrial relations,:
+Gindustrial revolution,:
+Ginformation technology,:
+Ginternational law,:
+Gkansas city,:
+Gkey west,:
+Glas vegas,:
+Glos angeles,:
+Gmachine translation,:
+Gmarket research,:
+Gmiddle class,:
+Gmips computer systems,:
+Gneural network,:
+Gnew mexico,:
+Gnew orleans,:
+Goriginal intent,:
+Gpower plant,:
+Gsalt lake city,:
+Gsan diego,:
+Gsan francisco,:
+Gsaudi arabia,:
+Gsilicone gel,:
+Gsinn fein,:
+Gsoap opera,:
+Gsocial security,:
+Gsocial work,:
+Gst louis,:
+Gterritorial waters,:
+Gtheme park,
+Gthird party,:
+Gunited nations,:
+Gvalue added tax,:
+Gvirtual reality,:
+Gvitamin a,:
+Gvitamin b,:
+Gvitamin c,:
+Gvitamin d,:
+Gvitamin e,:
+Gwall street,:
+Gworking class,:
+Ha,:
+Habout,:
+Hacross,:
+Hagain,:
+Hall,:
+Halmost,:
+Halong,:
+Halready,:
+Halso,:
+Halthough,:
+Halways,:
+Ham,:
+Hamong,:
+Han,:
+Hanother,:
+Hany,:
+Hare,:
+Harent,:
+Haround,:
+Has,:
+Hat,:
+Haway,:
+Hbe,:
+Hbecame,:
+Hbecause,:
+Hbecome,:
+Hbeen,:
+Hbegan,:
+Hbegin,:
+Hbehind,:
+Hbelieve,:
+Hbelow,:
+Hboth,:
+Hbrought,:
+Hbut,:
+Hby,:
+Hcame,:
+Hcan,:
+Hcannot,:
+Hcant,:
+Hcent,:
+Hcome,:
+Hcould,:
+Hdai,:
+Hdespite,:
+Hdid,:
+Hdidnt,:
+Hdo,:
+Hdoesnt,:
+Hdone,:
+Hdont,:
+Hdown,:
+Hduring,:
+Heach,:
+Hearlier,:
+Heither,:
+Henough,:
+Hetc,:
+Heven,:
+Hever,:
+Hevery,:
+Hfor,:
+Hfound,:
+Hfrom,:
+Hgave,:
+Hget,:
+Hgiven,:
+Hgo,:
+Hgone,:
+Hgot,:
+Hhad,:
+Hhadnt,:
+Hhas,:
+Hhasnt,:
+Hhave,:
+Hhavent,:
+Hhe,:
+Hheld,:
+Hher,:
+Hhere,:
+Hhes,:
+Hhim,:
+Hhimself,:
+Hhis,:
+Hhow,:
+Hhowever,:
+Hi'm,:
+Hif,:
+Himmediately,:
+Hinc,:
+Hindeed,:
+Hinstead,:
+Hinto,:
+His,:
+Hisnt,:
+Hit,:
+Hits,:
+Hitself,:
+Hlater,:
+Hlatest,:
+Hlet,:
+Hlike,:
+Hlonger,:
+Hlook,:
+Hlower,:
+Hmade,:
+Hmake,:
+Hmany,:
+Hmay,:
+Hmeanwhile,:
+Hmet,:
+Hmight,:
+Hmore,:
+Hmy,:
+Hnearly,:
+Hnever,:
+Hno,:
+Hnothing,:
+Hnow,:
+Hoff,:
+Hoften,:
+Hon,:
+Honli,:
+Hour,:
+Hout,:
+Hover,:
+Hparticular,:
+Hparticularly,:
+Hper,:
+Hpossible,:
+Hprobable,:
+Hprobably,:
+Hput,:
+Hquickly,:
+Hrather,:
+Hreally,:
+Hsaid,:
+Hsay,:
+Hsaying,:
+Hsee,:
+Hseek,:
+Hseem,:
+Hseen,:
+Hsent,:
+Hseveral,:
+Hshe,:
+Hshould,:
+Hshown,:
+Hsinc,:
+Hsmaller,:
+Hso,:
+Hsome,:
+Hsomething,:
+Hsoon,:
+Hspecial,:
+Hsuch,:
+Htake,:
+Htaken,:
+Htalk,:
+Htell,:
+Hthan,:
+Hthat,:
+Hthe,:
+Htheir,:
+Hthem,:
+Hthemselves,:
+Hthen,:
+Hthere,:
+Htherefore,:
+Hthese,:
+Hthey,:
+Htheyre,:
+Hthink,:
+Hthis,:
+Hthose,:
+Hthough,:
+Hthrough,:
+Hthus,:
+Hto,:
+Htold,:
+Htoo,:
+Htook,:
+Htry,:
+Huntil,:
+Hup,:
+Hupon,:
+Hwant,:
+Hwas,:
+Hwasnt,:
+Hwe're,:
+Hwe've,:
+Hwe,:
+Hwent,:
+Hwere,:
+Hwerent,:
+Hwhat,:
+Hwhen,:
+Hwhere,:
+Hwhether,:
+Hwhich,:
+Hwhile,:
+Hwho,:
+Hwhose,:
+Hwhy,:
+Hwill,:
+Hwith,:
+Hwithin,:
+Hwont,:
+Hwould,:
+Hwouldnt,:
+Hyet,:
+Hyou,:
+Hyour,:
+I0,:
+I1,:
+I10,:
+I100,:
+I1000,:
+I10000,:
+I11,:
+I12,:
+I13,:
+I14,:
+I15,:
+I16,:
+I17,:
+I18,:
+I19,:
+I1980,:
+I1981,:
+I1982,:
+I1983,:
+I1984,:
+I1985,:
+I1986,:
+I1987,:
+I1988,:
+I1989,:
+I1990,:
+I1991,:
+I1992,:
+I1993,:
+I1994,:
+I1995,:
+I1996,:
+I1997,:
+I1998,:
+I1999,:
+I2,:
+I20,:
+I200,:
+I2000,:
+I20000,:
+I21,:
+I22,:
+I23,:
+I24,:
+I25,:
+I26,:
+I27,:
+I28,:
+I29,:
+I3,:
+I30,:
+I300,:
+I31,:
+I35,:
+I4,:
+I40,:
+I400,:
+I45,:
+I5,:
+I50,:
+I500,:
+I6,:
+I60,:
+I7,:
+I70,:
+I8,:
+I80,:
+I89,:
+I9,:
+I90,:
+Iable,:
+Iabove,:
+Iactual,:
+Iagainst,:
+Iago,:
+Iallow,:
+Ianalysis,:
+Iappear,:
+Iapr,:
+Iapril,:
+Iask,:
+Iattempt,:
+Iaug,:
+Iaugust,:
+Ib,:
+Iback,:
+Ibetween,:
+Ibillion,:
+Ic,:
+Icall,:
+Icarry,:
+Icause,:
+Iclose,:
+Icompare,:
+Icon,:
+Iconcern,:
+Iconsider,:
+Icost,:
+Id,:
+Idate,:
+Iday,:
+Idec,:
+Idecember,:
+Idescribe,:
+Idollar,:
+Ie,:
+Iearly,:
+# Problem as effect also gsclass. Parse finds it here but it's indexed
+# as gsclass
+#Ieffect,:
+Ieight,:
+Iespecial,:
+Iexpect,:
+If,:
+Ifeb,:
+Ifebruary,:
+Ifell,:
+Ifew,:
+Ififty,:
+Ifirst,:
+Ifive,:
+Ifollow,:
+Iforty,:
+Ifour,:
+Ifri,:
+Ifriday,:
+Ifurther,:
+Ig,:
+Igive,:
+Igood,:
+Igreater,:
+Ih,:
+Ihappen,:
+Ihigh,:
+Ihigher,:
+Ihope,:
+Ihundred,:
+Ii,:
+Iinclude,:
+Iinvolve,:
+Ij,:
+Ijan,:
+Ijanuary,:
+Ijul,:
+Ijuly,:
+Ijun,:
+Ijune,:
+Ijust,:
+Ik,:
+Ikeep,:
+Iknow,:
+Il,:
+Ilarger,:
+Ilast,:
+Ilate,:
+Ileast,:
+Iless,:
+Ilikely,:
+Ilittle,:
+Ilong,:
+Im,:
+Imajor,:
+Imar,:
+Ime,:
+Imillion,:
+Imon,:
+Imonday,:
+Imonth,:
+Imost,:
+Imove,:
+Imuch,:
+Imust,:
+In,:
+Inear,:
+Ineed,:
+Inew,:
+Inext,:
+Inine,:
+Inov,:
+Inovember,:
+Inumber,:
+Io,:
+Iobtain,:
+Ioct,:
+Ioctober,:
+Ionce,:
+Ione,:
+Iorder,:
+Iother,:
+Iown,:
+Ip,:
+Ipart,:
+Ipeople,:
+Ipercent,:
+Iprevious,:
+Ipro,:
+Iproblem,:
+Iq,:
+Ir,:
+Irecent,:
+Irequire,:
+Iright,:
+Irun,:
+Is,:
+Isame,:
+Isat,:
+Isaturday,:
+Isep,:
+Isept,:
+Iseptember,:
+Iseven,:
+Ishow,:
+Isix,:
+Isold,:
+Ispecial,:
+Ist,:
+Istill,:
+Istudy,:
+Isunday,:
+Isure,:
+Isystem,:
+It,:
+Iten,:
+Ithirty,:
+Ithousand,:
+Ithree,:
+Ithrough,:
+Ithurs,:
+Ithursday,:
+Itime,:
+Itoday,:
+Itogether,:
+Itoward,:
+Itues,:
+Ituesday,:
+Itwenty,:
+Itwo,:
+Iu,:
+Iunder,:
+Iuse,:
+Iusual,:
+Iv,:
+Ivarious,:
+Ivery,:
+Iw,:
+Iway,:
+Iwednesday,:
+Iweek,:
+Iwell,:
+Iwithout,:
+Ix,:
+Iy,:
+Iyear,:
+Iyesterday,:
+Iz,:
+Pa-,:
+Pante-,:
+Panti-,:
+Pbio-,:
+Pcontra-,:
+Pcounter-,:
+Pde-,:
+Pinfra-,:
+Pinter-,:
+Pmacro-,:
+Pmicro-,:
+Pmulti-,:
+Pneo-,:
+Pnon-,:
+Ppost-,:
+Ppre-,:
+Pre-,:
+Psub-,:
+Saccounting, accountancy,:
+Sadministrative, administration,:
+Sadvertising, advertisement, adverts,:
+Saeroplane, airplane, aircraft,:
+Saesthetic, esthetic,:
+Safrican, africa,:
+Sageism, agism, ageist, agist,:
+Sagricultural, agriculture,:
+Sair lines, airlines,:
+Sairport, aerodrome,:
+Salcoholism, drunkeness,:
+Salgerian, algeria,:
+Salps, alpine,:
+Saluminium, aluminum,:
+Samerican, america,:
+Sanalytical, analytic,:
+Santhropological, anthropology,:
+Santi nuclear, antinuclear, anti-nuclear,:
+Santi smoking, no smoking, no-smoking, nonsmoking, non smoking, antismoking,:
+Sarabia, arab, arabian,:
+Sargentina, argentinian,:
+Saristotle, aristotelean, aristotelian,:
+Sasia, asian, asiatic,:
+Sathens, athenian,:
+Sau-pair, au pair,:
+Saustralia, australian, australasia, australasian,:
+Saustria, austrian, austro,:
+Sauto immune, autoimmune,:
+Sback up, backup,:
+Sbavarian, bavaria,:
+Sbbc, british broadcasting corporation,:
+Sbelgium, belgian,:
+Sblow up, blowup,:
+Sbluecollar, blue-collar, blue collar,:
+Sbolshevik, bolshevism,:
+Sbosnian, bosnia,:
+Sbrazil, brazilian,:
+Sbreak down, breakdown,:
+Sbreak off, breakoff,:
+Sbreak up, breakup,:
+Sbrecht, brechtian,:
+Sbt, british telecom,:
+Sbuild up, buildup,:
+Sbuilt in, builtin,:
+Sbulgarian, bulgaria,:
+Sbuses, omnibus, bus,:
+Sbuy back, buyback,:
+Sbuy in, buyin,:
+Sbuyout, buy out,:
+Scal, cai, computer aided instruction, computer aided learning, computer assisted learning,:
+Scalifornia, calif, californian,:
+Scambodia, cambodian,:
+Scanada, canadian,:
+Scapital punishment, death penalty,:
+Scd-rom, cd rom,:
+Sceo, chief executive officer,:
+Scheck out, checkout,:
+Scheck up, checkup,:
+Schild, children, childhood,:
+Schile, chilean,:
+Schina, chinese,:
+Schunnel, channel tunnel,:
+Scia, central intelligence agency,:
+Sclassify, classification,:
+Scleanup, clean up,:
+Sclose up, closeup,:
+Scnd, campaign for nuclear disarmament,:
+# Next, because of mistake in trec topic
+Sco generation, cogeneration,:
+Sco, company,:
+Scommunity charge, poll tax,:
+Scomparison, compare,:
+Scomputation, computational,:
+Sconservative party, tory party, conservative and unionist party,:
+Sconsortia, consortium,:
+Scorsica, corsican,:
+Scost-of-living, cost of living,:
+Scount  down, countdown,:
+Scroatia, croatian,:
+Scttee, committee,:
+Scuba, cuban,:
+Scurriculum, curricula, curricular,:
+Scut back, cutback,:
+Scut off, cutoff,:
+Scut out, cutout,:
+Scyprus, cypriot,:
+Sczar, csar, tsar, tzar,:
+Sczechoslovakia, czech, czechoslovak, czechoslovakian,:
+Sdata base, database,:
+Sdbms, database management system,:
+Sdenmark, danish, dane,:
+Sdhss, department of health and social security,:
+Sdial up, dialup,:
+Sdie, dying, death,:
+Sdisc, disk,:
+Sdod, department of defense,:
+Sdoi, department of industry,:
+Sdrop out, dropout,:
+Sdropin, drop in,:
+Sdwi, driving while intoxicated,:
+Seec, european economic community, eu, european union, ec,:
+Segypt, egyptian,:
+Semail, electronic mail,:
+Senduser, end-user, end user,:
+Sengland, english,:
+Senvironment, environmental,:
+Sepa, environmental protection agency,:
+Seritrean, eritrea,:
+Serosion, erode,:
+Sethiopia, ethiopian,:
+Seurodollar, euro-dollar, euro dollar,:
+Seurope, european,:
+Sextra-terrestrial, extraterrestrial, extra terrestrial,:
+Sfade out, fadeout,:
+Sfailure, fail,:
+Sfalklands, falkland islands, malvinas,:
+Sfall out, fallout,:
+Sfao, food and agriculture organisation,:
+Sfbi, federal bureau of investigation,:
+Sfda, federal drug administration,:
+Sfema, federal emergency management agency,:
+Sfiber, fibre,:
+Sfinancial, finance,:
+Sfinland, finnish,:
+Sflanders, flemish,:
+Sflorence, florentine, firenze,:
+Sfold up, foldup,:
+Sfollowon, follow on,:
+Sfoot, feet,:
+Sfrance, french, francais,:
+Sfreudian, freud, sigmund freud,:
+Sfront-end, frontend, front end,:
+Sfuel-cell, fuel cell,:
+Sfulltext, full-text, full text,:
+Sgaol, jail,:
+Sgases, gassing, gaseous, gas,:
+Sgatt, general agreement on tariffs and trade,:
+Sgdp, gross domestic product,:
+Sgec, general electric company,:
+Sgeographical, geography,:
+Sgeological, geology,:
+Sgeometrical, geometry,:
+Sgermany, german, germanic, germano, deutsch, deutschland,:
+Sget out, getout,:
+Sgilt-edge, giltedge, gilt edge,:
+Sgingrich, newt gingrich,:
+Sgnp, gross national product,:
+Sgoose, geese,:
+Sgov, govt, governmental, government,:
+Sgraphical, graphic,:
+Sgreece, greek, grecian,:
+Sgrown up, grownup, adult,:
+Sguncontrol lobby, guncontrol, gun control,:
+Shaemophiliac, haemophilia,:
+Shaiti, haitian,:
+Shand out, handout,:
+Shandicapped, disadvantaged,:
+Shang out, hangout,:
+Shebrides, hebridean,:
+Shegel, hegelian,:
+Sherts, hertford, hertfordshire,:
+Shigh school, highschool,:
+Shightech, hitech, high tech,:
+Shimalayas, himalayan,:
+Shold out, holdout,:
+Shold up, holdup,:
+Sholland, dutch, netherlands,:
+Shong kong, hongkong,:
+Shook up, hookup,:
+Shungary, hungarian,:
+Siaea, international atomic energy authority,:
+Siba, independent broadcasting authority,:
+Siceland, icelandic,:
+Sici, imperial chemical industries,:
+Simf, international monetary fund,:
+Simpact, effect,:
+Sin house, inhouse,:
+Sindia, indian,:
+Sindices, index,:
+Sindo-european, indo european, indoeuropean,:
+Sindonesian, indonesia,:
+Sindustrial, industry,:
+Sinfra red, infrared,:
+Sinternationally, internationalism, international,:
+Siq, intelligence quotient,:
+Sira, irish republican army,:
+Siran, iranian, persia, persian,:
+Siraq, iraqi,:
+Sireland, irish,:
+Sisdn, integrated services digital network,:
+Sisrael, israeli,:
+Sitaly, italian, italia, italiana, italiano,:
+Sitn, independent television news,:
+Sjapan, japanese,:
+Sjerk off, jerkoff,:
+Sjewelry, jewellery,:
+Sjewish, judaism, jew,:
+Sjudgement, judgment,:
+Sjung, jungian,:
+Skenya, kenyan,:
+Skeynes, keynesian,:
+Skibbutz, kibbutzim,:
+Sklein, kleinian,:
+Sknock down, knockdown,:
+Sknock out, knockout,:
+Skoran, quran, q'ran,:
+Skorea, korean,:
+Skuwaiti, kuwait,:
+Slabour party,:
+Slan, local area network,:
+Slay off, layoff,:
+Slay out, layout,:
+Slebanon, lebanese,:
+Slifesupport, life support,:
+Slift off, liftoff,:
+Sline up, lineup,:
+Slock out, lockout,:
+Slock up, lockup,:
+Slongterm, longer term, long term,:
+Slook up, lookup,:
+Slow down, lowdown,:
+Slse, london school of economics,:
+Sltd, limited,:
+Slunacy, lunatic, mad, madness, insane, insanity,:
+Smacedonian, macedonia,:
+Smachiavelli, machiavellian,:
+Smacro economics, macroeconomics,:
+Smaff, ministry of agriculture fisheries and food,:
+Smake up, makeup,:
+Smalta, maltese,:
+Sman, men,:
+Smarcuse, marcusian,:
+Smark up, mark-up, mark up,:
+Smarx, marxian, marxist,:
+Smath, maths, mathematics,:
+Smatrix, matrices,:
+Smddx, middlesex,:
+Smediumterm, medium term,:
+Smelt down, meltdown,:
+Smexican, mexico,:
+Smicro computers, microcomputers, micro-computers,:
+Smicro economics, microeconomics,:
+Smicroelectronics, micro electronics, micro-electronics,:
+Smiddle ages, medieval, mediaeval,:
+Smilan, milanese,:
+Sminnesota mining and manufacturing, mmm,:
+Smis, management information systems,:
+Smit, massachusetts institute of technology,:
+Smock up, mockup,:
+Smold, mould,:
+Smongolia, mongolian,:
+Smonogamous, monogamy,:
+Smonopolies and mergers commission,:
+Smoslem, muslim, islamic, islam,:
+Smouse, mice,:
+Smovies, moving pictures, cinematic, cinema,:
+Snapoleon, napoleonic,:
+Snasa, national aeronautical space agency,:
+Snato, north atlantic treaty organization,:
+Sncb, national coal board,:
+Snear-death, near death,:
+Snhs, national health service,:
+Snicaragua, nicaraguan,:
+Snigeria, nigerian,:
+Snlp, natural language processing,:
+Snorway, norwegian, norse,:
+Snotting hill,:
+Snov, november,:
+Snspcc, national society for the prevention of cruelty to children,:
+Sny, new york,:
+Snz, new zealand,:
+So and m, organisation and methods,:
+Soap, senior citizen, old age pensioner,:
+Soecd, organisation for economic cooperation and development,:
+Son line, online, on-line,:
+Sopec, organisation of petroleum exporting countries,:
+Soperatic, opera,:
+Soperations research, operational research,:
+Soptimum, optimal,:
+Sos 2, os/2, os-2, os2,:
+Spalestine, palestinian,:
+Spapua, papuan, new guinea, papua new guinea,:
+Sparaguay, paraguayan,:
+Sparis, parisian, parisien, parisienne,:
+Spart-time, part time,:
+Spartially sighted, blind,:
+Spaste up, pasteup,:
+Spavlov, pavlovian,:
+Spay off, payoff,:
+Spay out, payout,:
+Spembs, pembroke, pembrokes, pembrokeshire,:
+Sper cent, percent,:
+Spersons, people,:
+Speru, peruvian,:
+Sph d, phd,:
+Sphenomenon, phenomena,:
+Sphilosophical, philosophy,:
+Sphone, telephone,:
+Sphonein, phone-in, phone in,:
+Sphysiological, physiology,:
+Spick up, pickup,:
+Spigs, swine,:
+Spinup, pin-up, pin up,:
+Splay off, playoff,:
+Splo, palestine liberation organisation,:
+Spoland, polish,:
+Spolygamous, polygamy,:
+Spolymerisation, polymer,:
+Spolyphonic, polyphony,:
+Sporn, porno, pornography, pornographic,:
+Sportugal, portuguese,:
+Spost war, post-war, postwar,:
+Spresidentially, presidential,:
+Sprint out, printout,:
+Sprussia, prussian,:
+Spsbr, public sector borrowing requirement,:
+Spsychiatric, psychiatry,:
+Spsychology of language, psycholinguistics,:
+Spurchase, buying, bought, buyer, buy,:
+Sracism, racist, racialism, racialist,:
+Srail road, railroad, railway,:
+Sread out, readout,:
+Sreagan, ronald reagan, mr reagan, president reagan, president ronald reagan,:
+Sreligious, religion,:
+Srip off, ripoff,:
+Sround off, roundoff,:
+Sround up, roundup,:
+Srspb, royal society for the protection of birds,:
+Srspca, royal society for the prevention of cruelty to animals,:
+Srub down, rubdown,:
+Srun off, runoff,:
+Srussia, russian, soviet, soviet union, ussr, union of soviet socialist republics,:
+Ssalop, shrops, shropshire,:
+Ssalt 2, salt ii,:
+Sscandinavia, scandinavian,:
+Ssci fi, sci-fi, scifi, science-fiction, science fiction,:
+Sscottish, scots, scotland,:
+Sself sufficiency, selfsufficient, self sufficient,:
+Ssell out, sellout,:
+Ssep, sept, september,:
+Sserbia, serbian,:
+Sserbocroat, serbo-croat, serbo croat, serbocroatian, serbo-croatian, serbo croatian,:
+Sset up, setup,:
+Sshortterm, shorter term, short term,:
+Sshut down, shutdown,:
+Sshut off, shutoff,:
+Sshut out, shutout,:
+Ssit in, sit ins, sitin,:
+Sslow down, slowdown,:
+Sslowdown, slow down,:
+Ssocial science, sociology,:
+Ssocial work, social worker,:
+Ssomali, somalian, somalia,:
+Ssouth african, south africa,:
+Ssouth america, latin america, south american, latin american,:
+Ssoy, soya, soybean, soya bean, soyabean,:
+Sspain, spanish, hispanic, espana,:
+Sspeed up, speedup,:
+Sspin off, spinoff,:
+Sstake out, stakeout,:
+Sstand off, standoff,:
+Sstandard deviation,:
+Sstandard of living, living standards,:
+Sstar wars, sdi, strategic defense initiative,:
+Sstart up, startup,:
+Sstate-of-the-art, state of the art,:
+Sstats, statistics, statistical,:
+Sstd, sexually transmitted diseases, vd, venereal disease,:
+Sstockmarket, stock market,:
+Sstrategic, strategy,:
+Ssweden, swedish, sverige,:
+Sswitzerland, swiss, suisse,:
+Stake off, takeoff,:
+Stake up, takeup, take-up,:
+Stakeover, take over, take-over,:
+Stanzania, tanzanian,:
+Stax, taxation, taxable, taxability,:
+Stechnic, technique,:
+Stexan, texas,:
+Sthatcher, mrs thatcher, margaret thatcher, mrs margaret thatcher, thatcherite, thatcherism,:
+Stheses, thesis,:
+Sthird world, 3rd world, under developed countries, underdeveloped areas, underdeveloped countries, under-developed countries, developing countries,:
+Stibet, tibetan,:
+Stigray, tigre,:
+Stime out, timeout,:
+Stooth, teeth,:
+Stouch down, touchdown,:
+Stoys, toying, toy,:
+Strade off, tradeoff,:
+Strading on inside information, trading by insider, trading by an insider, insider trading,:
+Strash, garbage,:
+Stuc, trade union congress,:
+Sturkey, turkish,:
+Sturn off, turnoff,:
+Sturn out, turnout,:
+Stv, television,:
+Suk, united kingdom, britain, great britain, british isles, gb, british, gt brit,:
+Sunesco, united nations educational scientific and cultural organization,:
+Sunidentified flying object, ufo,:
+Sup to date, up-to-date,:
+Suruguay, uruguayan,:
+Susa, us of a, us, united states, united states of america,:
+Susda, united states department of agriculture,:
+Suserfriendly, user friendly,:
+Sutd, united,:
+Suv, ultra violet, ultraviolet,:
+Svdu, vdt, visual display unit, visual display terminal,:
+Svenezuelan, venezuela,:
+Svenice, venetian, fenice,:
+Svienna, viennese,:
+Svietnam, vietnamese,:
+Svlsi, very large scale integration,:
+Swales, welsh,:
+Swalk out, walkout,:
+Swarm up, warmup,:
+Swest indies, west indian,:
+Swhitecollar, white-collar, white collar,:
+Swife, wives,:
+Swoman, women,:
+Swordprocessing, word processing,:
+Sworld health organization,:
+Sworld war i, world war one, world war 1, first world war, 1st world war, 1914-18 war, world war 1914-1918, european war 1914-1918, premiere guerre mondiale,:
+Sworld war ii, world war two, world war 2, second world war, 2nd world war, 1939-45 war, world war two 1939-45, world war 1939-1945, seconde guerre mondiale, deuxieme guerre mondiale,:
+Sworldwide, world wide,:
+Swrite down, writedown,:
+Swrite off, writeoff,:
+Swrite up, writeup,:
+Swsj, wall street journal,:
+Sx 11, x windows, xwindows, x11,:
+Sx ray, x-ray, xray,:
+Syear book, yearbook,:
+Syorks, yorkshire,:
+Syugoslavia, yugoslav, yugoslavian,:

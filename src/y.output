@@ -1,0 +1,6298 @@
+Terminals unused in grammar
+
+   CLASSTOKEN
+   ERRORTOKEN
+   FLAGSTOKEN
+   HELPTOKEN
+   HIGHLIGHTTOKEN
+   OPTIONSTOKEN
+   PARASTOKEN
+   PARATOKEN
+   QETOKEN
+   REAL
+   TRECTOKEN
+
+
+Grammar
+
+    0 $accept: request $end
+
+    1 request: command ENDOFQUERY
+    2        | ENDOFQUERY
+    3        | %empty
+    4        | error ENDOFQUERY
+
+    5 command: choose
+    6        | find
+    7        | combine
+    8        | stem
+    9        | delete
+   10        | info
+   11        | show
+   12        | weight
+   13        | rscore
+   14        | parse
+   15        | superparse
+   16        | extract
+   17        | limit
+   18        | gsl
+   19        | findlimit
+   20        | settoken
+   21        | debug
+   22        | tf
+   23        | doclength
+   24        | perror
+   25        | dump
+   26        | report
+   27        | display
+   28        | displaytrecstats
+   29        | unknowncommand
+
+   30 unknowncommand: UNKNOWNCOMMAND
+
+   31 word: AWORD
+
+   32 inumber: NUMBER
+
+   33 dnumber: NUMBER
+
+   34 setnum: STOKEN EQUALS NUMBER
+
+   35 rnum: RTOKEN EQUALS inumber
+
+   36 irn: IRNTOKEN EQUALS inumber
+
+   37 frignum: FRIGTOKEN EQUALS dnumber
+
+   38 attr: ATOKEN EQUALS AWORD
+
+   39 lmask: LIMITTOKEN EQUALS inumber
+
+   40 $@1: %empty
+
+   41 $@2: %empty
+
+   42 choose: CHOOSETOKEN $@1 chooseargs dbname $@2 ENDOFQUERY
+
+   43 chooseargs: %empty
+   44           | DBFLAGSTOKEN EQUALS inumber
+
+   45 dbname: word
+   46       | DBTOKEN EQUALS word
+
+   47 find: lkupcmd ENDOFQUERY
+   48     | combcmd ENDOFQUERY
+   49     | ftoken irn ENDOFQUERY
+   50     | ftoken setnum rnum ENDOFQUERY
+   51     | ftoken rnum setnum ENDOFQUERY
+
+   52 $@3: %empty
+
+   53 combine: COMBTOKEN $@3 sets options ENDOFQUERY
+
+   54 lkupcmd: ftoken qualifiers TERM
+   55        | ftoken qualifiers
+
+   56 combcmd: ftoken sets options
+   57        | ftoken set TOPTOKEN EQUALS inumber
+
+   58 ftoken: FINDTOKEN
+
+   59 sets: set
+   60     | sets set
+
+   61 set: setnum WTOKEN EQUALS dnumber
+   62    | setnum WTOKEN EQUALS DOLLAR
+   63    | setnum
+   64    | setnum frignum
+   65    | set QTFTOKEN EQUALS inumber
+
+   66 options: %empty
+   67        | options option
+
+   68 option: OPTOKEN EQUALS word
+   69       | SCOREFUNCTOKEN EQUALS inumber
+   70       | GAPTOKEN EQUALS inumber
+   71       | AWTOKEN EQUALS dnumber
+   72       | GWTOKEN EQUALS dnumber
+   73       | TARGETTOKEN EQUALS inumber
+   74       | SAVETOKEN EQUALS tnumber
+   75       | MEMTOKEN EQUALS tnumber
+   76       | HOLDTOKEN EQUALS tnumber
+   77       | FILETOKEN EQUALS tnumber
+   78       | NOPOSTOKEN EQUALS tnumber
+   79       | NOTFTOKEN EQUALS tnumber
+   80       | OPENTOKEN EQUALS tnumber
+   81       | KEEPTOKEN EQUALS tnumber
+   82       | DELTOKEN EQUALS tnumber
+   83       | NO_ST_TOKEN EQUALS tnumber
+   84       | ST_TOKEN EQUALS tnumber
+   85       | STATS_TOKEN EQUALS tnumber
+   86       | NOSHOW_TOKEN EQUALS tnumber
+   87       | MODETOKEN EQUALS word
+   88       | lmask
+   89       | K1TOKEN EQUALS dnumber
+   90       | K2TOKEN EQUALS dnumber
+   91       | K3TOKEN EQUALS dnumber
+   92       | K7TOKEN EQUALS dnumber
+   93       | K8TOKEN EQUALS dnumber
+   94       | BM25_B_TOKEN EQUALS dnumber
+   95       | B3_TOKEN EQUALS dnumber
+   96       | AVEDOCLEN_TOKEN EQUALS inumber
+   97       | QUERYLEN_TOKEN EQUALS inumber
+   98       | AVEQUERYLEN_TOKEN EQUALS inumber
+   99       | P_UNIT_TOKEN EQUALS inumber
+  100       | P_STEP_TOKEN EQUALS inumber
+  101       | P_MAXLEN_TOKEN EQUALS inumber
+  102       | MARKTOKEN EQUALS inumber
+
+  103 qualifiers: %empty
+  104           | qualifiers qualifier
+
+  105 qualifier: SAVETOKEN EQUALS tnumber
+  106          | MEMTOKEN EQUALS tnumber
+  107          | HOLDTOKEN EQUALS tnumber
+  108          | FILETOKEN EQUALS tnumber
+  109          | NOPOSTOKEN EQUALS tnumber
+  110          | NOTFTOKEN EQUALS tnumber
+  111          | OPENTOKEN EQUALS tnumber
+  112          | KEEPTOKEN EQUALS tnumber
+  113          | TYPETOKEN EQUALS inumber
+  114          | lmask
+  115          | attr
+
+  116 stem: STEMTOKEN stemfunc EQUALS word TERM
+
+  117 stemfunc: STEMFUNCTIONTOKEN
+  118         | FUNCTOKEN
+
+  119 delete: deltoken numbers ENDOFQUERY
+  120       | deltoken STOKEN EQUALS word ENDOFQUERY
+  121       | deltoken word ENDOFQUERY
+  122       | deltoken ENDOFQUERY
+
+  123 deltoken: DELETETOKEN
+
+  124 numbers: number
+  125        | numbers number
+
+  126 number: inumber
+  127       | setnum
+
+  128 info: INFOTOKEN irn ENDOFQUERY
+  129     | INFOTOKEN DBTOKEN ENDOFQUERY
+  130     | INFOTOKEN DBTOKEN EQUALS word ENDOFQUERY
+  131     | INFOTOKEN DBSTOKEN ENDOFQUERY
+  132     | INFOTOKEN attr ENDOFQUERY
+  133     | INFOTOKEN ATOKEN ENDOFQUERY
+  134     | INFOTOKEN ATTSTOKEN ENDOFQUERY
+  135     | INFOTOKEN STEMFUNCTIONSTOKEN
+  136     | INFOTOKEN REGIMESTOKEN
+  137     | INFOTOKEN GSLSTOKEN
+  138     | INFOTOKEN VERSIONTOKEN
+  139     | INFOTOKEN LIMITSTOKEN
+  140     | INFOTOKEN word ENDOFQUERY
+  141     | INFOTOKEN ENDOFQUERY
+
+  142 $@4: %empty
+
+  143 show: SHOWTOKEN $@4 show_args ENDOFQUERY
+
+  144 show_args: %empty
+  145          | show_args show_arg
+
+  146 show_arg: setnum
+  147         | rnum
+  148         | FTOKEN EQUALS inumber
+  149         | NTOKEN EQUALS inumber
+  150         | irn
+  151         | NOERRORTOKEN EQUALS tnumber
+  152         | STARTSTRTOKEN EQUALS word
+  153         | FINSTRTOKEN EQUALS word
+
+  154 parse: ptoken p1qualifiers pterm
+  155      | ptoken p2qualifiers pterm
+
+  156 ptoken: PARSETOKEN
+
+  157 superparse: sptoken p1qualifiers pterm
+  158           | sptoken p2qualifiers pterm
+
+  159 sptoken: SUPERPARSETOKEN
+
+  160 pterm: %empty
+  161      | TERM
+
+  162 p1qualifiers: %empty
+  163             | p1qualifiers p1qualifier
+
+  164 p2qualifiers: p2qualifier
+  165             | p2qualifiers p2qualifier
+
+  166 p1qualifier: attr
+
+  167 p2qualifier: REGTOKEN EQUALS word
+  168            | STEMFUNCTIONTOKEN EQUALS word
+  169            | GSLTOKEN EQUALS word
+
+  170 $@5: %empty
+
+  171 extract: EXTRACTTOKEN $@5 extractargs ENDOFQUERY
+
+  172 extractargs: %empty
+  173            | extractargs extractarg
+
+  174 extractarg: setnum
+  175           | irn
+  176           | rnum
+  177           | OFFSETTOKEN EQUALS inumber
+  178           | LENGTHTOKEN EQUALS inumber
+  179           | FIELDTOKEN EQUALS inumber
+  180           | FIELDTOKEN EQUALS word
+  181           | SRCTOKEN EQUALS tnumber
+  182           | attr
+
+  183 $@6: %empty
+
+  184 weight: WEIGHTTOKEN $@6 weightqualifiers ENDOFQUERY
+
+  185 weightqualifiers: %empty
+  186                 | weightqualifiers weightqualifier
+
+  187 weightqualifier: lmask
+  188                | wfunc EQUALS inumber
+  189                | NTOKEN EQUALS inumber
+  190                | TTF_TOKEN EQUALS inumber
+  191                | QTFTOKEN EQUALS inumber
+  192                | K3TOKEN EQUALS NUMBER
+  193                | K4TOKEN EQUALS NUMBER
+  194                | K5TOKEN EQUALS NUMBER
+  195                | K6TOKEN EQUALS NUMBER
+  196                | rnum
+  197                | STOKEN EQUALS inumber
+  198                | BIGRTOKEN EQUALS inumber
+  199                | BIGSTOKEN EQUALS inumber
+  200                | RLOADTOKEN EQUALS inumber
+  201                | BIGRLOADTOKEN EQUALS inumber
+  202                | BIGNTOKEN EQUALS inumber
+  203                | THETATOKEN EQUALS inumber
+  204                | LAMDATOKEN EQUALS NUMBER
+  205                | TNPTOKEN EQUALS NUMBER
+  206                | CTTF_TOKEN EQUALS NUMBER
+  207                | WTFACTORTOKEN EQUALS NUMBER
+
+  208 wfunc: WTFUNCTOKEN
+  209      | FUNCTOKEN
+
+  210 $@7: %empty
+
+  211 rscore: RSCORETOKEN $@7 rscorequalifiers ENDOFQUERY
+
+  212 rscorequalifiers: %empty
+  213                 | rscorequalifiers rscorequalifier
+
+  214 rscorequalifier: lmask
+  215                | attr
+  216                | NTOKEN EQUALS inumber
+  217                | rnum
+  218                | BIGRTOKEN EQUALS inumber
+
+  219 $@8: %empty
+
+  220 gsl: GSLTOKEN $@8 p1qualifiers TERM
+
+  221 debug: DEBUGTOKEN TERM
+  222      | DEBUGTOKEN inumber
+
+  223 findlimit: FINDLIMITTOKEN TERM
+  224          | FINDLIMITTOKEN ENDOFQUERY
+
+  225 $@9: %empty
+
+  226 settoken: SETTOKEN $@9 setargs
+  227         | SETTOKEN word ENDOFQUERY
+  228         | SETTOKEN
+
+  229 setargs: setarg
+  230        | setargs setarg
+
+  231 setarg: lmask
+  232       | VERBOSETOKEN EQUALS NUMBER
+  233       | THETATOKEN EQUALS inumber
+  234       | LAMDATOKEN EQUALS NUMBER
+  235       | TNT_TOKEN EQUALS inumber
+  236       | TNPTOKEN EQUALS NUMBER
+  237       | CTTF_TOKEN EQUALS NUMBER
+  238       | wfunc EQUALS inumber
+  239       | SCOREFUNCTOKEN EQUALS inumber
+  240       | FTOKEN EQUALS NUMBER
+  241       | ATOKEN EQUALS AWORD
+  242       | SAVETOKEN EQUALS tnumber
+  243       | TYPETOKEN EQUALS wnumber
+  244       | NOPOSTOKEN EQUALS tnumber
+  245       | NOTFTOKEN EQUALS tnumber
+  246       | MEMTOKEN EQUALS tnumber
+  247       | NO_ST_TOKEN EQUALS tnumber
+  248       | ST_TOKEN EQUALS tnumber
+  249       | K1TOKEN EQUALS NUMBER
+  250       | K2TOKEN EQUALS NUMBER
+  251       | K3TOKEN EQUALS NUMBER
+  252       | K4TOKEN EQUALS NUMBER
+  253       | K5TOKEN EQUALS NUMBER
+  254       | K6TOKEN EQUALS NUMBER
+  255       | K7TOKEN EQUALS NUMBER
+  256       | K8TOKEN EQUALS NUMBER
+  257       | BM25_B_TOKEN EQUALS NUMBER
+  258       | B3_TOKEN EQUALS NUMBER
+  259       | AVEDOCLEN_TOKEN EQUALS NUMBER
+  260       | AVEQUERYLEN_TOKEN EQUALS NUMBER
+  261       | P_UNIT_TOKEN EQUALS NUMBER
+  262       | P_STEP_TOKEN EQUALS NUMBER
+  263       | P_MAXLEN_TOKEN EQUALS NUMBER
+  264       | BIGRTOKEN EQUALS NUMBER
+  265       | BIGSTOKEN EQUALS NUMBER
+  266       | BIGRLOADTOKEN EQUALS NUMBER
+  267       | RLOADTOKEN EQUALS NUMBER
+  268       | BIGNTOKEN EQUALS NUMBER
+  269       | DEBUGTOKEN EQUALS inumber
+  270       | PREFERTOKEN EQUALS NUMBER
+  271       | ACCEPTTOKEN EQUALS NUMBER
+  272       | OPTOKEN EQUALS AWORD
+
+  273 tnumber: AWORD
+  274        | NUMBER
+
+  275 wnumber: AWORD
+  276        | NUMBER
+
+  277 $@10: %empty
+
+  278 limit: LIMITTOKEN $@10 limitargs
+
+  279 limitargs: %empty
+  280          | limitargs limitarg
+
+  281 limitarg: setnum
+  282         | lmask
+  283         | SAVETOKEN EQUALS tnumber
+
+  284 display: DISPLAYTOKEN ENDOFQUERY
+
+  285 $@11: %empty
+
+  286 display: DISPLAYTOKEN $@11 dispqualifiers disparg
+  287        | DISPLAYTOKEN STATS_TOKEN
+  288        | DISPLAYTOKEN setnum STATS_TOKEN
+  289        | DISPLAYTOKEN STATS_TOKEN setnum
+
+  290 disparg: BIGNTOKEN
+  291        | AVEDOCLEN_TOKEN
+  292        | TNT_TOKEN
+  293        | CTTF_TOKEN
+  294        | DBTOKEN
+  295        | WTOKEN
+  296        | NTOKEN
+  297        | TTF_TOKEN
+
+  298 dispqualifiers: %empty
+  299               | dispqualifiers dispqualifier
+
+  300 dispqualifier: lmask
+  301              | attr
+
+  302 $@12: %empty
+
+  303 displaytrecstats: DISPLAYTRECSTATSTOKEN $@12 stat_args ENDOFQUERY
+
+  304 stat_args: %empty
+  305          | stat_args stat_arg
+
+  306 stat_arg: setnum
+  307         | MARKTOKEN EQUALS inumber
+  308         | BIGRTOKEN EQUALS inumber
+  309         | NTOKEN EQUALS inumber
+  310         | MEMTOKEN EQUALS tnumber
+  311         | CODETOKEN EQUALS inumber
+  312         | AWORD
+
+  313 perror: PERRORTOKEN ENDOFQUERY
+
+  314 tf: TFTOKEN ENDOFQUERY
+
+  315 $@13: %empty
+
+  316 doclength: DOCLENGTHTOKEN $@13 doclengthargs ENDOFQUERY
+
+  317 doclengthargs: %empty
+  318              | doclengthargs doclengtharg
+
+  319 doclengtharg: setnum
+  320             | irn
+  321             | rnum
+  322             | attr
+
+  323 $@14: %empty
+
+  324 dump: DUMPTOKEN $@14 dumpargs ENDOFQUERY
+
+  325 dumpargs: %empty
+  326         | dumpargs dumparg
+
+  327 dumparg: word
+  328        | setnum
+  329        | TTF_TOKEN
+  330        | NTOKEN
+  331        | ATOKEN
+
+  332 report: REPORTTOKEN word ENDOFQUERY
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256) 4
+ACCEPTTOKEN (258) 271
+ATOKEN (259) 38 133 241 331
+ATTSTOKEN (260) 134
+AVEDOCLEN_TOKEN (261) 96 259 291
+AVEQUERYLEN_TOKEN (262) 98 260
+AWTOKEN (263) 71
+BIGNTOKEN (264) 202 268 290
+BIGRLOADTOKEN (265) 201 266
+BIGRTOKEN (266) 198 218 264 308
+BIGSTOKEN (267) 199 265
+BM25_B_TOKEN (268) 94 257
+B3_TOKEN (269) 95 258
+CHOOSETOKEN (270) 42
+CLASSTOKEN (271)
+CODETOKEN (272) 311
+COMBTOKEN (273) 53
+TNT_TOKEN (274) 235 292
+CTTF_TOKEN (275) 206 237 293
+DBFLAGSTOKEN (276) 44
+DBSTOKEN (277) 131
+DBTOKEN (278) 46 129 130 294
+DEBUGTOKEN (279) 221 222 269
+DELETETOKEN (280) 123
+DELTOKEN (281) 82
+DISPLAYTOKEN (282) 284 286 287 288 289
+DISPLAYTRECSTATSTOKEN (283) 303
+DOCLENGTHTOKEN (284) 316
+DOLLAR (285) 62
+DUMPTOKEN (286) 324
+EQUALS (287) 34 35 36 37 38 39 44 46 57 61 62 65 68 69 70 71 72 73
+    74 75 76 77 78 79 80 81 82 83 84 85 86 87 89 90 91 92 93 94 95
+    96 97 98 99 100 101 102 105 106 107 108 109 110 111 112 113 116
+    120 130 148 149 151 152 153 167 168 169 177 178 179 180 181 188
+    189 190 191 192 193 194 195 197 198 199 200 201 202 203 204 205
+    206 207 216 218 232 233 234 235 236 237 238 239 240 241 242 243
+    244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259
+    260 261 262 263 264 265 266 267 268 269 270 271 272 283 307 308
+    309 310 311
+ERRORTOKEN (288)
+NOERRORTOKEN (289) 151
+EXTRACTTOKEN (290) 171
+FIELDTOKEN (291) 179 180
+FILETOKEN (292) 77 108
+FINDLIMITTOKEN (293) 223 224
+FINDTOKEN (294) 58
+FINSTRTOKEN (295) 153
+FLAGSTOKEN (296)
+FRIGTOKEN (297) 37
+FTOKEN (298) 148 240
+FUNCTOKEN (299) 118 209
+GAPTOKEN (300) 70
+GSLSTOKEN (301) 137
+GSLTOKEN (302) 169 220
+GWTOKEN (303) 72
+HELPTOKEN (304)
+HIGHLIGHTTOKEN (305)
+HOLDTOKEN (306) 76 107
+INFOTOKEN (307) 128 129 130 131 132 133 134 135 136 137 138 139 140
+    141
+IRNTOKEN (308) 36
+K1TOKEN (309) 89 249
+K2TOKEN (310) 90 250
+K3TOKEN (311) 91 192 251
+K4TOKEN (312) 193 252
+K5TOKEN (313) 194 253
+K6TOKEN (314) 195 254
+K7TOKEN (315) 92 255
+K8TOKEN (316) 93 256
+KEEPTOKEN (317) 81 112
+LAMDATOKEN (318) 204 234
+LENGTHTOKEN (319) 178
+LIMITTOKEN (320) 39 278
+LIMITSTOKEN (321) 139
+MARKTOKEN (322) 102 307
+MEMTOKEN (323) 75 106 246 310
+MODETOKEN (324) 87
+NOPOSTOKEN (325) 78 109 244
+NOSHOW_TOKEN (326) 86
+NOTFTOKEN (327) 79 110 245
+NO_ST_TOKEN (328) 83 247
+NTOKEN (329) 149 189 216 296 309 330
+NUMBER (330) 32 33 34 192 193 194 195 204 205 206 207 232 234 236 237
+    240 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263
+    264 265 266 267 268 270 271 274 276
+OFFSETTOKEN (331) 177
+OPENTOKEN (332) 80 111
+OPTIONSTOKEN (333)
+OPTOKEN (334) 68 272
+PARASTOKEN (335)
+PARATOKEN (336)
+PARSETOKEN (337) 156
+PERRORTOKEN (338) 313
+PREFERTOKEN (339) 270
+P_MAXLEN_TOKEN (340) 101 263
+P_STEP_TOKEN (341) 100 262
+P_UNIT_TOKEN (342) 99 261
+QETOKEN (343)
+QTFTOKEN (344) 65 191
+QUERYLEN_TOKEN (345) 97
+REAL (346)
+REGIMESTOKEN (347) 136
+REGTOKEN (348) 167
+REPORTTOKEN (349) 332
+RLOADTOKEN (350) 200 267
+RSCORETOKEN (351) 211
+RTOKEN (352) 35
+SAVETOKEN (353) 74 105 242 283
+SETTOKEN (354) 226 227 228
+SCOREFUNCTOKEN (355) 69 239
+SHOWTOKEN (356) 143
+SRCTOKEN (357) 181
+STARTSTRTOKEN (358) 152
+STATS_TOKEN (359) 85 287 288 289
+STEMFUNCTIONSTOKEN (360) 135
+STEMFUNCTIONTOKEN (361) 117 168
+STEMTOKEN (362) 116
+STOKEN (363) 34 120 197
+ST_TOKEN (364) 84 248
+SUPERPARSETOKEN (365) 159
+TARGETTOKEN (366) 73
+TERM (367) 54 116 161 220 221 223
+TFTOKEN (368) 314
+THETATOKEN (369) 203 233
+TNPTOKEN (370) 205 236
+TOPTOKEN (371) 57
+TRECTOKEN (372)
+TTF_TOKEN (373) 190 297 329
+TYPETOKEN (374) 113 243
+VERBOSETOKEN (375) 232
+VERSIONTOKEN (376) 138
+WEIGHTTOKEN (377) 184
+AWORD (378) 31 38 241 272 273 275 312
+WTFUNCTOKEN (379) 208
+WTOKEN (380) 61 62 295
+WTFACTORTOKEN (381) 207
+UNKNOWNCOMMAND (382) 30
+ENDOFQUERY (383) 1 2 4 42 47 48 49 50 51 53 119 120 121 122 128 129
+    130 131 132 133 134 140 141 143 171 184 211 224 227 284 303 313
+    314 316 324 332
+
+
+Nonterminals, with rules where they appear
+
+$accept (129)
+    on left: 0
+request (130)
+    on left: 1 2 3 4, on right: 0
+command (131)
+    on left: 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+    25 26 27 28 29, on right: 1
+unknowncommand (132)
+    on left: 30, on right: 29
+word (133)
+    on left: 31, on right: 45 46 68 87 116 120 121 130 140 152 153
+    167 168 169 180 227 327 332
+inumber (134)
+    on left: 32, on right: 35 36 39 44 57 65 69 70 73 96 97 98 99 100
+    101 102 113 126 148 149 177 178 179 188 189 190 191 197 198 199
+    200 201 202 203 216 218 222 233 235 238 239 269 307 308 309 311
+dnumber (135)
+    on left: 33, on right: 37 61 71 72 89 90 91 92 93 94 95
+setnum (136)
+    on left: 34, on right: 50 51 61 62 63 64 127 146 174 281 288 289
+    306 319 328
+rnum (137)
+    on left: 35, on right: 50 51 147 176 196 217 321
+irn (138)
+    on left: 36, on right: 49 128 150 175 320
+frignum (139)
+    on left: 37, on right: 64
+attr (140)
+    on left: 38, on right: 115 132 166 182 215 301 322
+lmask (141)
+    on left: 39, on right: 88 114 187 214 231 282 300
+choose (142)
+    on left: 42, on right: 5
+$@1 (143)
+    on left: 40, on right: 42
+$@2 (144)
+    on left: 41, on right: 42
+chooseargs (145)
+    on left: 43 44, on right: 42
+dbname (146)
+    on left: 45 46, on right: 42
+find (147)
+    on left: 47 48 49 50 51, on right: 6
+combine (148)
+    on left: 53, on right: 7
+$@3 (149)
+    on left: 52, on right: 53
+lkupcmd (150)
+    on left: 54 55, on right: 47
+combcmd (151)
+    on left: 56 57, on right: 48
+ftoken (152)
+    on left: 58, on right: 49 50 51 54 55 56 57
+sets (153)
+    on left: 59 60, on right: 53 56 60
+set (154)
+    on left: 61 62 63 64 65, on right: 57 59 60 65
+options (155)
+    on left: 66 67, on right: 53 56 67
+option (156)
+    on left: 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85
+    86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102, on right:
+    67
+qualifiers (157)
+    on left: 103 104, on right: 54 55 104
+qualifier (158)
+    on left: 105 106 107 108 109 110 111 112 113 114 115, on right:
+    104
+stem (159)
+    on left: 116, on right: 8
+stemfunc (160)
+    on left: 117 118, on right: 116
+delete (161)
+    on left: 119 120 121 122, on right: 9
+deltoken (162)
+    on left: 123, on right: 119 120 121 122
+numbers (163)
+    on left: 124 125, on right: 119 125
+number (164)
+    on left: 126 127, on right: 124 125
+info (165)
+    on left: 128 129 130 131 132 133 134 135 136 137 138 139 140 141,
+    on right: 10
+show (166)
+    on left: 143, on right: 11
+$@4 (167)
+    on left: 142, on right: 143
+show_args (168)
+    on left: 144 145, on right: 143 145
+show_arg (169)
+    on left: 146 147 148 149 150 151 152 153, on right: 145
+parse (170)
+    on left: 154 155, on right: 14
+ptoken (171)
+    on left: 156, on right: 154 155
+superparse (172)
+    on left: 157 158, on right: 15
+sptoken (173)
+    on left: 159, on right: 157 158
+pterm (174)
+    on left: 160 161, on right: 154 155 157 158
+p1qualifiers (175)
+    on left: 162 163, on right: 154 157 163 220
+p2qualifiers (176)
+    on left: 164 165, on right: 155 158 165
+p1qualifier (177)
+    on left: 166, on right: 163
+p2qualifier (178)
+    on left: 167 168 169, on right: 164 165
+extract (179)
+    on left: 171, on right: 16
+$@5 (180)
+    on left: 170, on right: 171
+extractargs (181)
+    on left: 172 173, on right: 171 173
+extractarg (182)
+    on left: 174 175 176 177 178 179 180 181 182, on right: 173
+weight (183)
+    on left: 184, on right: 12
+$@6 (184)
+    on left: 183, on right: 184
+weightqualifiers (185)
+    on left: 185 186, on right: 184 186
+weightqualifier (186)
+    on left: 187 188 189 190 191 192 193 194 195 196 197 198 199 200
+    201 202 203 204 205 206 207, on right: 186
+wfunc (187)
+    on left: 208 209, on right: 188 238
+rscore (188)
+    on left: 211, on right: 13
+$@7 (189)
+    on left: 210, on right: 211
+rscorequalifiers (190)
+    on left: 212 213, on right: 211 213
+rscorequalifier (191)
+    on left: 214 215 216 217 218, on right: 213
+gsl (192)
+    on left: 220, on right: 18
+$@8 (193)
+    on left: 219, on right: 220
+debug (194)
+    on left: 221 222, on right: 21
+findlimit (195)
+    on left: 223 224, on right: 19
+settoken (196)
+    on left: 226 227 228, on right: 20
+$@9 (197)
+    on left: 225, on right: 226
+setargs (198)
+    on left: 229 230, on right: 226 230
+setarg (199)
+    on left: 231 232 233 234 235 236 237 238 239 240 241 242 243 244
+    245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260
+    261 262 263 264 265 266 267 268 269 270 271 272, on right: 229
+    230
+tnumber (200)
+    on left: 273 274, on right: 74 75 76 77 78 79 80 81 82 83 84 85
+    86 105 106 107 108 109 110 111 112 151 181 242 244 245 246 247
+    248 283 310
+wnumber (201)
+    on left: 275 276, on right: 243
+limit (202)
+    on left: 278, on right: 17
+$@10 (203)
+    on left: 277, on right: 278
+limitargs (204)
+    on left: 279 280, on right: 278 280
+limitarg (205)
+    on left: 281 282 283, on right: 280
+display (206)
+    on left: 284 286 287 288 289, on right: 27
+$@11 (207)
+    on left: 285, on right: 286
+disparg (208)
+    on left: 290 291 292 293 294 295 296 297, on right: 286
+dispqualifiers (209)
+    on left: 298 299, on right: 286 299
+dispqualifier (210)
+    on left: 300 301, on right: 299
+displaytrecstats (211)
+    on left: 303, on right: 28
+$@12 (212)
+    on left: 302, on right: 303
+stat_args (213)
+    on left: 304 305, on right: 303 305
+stat_arg (214)
+    on left: 306 307 308 309 310 311 312, on right: 305
+perror (215)
+    on left: 313, on right: 24
+tf (216)
+    on left: 314, on right: 22
+doclength (217)
+    on left: 316, on right: 23
+$@13 (218)
+    on left: 315, on right: 316
+doclengthargs (219)
+    on left: 317 318, on right: 316 318
+doclengtharg (220)
+    on left: 319 320 321 322, on right: 318
+dump (221)
+    on left: 324, on right: 25
+$@14 (222)
+    on left: 323, on right: 324
+dumpargs (223)
+    on left: 325 326, on right: 324 326
+dumparg (224)
+    on left: 327 328 329 330 331, on right: 326
+report (225)
+    on left: 332, on right: 26
+
+
+State 0
+
+    0 $accept: . request $end
+
+    error                  shift, and go to state 1
+    CHOOSETOKEN            shift, and go to state 2
+    COMBTOKEN              shift, and go to state 3
+    DEBUGTOKEN             shift, and go to state 4
+    DELETETOKEN            shift, and go to state 5
+    DISPLAYTOKEN           shift, and go to state 6
+    DISPLAYTRECSTATSTOKEN  shift, and go to state 7
+    DOCLENGTHTOKEN         shift, and go to state 8
+    DUMPTOKEN              shift, and go to state 9
+    EXTRACTTOKEN           shift, and go to state 10
+    FINDLIMITTOKEN         shift, and go to state 11
+    FINDTOKEN              shift, and go to state 12
+    GSLTOKEN               shift, and go to state 13
+    INFOTOKEN              shift, and go to state 14
+    LIMITTOKEN             shift, and go to state 15
+    PARSETOKEN             shift, and go to state 16
+    PERRORTOKEN            shift, and go to state 17
+    REPORTTOKEN            shift, and go to state 18
+    RSCORETOKEN            shift, and go to state 19
+    SETTOKEN               shift, and go to state 20
+    SHOWTOKEN              shift, and go to state 21
+    STEMTOKEN              shift, and go to state 22
+    SUPERPARSETOKEN        shift, and go to state 23
+    TFTOKEN                shift, and go to state 24
+    WEIGHTTOKEN            shift, and go to state 25
+    UNKNOWNCOMMAND         shift, and go to state 26
+    ENDOFQUERY             shift, and go to state 27
+
+    $end  reduce using rule 3 (request)
+
+    request           go to state 28
+    command           go to state 29
+    unknowncommand    go to state 30
+    choose            go to state 31
+    find              go to state 32
+    combine           go to state 33
+    lkupcmd           go to state 34
+    combcmd           go to state 35
+    ftoken            go to state 36
+    stem              go to state 37
+    delete            go to state 38
+    deltoken          go to state 39
+    info              go to state 40
+    show              go to state 41
+    parse             go to state 42
+    ptoken            go to state 43
+    superparse        go to state 44
+    sptoken           go to state 45
+    extract           go to state 46
+    weight            go to state 47
+    rscore            go to state 48
+    gsl               go to state 49
+    debug             go to state 50
+    findlimit         go to state 51
+    settoken          go to state 52
+    limit             go to state 53
+    display           go to state 54
+    displaytrecstats  go to state 55
+    perror            go to state 56
+    tf                go to state 57
+    doclength         go to state 58
+    dump              go to state 59
+    report            go to state 60
+
+
+State 1
+
+    4 request: error . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 61
+
+
+State 2
+
+   42 choose: CHOOSETOKEN . $@1 chooseargs dbname $@2 ENDOFQUERY
+
+    $default  reduce using rule 40 ($@1)
+
+    $@1  go to state 62
+
+
+State 3
+
+   53 combine: COMBTOKEN . $@3 sets options ENDOFQUERY
+
+    $default  reduce using rule 52 ($@3)
+
+    $@3  go to state 63
+
+
+State 4
+
+  221 debug: DEBUGTOKEN . TERM
+  222      | DEBUGTOKEN . inumber
+
+    NUMBER  shift, and go to state 64
+    TERM    shift, and go to state 65
+
+    inumber  go to state 66
+
+
+State 5
+
+  123 deltoken: DELETETOKEN .
+
+    $default  reduce using rule 123 (deltoken)
+
+
+State 6
+
+  284 display: DISPLAYTOKEN . ENDOFQUERY
+  286        | DISPLAYTOKEN . $@11 dispqualifiers disparg
+  287        | DISPLAYTOKEN . STATS_TOKEN
+  288        | DISPLAYTOKEN . setnum STATS_TOKEN
+  289        | DISPLAYTOKEN . STATS_TOKEN setnum
+
+    STATS_TOKEN  shift, and go to state 67
+    STOKEN       shift, and go to state 68
+    ENDOFQUERY   shift, and go to state 69
+
+    $default  reduce using rule 285 ($@11)
+
+    setnum  go to state 70
+    $@11    go to state 71
+
+
+State 7
+
+  303 displaytrecstats: DISPLAYTRECSTATSTOKEN . $@12 stat_args ENDOFQUERY
+
+    $default  reduce using rule 302 ($@12)
+
+    $@12  go to state 72
+
+
+State 8
+
+  316 doclength: DOCLENGTHTOKEN . $@13 doclengthargs ENDOFQUERY
+
+    $default  reduce using rule 315 ($@13)
+
+    $@13  go to state 73
+
+
+State 9
+
+  324 dump: DUMPTOKEN . $@14 dumpargs ENDOFQUERY
+
+    $default  reduce using rule 323 ($@14)
+
+    $@14  go to state 74
+
+
+State 10
+
+  171 extract: EXTRACTTOKEN . $@5 extractargs ENDOFQUERY
+
+    $default  reduce using rule 170 ($@5)
+
+    $@5  go to state 75
+
+
+State 11
+
+  223 findlimit: FINDLIMITTOKEN . TERM
+  224          | FINDLIMITTOKEN . ENDOFQUERY
+
+    TERM        shift, and go to state 76
+    ENDOFQUERY  shift, and go to state 77
+
+
+State 12
+
+   58 ftoken: FINDTOKEN .
+
+    $default  reduce using rule 58 (ftoken)
+
+
+State 13
+
+  220 gsl: GSLTOKEN . $@8 p1qualifiers TERM
+
+    $default  reduce using rule 219 ($@8)
+
+    $@8  go to state 78
+
+
+State 14
+
+  128 info: INFOTOKEN . irn ENDOFQUERY
+  129     | INFOTOKEN . DBTOKEN ENDOFQUERY
+  130     | INFOTOKEN . DBTOKEN EQUALS word ENDOFQUERY
+  131     | INFOTOKEN . DBSTOKEN ENDOFQUERY
+  132     | INFOTOKEN . attr ENDOFQUERY
+  133     | INFOTOKEN . ATOKEN ENDOFQUERY
+  134     | INFOTOKEN . ATTSTOKEN ENDOFQUERY
+  135     | INFOTOKEN . STEMFUNCTIONSTOKEN
+  136     | INFOTOKEN . REGIMESTOKEN
+  137     | INFOTOKEN . GSLSTOKEN
+  138     | INFOTOKEN . VERSIONTOKEN
+  139     | INFOTOKEN . LIMITSTOKEN
+  140     | INFOTOKEN . word ENDOFQUERY
+  141     | INFOTOKEN . ENDOFQUERY
+
+    ATOKEN              shift, and go to state 79
+    ATTSTOKEN           shift, and go to state 80
+    DBSTOKEN            shift, and go to state 81
+    DBTOKEN             shift, and go to state 82
+    GSLSTOKEN           shift, and go to state 83
+    IRNTOKEN            shift, and go to state 84
+    LIMITSTOKEN         shift, and go to state 85
+    REGIMESTOKEN        shift, and go to state 86
+    STEMFUNCTIONSTOKEN  shift, and go to state 87
+    VERSIONTOKEN        shift, and go to state 88
+    AWORD               shift, and go to state 89
+    ENDOFQUERY          shift, and go to state 90
+
+    word  go to state 91
+    irn   go to state 92
+    attr  go to state 93
+
+
+State 15
+
+  278 limit: LIMITTOKEN . $@10 limitargs
+
+    $default  reduce using rule 277 ($@10)
+
+    $@10  go to state 94
+
+
+State 16
+
+  156 ptoken: PARSETOKEN .
+
+    $default  reduce using rule 156 (ptoken)
+
+
+State 17
+
+  313 perror: PERRORTOKEN . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 95
+
+
+State 18
+
+  332 report: REPORTTOKEN . word ENDOFQUERY
+
+    AWORD  shift, and go to state 89
+
+    word  go to state 96
+
+
+State 19
+
+  211 rscore: RSCORETOKEN . $@7 rscorequalifiers ENDOFQUERY
+
+    $default  reduce using rule 210 ($@7)
+
+    $@7  go to state 97
+
+
+State 20
+
+  226 settoken: SETTOKEN . $@9 setargs
+  227         | SETTOKEN . word ENDOFQUERY
+  228         | SETTOKEN .
+
+    AWORD  shift, and go to state 89
+
+    ENDOFQUERY  reduce using rule 228 (settoken)
+    $default    reduce using rule 225 ($@9)
+
+    word  go to state 98
+    $@9   go to state 99
+
+
+State 21
+
+  143 show: SHOWTOKEN . $@4 show_args ENDOFQUERY
+
+    $default  reduce using rule 142 ($@4)
+
+    $@4  go to state 100
+
+
+State 22
+
+  116 stem: STEMTOKEN . stemfunc EQUALS word TERM
+
+    FUNCTOKEN          shift, and go to state 101
+    STEMFUNCTIONTOKEN  shift, and go to state 102
+
+    stemfunc  go to state 103
+
+
+State 23
+
+  159 sptoken: SUPERPARSETOKEN .
+
+    $default  reduce using rule 159 (sptoken)
+
+
+State 24
+
+  314 tf: TFTOKEN . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 104
+
+
+State 25
+
+  184 weight: WEIGHTTOKEN . $@6 weightqualifiers ENDOFQUERY
+
+    $default  reduce using rule 183 ($@6)
+
+    $@6  go to state 105
+
+
+State 26
+
+   30 unknowncommand: UNKNOWNCOMMAND .
+
+    $default  reduce using rule 30 (unknowncommand)
+
+
+State 27
+
+    2 request: ENDOFQUERY .
+
+    $default  reduce using rule 2 (request)
+
+
+State 28
+
+    0 $accept: request . $end
+
+    $end  shift, and go to state 106
+
+
+State 29
+
+    1 request: command . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 107
+
+
+State 30
+
+   29 command: unknowncommand .
+
+    $default  reduce using rule 29 (command)
+
+
+State 31
+
+    5 command: choose .
+
+    $default  reduce using rule 5 (command)
+
+
+State 32
+
+    6 command: find .
+
+    $default  reduce using rule 6 (command)
+
+
+State 33
+
+    7 command: combine .
+
+    $default  reduce using rule 7 (command)
+
+
+State 34
+
+   47 find: lkupcmd . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 108
+
+
+State 35
+
+   48 find: combcmd . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 109
+
+
+State 36
+
+   49 find: ftoken . irn ENDOFQUERY
+   50     | ftoken . setnum rnum ENDOFQUERY
+   51     | ftoken . rnum setnum ENDOFQUERY
+   54 lkupcmd: ftoken . qualifiers TERM
+   55        | ftoken . qualifiers
+   56 combcmd: ftoken . sets options
+   57        | ftoken . set TOPTOKEN EQUALS inumber
+
+    IRNTOKEN  shift, and go to state 84
+    RTOKEN    shift, and go to state 110
+    STOKEN    shift, and go to state 68
+
+    $default  reduce using rule 103 (qualifiers)
+
+    setnum      go to state 111
+    rnum        go to state 112
+    irn         go to state 113
+    sets        go to state 114
+    set         go to state 115
+    qualifiers  go to state 116
+
+
+State 37
+
+    8 command: stem .
+
+    $default  reduce using rule 8 (command)
+
+
+State 38
+
+    9 command: delete .
+
+    $default  reduce using rule 9 (command)
+
+
+State 39
+
+  119 delete: deltoken . numbers ENDOFQUERY
+  120       | deltoken . STOKEN EQUALS word ENDOFQUERY
+  121       | deltoken . word ENDOFQUERY
+  122       | deltoken . ENDOFQUERY
+
+    NUMBER      shift, and go to state 64
+    STOKEN      shift, and go to state 117
+    AWORD       shift, and go to state 89
+    ENDOFQUERY  shift, and go to state 118
+
+    word     go to state 119
+    inumber  go to state 120
+    setnum   go to state 121
+    numbers  go to state 122
+    number   go to state 123
+
+
+State 40
+
+   10 command: info .
+
+    $default  reduce using rule 10 (command)
+
+
+State 41
+
+   11 command: show .
+
+    $default  reduce using rule 11 (command)
+
+
+State 42
+
+   14 command: parse .
+
+    $default  reduce using rule 14 (command)
+
+
+State 43
+
+  154 parse: ptoken . p1qualifiers pterm
+  155      | ptoken . p2qualifiers pterm
+
+    GSLTOKEN           shift, and go to state 124
+    REGTOKEN           shift, and go to state 125
+    STEMFUNCTIONTOKEN  shift, and go to state 126
+
+    $default  reduce using rule 162 (p1qualifiers)
+
+    p1qualifiers  go to state 127
+    p2qualifiers  go to state 128
+    p2qualifier   go to state 129
+
+
+State 44
+
+   15 command: superparse .
+
+    $default  reduce using rule 15 (command)
+
+
+State 45
+
+  157 superparse: sptoken . p1qualifiers pterm
+  158           | sptoken . p2qualifiers pterm
+
+    GSLTOKEN           shift, and go to state 124
+    REGTOKEN           shift, and go to state 125
+    STEMFUNCTIONTOKEN  shift, and go to state 126
+
+    $default  reduce using rule 162 (p1qualifiers)
+
+    p1qualifiers  go to state 130
+    p2qualifiers  go to state 131
+    p2qualifier   go to state 129
+
+
+State 46
+
+   16 command: extract .
+
+    $default  reduce using rule 16 (command)
+
+
+State 47
+
+   12 command: weight .
+
+    $default  reduce using rule 12 (command)
+
+
+State 48
+
+   13 command: rscore .
+
+    $default  reduce using rule 13 (command)
+
+
+State 49
+
+   18 command: gsl .
+
+    $default  reduce using rule 18 (command)
+
+
+State 50
+
+   21 command: debug .
+
+    $default  reduce using rule 21 (command)
+
+
+State 51
+
+   19 command: findlimit .
+
+    $default  reduce using rule 19 (command)
+
+
+State 52
+
+   20 command: settoken .
+
+    $default  reduce using rule 20 (command)
+
+
+State 53
+
+   17 command: limit .
+
+    $default  reduce using rule 17 (command)
+
+
+State 54
+
+   27 command: display .
+
+    $default  reduce using rule 27 (command)
+
+
+State 55
+
+   28 command: displaytrecstats .
+
+    $default  reduce using rule 28 (command)
+
+
+State 56
+
+   24 command: perror .
+
+    $default  reduce using rule 24 (command)
+
+
+State 57
+
+   22 command: tf .
+
+    $default  reduce using rule 22 (command)
+
+
+State 58
+
+   23 command: doclength .
+
+    $default  reduce using rule 23 (command)
+
+
+State 59
+
+   25 command: dump .
+
+    $default  reduce using rule 25 (command)
+
+
+State 60
+
+   26 command: report .
+
+    $default  reduce using rule 26 (command)
+
+
+State 61
+
+    4 request: error ENDOFQUERY .
+
+    $default  reduce using rule 4 (request)
+
+
+State 62
+
+   42 choose: CHOOSETOKEN $@1 . chooseargs dbname $@2 ENDOFQUERY
+
+    DBFLAGSTOKEN  shift, and go to state 132
+
+    $default  reduce using rule 43 (chooseargs)
+
+    chooseargs  go to state 133
+
+
+State 63
+
+   53 combine: COMBTOKEN $@3 . sets options ENDOFQUERY
+
+    STOKEN  shift, and go to state 68
+
+    setnum  go to state 134
+    sets    go to state 135
+    set     go to state 136
+
+
+State 64
+
+   32 inumber: NUMBER .
+
+    $default  reduce using rule 32 (inumber)
+
+
+State 65
+
+  221 debug: DEBUGTOKEN TERM .
+
+    $default  reduce using rule 221 (debug)
+
+
+State 66
+
+  222 debug: DEBUGTOKEN inumber .
+
+    $default  reduce using rule 222 (debug)
+
+
+State 67
+
+  287 display: DISPLAYTOKEN STATS_TOKEN .
+  289        | DISPLAYTOKEN STATS_TOKEN . setnum
+
+    STOKEN  shift, and go to state 68
+
+    $default  reduce using rule 287 (display)
+
+    setnum  go to state 137
+
+
+State 68
+
+   34 setnum: STOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 138
+
+
+State 69
+
+  284 display: DISPLAYTOKEN ENDOFQUERY .
+
+    $default  reduce using rule 284 (display)
+
+
+State 70
+
+  288 display: DISPLAYTOKEN setnum . STATS_TOKEN
+
+    STATS_TOKEN  shift, and go to state 139
+
+
+State 71
+
+  286 display: DISPLAYTOKEN $@11 . dispqualifiers disparg
+
+    $default  reduce using rule 298 (dispqualifiers)
+
+    dispqualifiers  go to state 140
+
+
+State 72
+
+  303 displaytrecstats: DISPLAYTRECSTATSTOKEN $@12 . stat_args ENDOFQUERY
+
+    $default  reduce using rule 304 (stat_args)
+
+    stat_args  go to state 141
+
+
+State 73
+
+  316 doclength: DOCLENGTHTOKEN $@13 . doclengthargs ENDOFQUERY
+
+    $default  reduce using rule 317 (doclengthargs)
+
+    doclengthargs  go to state 142
+
+
+State 74
+
+  324 dump: DUMPTOKEN $@14 . dumpargs ENDOFQUERY
+
+    $default  reduce using rule 325 (dumpargs)
+
+    dumpargs  go to state 143
+
+
+State 75
+
+  171 extract: EXTRACTTOKEN $@5 . extractargs ENDOFQUERY
+
+    $default  reduce using rule 172 (extractargs)
+
+    extractargs  go to state 144
+
+
+State 76
+
+  223 findlimit: FINDLIMITTOKEN TERM .
+
+    $default  reduce using rule 223 (findlimit)
+
+
+State 77
+
+  224 findlimit: FINDLIMITTOKEN ENDOFQUERY .
+
+    $default  reduce using rule 224 (findlimit)
+
+
+State 78
+
+  220 gsl: GSLTOKEN $@8 . p1qualifiers TERM
+
+    $default  reduce using rule 162 (p1qualifiers)
+
+    p1qualifiers  go to state 145
+
+
+State 79
+
+   38 attr: ATOKEN . EQUALS AWORD
+  133 info: INFOTOKEN ATOKEN . ENDOFQUERY
+
+    EQUALS      shift, and go to state 146
+    ENDOFQUERY  shift, and go to state 147
+
+
+State 80
+
+  134 info: INFOTOKEN ATTSTOKEN . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 148
+
+
+State 81
+
+  131 info: INFOTOKEN DBSTOKEN . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 149
+
+
+State 82
+
+  129 info: INFOTOKEN DBTOKEN . ENDOFQUERY
+  130     | INFOTOKEN DBTOKEN . EQUALS word ENDOFQUERY
+
+    EQUALS      shift, and go to state 150
+    ENDOFQUERY  shift, and go to state 151
+
+
+State 83
+
+  137 info: INFOTOKEN GSLSTOKEN .
+
+    $default  reduce using rule 137 (info)
+
+
+State 84
+
+   36 irn: IRNTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 152
+
+
+State 85
+
+  139 info: INFOTOKEN LIMITSTOKEN .
+
+    $default  reduce using rule 139 (info)
+
+
+State 86
+
+  136 info: INFOTOKEN REGIMESTOKEN .
+
+    $default  reduce using rule 136 (info)
+
+
+State 87
+
+  135 info: INFOTOKEN STEMFUNCTIONSTOKEN .
+
+    $default  reduce using rule 135 (info)
+
+
+State 88
+
+  138 info: INFOTOKEN VERSIONTOKEN .
+
+    $default  reduce using rule 138 (info)
+
+
+State 89
+
+   31 word: AWORD .
+
+    $default  reduce using rule 31 (word)
+
+
+State 90
+
+  141 info: INFOTOKEN ENDOFQUERY .
+
+    $default  reduce using rule 141 (info)
+
+
+State 91
+
+  140 info: INFOTOKEN word . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 153
+
+
+State 92
+
+  128 info: INFOTOKEN irn . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 154
+
+
+State 93
+
+  132 info: INFOTOKEN attr . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 155
+
+
+State 94
+
+  278 limit: LIMITTOKEN $@10 . limitargs
+
+    $default  reduce using rule 279 (limitargs)
+
+    limitargs  go to state 156
+
+
+State 95
+
+  313 perror: PERRORTOKEN ENDOFQUERY .
+
+    $default  reduce using rule 313 (perror)
+
+
+State 96
+
+  332 report: REPORTTOKEN word . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 157
+
+
+State 97
+
+  211 rscore: RSCORETOKEN $@7 . rscorequalifiers ENDOFQUERY
+
+    $default  reduce using rule 212 (rscorequalifiers)
+
+    rscorequalifiers  go to state 158
+
+
+State 98
+
+  227 settoken: SETTOKEN word . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 159
+
+
+State 99
+
+  226 settoken: SETTOKEN $@9 . setargs
+
+    ACCEPTTOKEN        shift, and go to state 160
+    ATOKEN             shift, and go to state 161
+    AVEDOCLEN_TOKEN    shift, and go to state 162
+    AVEQUERYLEN_TOKEN  shift, and go to state 163
+    BIGNTOKEN          shift, and go to state 164
+    BIGRLOADTOKEN      shift, and go to state 165
+    BIGRTOKEN          shift, and go to state 166
+    BIGSTOKEN          shift, and go to state 167
+    BM25_B_TOKEN       shift, and go to state 168
+    B3_TOKEN           shift, and go to state 169
+    TNT_TOKEN          shift, and go to state 170
+    CTTF_TOKEN         shift, and go to state 171
+    DEBUGTOKEN         shift, and go to state 172
+    FTOKEN             shift, and go to state 173
+    FUNCTOKEN          shift, and go to state 174
+    K1TOKEN            shift, and go to state 175
+    K2TOKEN            shift, and go to state 176
+    K3TOKEN            shift, and go to state 177
+    K4TOKEN            shift, and go to state 178
+    K5TOKEN            shift, and go to state 179
+    K6TOKEN            shift, and go to state 180
+    K7TOKEN            shift, and go to state 181
+    K8TOKEN            shift, and go to state 182
+    LAMDATOKEN         shift, and go to state 183
+    LIMITTOKEN         shift, and go to state 184
+    MEMTOKEN           shift, and go to state 185
+    NOPOSTOKEN         shift, and go to state 186
+    NOTFTOKEN          shift, and go to state 187
+    NO_ST_TOKEN        shift, and go to state 188
+    OPTOKEN            shift, and go to state 189
+    PREFERTOKEN        shift, and go to state 190
+    P_MAXLEN_TOKEN     shift, and go to state 191
+    P_STEP_TOKEN       shift, and go to state 192
+    P_UNIT_TOKEN       shift, and go to state 193
+    RLOADTOKEN         shift, and go to state 194
+    SAVETOKEN          shift, and go to state 195
+    SCOREFUNCTOKEN     shift, and go to state 196
+    ST_TOKEN           shift, and go to state 197
+    THETATOKEN         shift, and go to state 198
+    TNPTOKEN           shift, and go to state 199
+    TYPETOKEN          shift, and go to state 200
+    VERBOSETOKEN       shift, and go to state 201
+    WTFUNCTOKEN        shift, and go to state 202
+
+    lmask    go to state 203
+    wfunc    go to state 204
+    setargs  go to state 205
+    setarg   go to state 206
+
+
+State 100
+
+  143 show: SHOWTOKEN $@4 . show_args ENDOFQUERY
+
+    $default  reduce using rule 144 (show_args)
+
+    show_args  go to state 207
+
+
+State 101
+
+  118 stemfunc: FUNCTOKEN .
+
+    $default  reduce using rule 118 (stemfunc)
+
+
+State 102
+
+  117 stemfunc: STEMFUNCTIONTOKEN .
+
+    $default  reduce using rule 117 (stemfunc)
+
+
+State 103
+
+  116 stem: STEMTOKEN stemfunc . EQUALS word TERM
+
+    EQUALS  shift, and go to state 208
+
+
+State 104
+
+  314 tf: TFTOKEN ENDOFQUERY .
+
+    $default  reduce using rule 314 (tf)
+
+
+State 105
+
+  184 weight: WEIGHTTOKEN $@6 . weightqualifiers ENDOFQUERY
+
+    $default  reduce using rule 185 (weightqualifiers)
+
+    weightqualifiers  go to state 209
+
+
+State 106
+
+    0 $accept: request $end .
+
+    $default  accept
+
+
+State 107
+
+    1 request: command ENDOFQUERY .
+
+    $default  reduce using rule 1 (request)
+
+
+State 108
+
+   47 find: lkupcmd ENDOFQUERY .
+
+    $default  reduce using rule 47 (find)
+
+
+State 109
+
+   48 find: combcmd ENDOFQUERY .
+
+    $default  reduce using rule 48 (find)
+
+
+State 110
+
+   35 rnum: RTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 210
+
+
+State 111
+
+   50 find: ftoken setnum . rnum ENDOFQUERY
+   61 set: setnum . WTOKEN EQUALS dnumber
+   62    | setnum . WTOKEN EQUALS DOLLAR
+   63    | setnum .
+   64    | setnum . frignum
+
+    FRIGTOKEN  shift, and go to state 211
+    RTOKEN     shift, and go to state 110
+    WTOKEN     shift, and go to state 212
+
+    $default  reduce using rule 63 (set)
+
+    rnum     go to state 213
+    frignum  go to state 214
+
+
+State 112
+
+   51 find: ftoken rnum . setnum ENDOFQUERY
+
+    STOKEN  shift, and go to state 68
+
+    setnum  go to state 215
+
+
+State 113
+
+   49 find: ftoken irn . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 216
+
+
+State 114
+
+   56 combcmd: ftoken sets . options
+   60 sets: sets . set
+
+    STOKEN  shift, and go to state 68
+
+    $default  reduce using rule 66 (options)
+
+    setnum   go to state 134
+    set      go to state 217
+    options  go to state 218
+
+
+State 115
+
+   57 combcmd: ftoken set . TOPTOKEN EQUALS inumber
+   59 sets: set .
+   65 set: set . QTFTOKEN EQUALS inumber
+
+    QTFTOKEN  shift, and go to state 219
+    TOPTOKEN  shift, and go to state 220
+
+    $default  reduce using rule 59 (sets)
+
+
+State 116
+
+   54 lkupcmd: ftoken qualifiers . TERM
+   55        | ftoken qualifiers .
+  104 qualifiers: qualifiers . qualifier
+
+    ATOKEN      shift, and go to state 221
+    FILETOKEN   shift, and go to state 222
+    HOLDTOKEN   shift, and go to state 223
+    KEEPTOKEN   shift, and go to state 224
+    LIMITTOKEN  shift, and go to state 184
+    MEMTOKEN    shift, and go to state 225
+    NOPOSTOKEN  shift, and go to state 226
+    NOTFTOKEN   shift, and go to state 227
+    OPENTOKEN   shift, and go to state 228
+    SAVETOKEN   shift, and go to state 229
+    TERM        shift, and go to state 230
+    TYPETOKEN   shift, and go to state 231
+
+    $default  reduce using rule 55 (lkupcmd)
+
+    attr       go to state 232
+    lmask      go to state 233
+    qualifier  go to state 234
+
+
+State 117
+
+   34 setnum: STOKEN . EQUALS NUMBER
+  120 delete: deltoken STOKEN . EQUALS word ENDOFQUERY
+
+    EQUALS  shift, and go to state 235
+
+
+State 118
+
+  122 delete: deltoken ENDOFQUERY .
+
+    $default  reduce using rule 122 (delete)
+
+
+State 119
+
+  121 delete: deltoken word . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 236
+
+
+State 120
+
+  126 number: inumber .
+
+    $default  reduce using rule 126 (number)
+
+
+State 121
+
+  127 number: setnum .
+
+    $default  reduce using rule 127 (number)
+
+
+State 122
+
+  119 delete: deltoken numbers . ENDOFQUERY
+  125 numbers: numbers . number
+
+    NUMBER      shift, and go to state 64
+    STOKEN      shift, and go to state 68
+    ENDOFQUERY  shift, and go to state 237
+
+    inumber  go to state 120
+    setnum   go to state 121
+    number   go to state 238
+
+
+State 123
+
+  124 numbers: number .
+
+    $default  reduce using rule 124 (numbers)
+
+
+State 124
+
+  169 p2qualifier: GSLTOKEN . EQUALS word
+
+    EQUALS  shift, and go to state 239
+
+
+State 125
+
+  167 p2qualifier: REGTOKEN . EQUALS word
+
+    EQUALS  shift, and go to state 240
+
+
+State 126
+
+  168 p2qualifier: STEMFUNCTIONTOKEN . EQUALS word
+
+    EQUALS  shift, and go to state 241
+
+
+State 127
+
+  154 parse: ptoken p1qualifiers . pterm
+  163 p1qualifiers: p1qualifiers . p1qualifier
+
+    ATOKEN  shift, and go to state 221
+    TERM    shift, and go to state 242
+
+    $default  reduce using rule 160 (pterm)
+
+    attr         go to state 243
+    pterm        go to state 244
+    p1qualifier  go to state 245
+
+
+State 128
+
+  155 parse: ptoken p2qualifiers . pterm
+  165 p2qualifiers: p2qualifiers . p2qualifier
+
+    GSLTOKEN           shift, and go to state 124
+    REGTOKEN           shift, and go to state 125
+    STEMFUNCTIONTOKEN  shift, and go to state 126
+    TERM               shift, and go to state 242
+
+    $default  reduce using rule 160 (pterm)
+
+    pterm        go to state 246
+    p2qualifier  go to state 247
+
+
+State 129
+
+  164 p2qualifiers: p2qualifier .
+
+    $default  reduce using rule 164 (p2qualifiers)
+
+
+State 130
+
+  157 superparse: sptoken p1qualifiers . pterm
+  163 p1qualifiers: p1qualifiers . p1qualifier
+
+    ATOKEN  shift, and go to state 221
+    TERM    shift, and go to state 242
+
+    $default  reduce using rule 160 (pterm)
+
+    attr         go to state 243
+    pterm        go to state 248
+    p1qualifier  go to state 245
+
+
+State 131
+
+  158 superparse: sptoken p2qualifiers . pterm
+  165 p2qualifiers: p2qualifiers . p2qualifier
+
+    GSLTOKEN           shift, and go to state 124
+    REGTOKEN           shift, and go to state 125
+    STEMFUNCTIONTOKEN  shift, and go to state 126
+    TERM               shift, and go to state 242
+
+    $default  reduce using rule 160 (pterm)
+
+    pterm        go to state 249
+    p2qualifier  go to state 247
+
+
+State 132
+
+   44 chooseargs: DBFLAGSTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 250
+
+
+State 133
+
+   42 choose: CHOOSETOKEN $@1 chooseargs . dbname $@2 ENDOFQUERY
+
+    DBTOKEN  shift, and go to state 251
+    AWORD    shift, and go to state 89
+
+    word    go to state 252
+    dbname  go to state 253
+
+
+State 134
+
+   61 set: setnum . WTOKEN EQUALS dnumber
+   62    | setnum . WTOKEN EQUALS DOLLAR
+   63    | setnum .
+   64    | setnum . frignum
+
+    FRIGTOKEN  shift, and go to state 211
+    WTOKEN     shift, and go to state 212
+
+    $default  reduce using rule 63 (set)
+
+    frignum  go to state 214
+
+
+State 135
+
+   53 combine: COMBTOKEN $@3 sets . options ENDOFQUERY
+   60 sets: sets . set
+
+    STOKEN  shift, and go to state 68
+
+    $default  reduce using rule 66 (options)
+
+    setnum   go to state 134
+    set      go to state 217
+    options  go to state 254
+
+
+State 136
+
+   59 sets: set .
+   65 set: set . QTFTOKEN EQUALS inumber
+
+    QTFTOKEN  shift, and go to state 219
+
+    $default  reduce using rule 59 (sets)
+
+
+State 137
+
+  289 display: DISPLAYTOKEN STATS_TOKEN setnum .
+
+    $default  reduce using rule 289 (display)
+
+
+State 138
+
+   34 setnum: STOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 255
+
+
+State 139
+
+  288 display: DISPLAYTOKEN setnum STATS_TOKEN .
+
+    $default  reduce using rule 288 (display)
+
+
+State 140
+
+  286 display: DISPLAYTOKEN $@11 dispqualifiers . disparg
+  299 dispqualifiers: dispqualifiers . dispqualifier
+
+    ATOKEN           shift, and go to state 221
+    AVEDOCLEN_TOKEN  shift, and go to state 256
+    BIGNTOKEN        shift, and go to state 257
+    TNT_TOKEN        shift, and go to state 258
+    CTTF_TOKEN       shift, and go to state 259
+    DBTOKEN          shift, and go to state 260
+    LIMITTOKEN       shift, and go to state 184
+    NTOKEN           shift, and go to state 261
+    TTF_TOKEN        shift, and go to state 262
+    WTOKEN           shift, and go to state 263
+
+    attr           go to state 264
+    lmask          go to state 265
+    disparg        go to state 266
+    dispqualifier  go to state 267
+
+
+State 141
+
+  303 displaytrecstats: DISPLAYTRECSTATSTOKEN $@12 stat_args . ENDOFQUERY
+  305 stat_args: stat_args . stat_arg
+
+    BIGRTOKEN   shift, and go to state 268
+    CODETOKEN   shift, and go to state 269
+    MARKTOKEN   shift, and go to state 270
+    MEMTOKEN    shift, and go to state 271
+    NTOKEN      shift, and go to state 272
+    STOKEN      shift, and go to state 68
+    AWORD       shift, and go to state 273
+    ENDOFQUERY  shift, and go to state 274
+
+    setnum    go to state 275
+    stat_arg  go to state 276
+
+
+State 142
+
+  316 doclength: DOCLENGTHTOKEN $@13 doclengthargs . ENDOFQUERY
+  318 doclengthargs: doclengthargs . doclengtharg
+
+    ATOKEN      shift, and go to state 221
+    IRNTOKEN    shift, and go to state 84
+    RTOKEN      shift, and go to state 110
+    STOKEN      shift, and go to state 68
+    ENDOFQUERY  shift, and go to state 277
+
+    setnum        go to state 278
+    rnum          go to state 279
+    irn           go to state 280
+    attr          go to state 281
+    doclengtharg  go to state 282
+
+
+State 143
+
+  324 dump: DUMPTOKEN $@14 dumpargs . ENDOFQUERY
+  326 dumpargs: dumpargs . dumparg
+
+    ATOKEN      shift, and go to state 283
+    NTOKEN      shift, and go to state 284
+    STOKEN      shift, and go to state 68
+    TTF_TOKEN   shift, and go to state 285
+    AWORD       shift, and go to state 89
+    ENDOFQUERY  shift, and go to state 286
+
+    word     go to state 287
+    setnum   go to state 288
+    dumparg  go to state 289
+
+
+State 144
+
+  171 extract: EXTRACTTOKEN $@5 extractargs . ENDOFQUERY
+  173 extractargs: extractargs . extractarg
+
+    ATOKEN       shift, and go to state 221
+    FIELDTOKEN   shift, and go to state 290
+    IRNTOKEN     shift, and go to state 84
+    LENGTHTOKEN  shift, and go to state 291
+    OFFSETTOKEN  shift, and go to state 292
+    RTOKEN       shift, and go to state 110
+    SRCTOKEN     shift, and go to state 293
+    STOKEN       shift, and go to state 68
+    ENDOFQUERY   shift, and go to state 294
+
+    setnum      go to state 295
+    rnum        go to state 296
+    irn         go to state 297
+    attr        go to state 298
+    extractarg  go to state 299
+
+
+State 145
+
+  163 p1qualifiers: p1qualifiers . p1qualifier
+  220 gsl: GSLTOKEN $@8 p1qualifiers . TERM
+
+    ATOKEN  shift, and go to state 221
+    TERM    shift, and go to state 300
+
+    attr         go to state 243
+    p1qualifier  go to state 245
+
+
+State 146
+
+   38 attr: ATOKEN EQUALS . AWORD
+
+    AWORD  shift, and go to state 301
+
+
+State 147
+
+  133 info: INFOTOKEN ATOKEN ENDOFQUERY .
+
+    $default  reduce using rule 133 (info)
+
+
+State 148
+
+  134 info: INFOTOKEN ATTSTOKEN ENDOFQUERY .
+
+    $default  reduce using rule 134 (info)
+
+
+State 149
+
+  131 info: INFOTOKEN DBSTOKEN ENDOFQUERY .
+
+    $default  reduce using rule 131 (info)
+
+
+State 150
+
+  130 info: INFOTOKEN DBTOKEN EQUALS . word ENDOFQUERY
+
+    AWORD  shift, and go to state 89
+
+    word  go to state 302
+
+
+State 151
+
+  129 info: INFOTOKEN DBTOKEN ENDOFQUERY .
+
+    $default  reduce using rule 129 (info)
+
+
+State 152
+
+   36 irn: IRNTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 303
+
+
+State 153
+
+  140 info: INFOTOKEN word ENDOFQUERY .
+
+    $default  reduce using rule 140 (info)
+
+
+State 154
+
+  128 info: INFOTOKEN irn ENDOFQUERY .
+
+    $default  reduce using rule 128 (info)
+
+
+State 155
+
+  132 info: INFOTOKEN attr ENDOFQUERY .
+
+    $default  reduce using rule 132 (info)
+
+
+State 156
+
+  278 limit: LIMITTOKEN $@10 limitargs .
+  280 limitargs: limitargs . limitarg
+
+    LIMITTOKEN  shift, and go to state 184
+    SAVETOKEN   shift, and go to state 304
+    STOKEN      shift, and go to state 68
+
+    $default  reduce using rule 278 (limit)
+
+    setnum    go to state 305
+    lmask     go to state 306
+    limitarg  go to state 307
+
+
+State 157
+
+  332 report: REPORTTOKEN word ENDOFQUERY .
+
+    $default  reduce using rule 332 (report)
+
+
+State 158
+
+  211 rscore: RSCORETOKEN $@7 rscorequalifiers . ENDOFQUERY
+  213 rscorequalifiers: rscorequalifiers . rscorequalifier
+
+    ATOKEN      shift, and go to state 221
+    BIGRTOKEN   shift, and go to state 308
+    LIMITTOKEN  shift, and go to state 184
+    NTOKEN      shift, and go to state 309
+    RTOKEN      shift, and go to state 110
+    ENDOFQUERY  shift, and go to state 310
+
+    rnum             go to state 311
+    attr             go to state 312
+    lmask            go to state 313
+    rscorequalifier  go to state 314
+
+
+State 159
+
+  227 settoken: SETTOKEN word ENDOFQUERY .
+
+    $default  reduce using rule 227 (settoken)
+
+
+State 160
+
+  271 setarg: ACCEPTTOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 315
+
+
+State 161
+
+  241 setarg: ATOKEN . EQUALS AWORD
+
+    EQUALS  shift, and go to state 316
+
+
+State 162
+
+  259 setarg: AVEDOCLEN_TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 317
+
+
+State 163
+
+  260 setarg: AVEQUERYLEN_TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 318
+
+
+State 164
+
+  268 setarg: BIGNTOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 319
+
+
+State 165
+
+  266 setarg: BIGRLOADTOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 320
+
+
+State 166
+
+  264 setarg: BIGRTOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 321
+
+
+State 167
+
+  265 setarg: BIGSTOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 322
+
+
+State 168
+
+  257 setarg: BM25_B_TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 323
+
+
+State 169
+
+  258 setarg: B3_TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 324
+
+
+State 170
+
+  235 setarg: TNT_TOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 325
+
+
+State 171
+
+  237 setarg: CTTF_TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 326
+
+
+State 172
+
+  269 setarg: DEBUGTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 327
+
+
+State 173
+
+  240 setarg: FTOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 328
+
+
+State 174
+
+  209 wfunc: FUNCTOKEN .
+
+    $default  reduce using rule 209 (wfunc)
+
+
+State 175
+
+  249 setarg: K1TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 329
+
+
+State 176
+
+  250 setarg: K2TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 330
+
+
+State 177
+
+  251 setarg: K3TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 331
+
+
+State 178
+
+  252 setarg: K4TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 332
+
+
+State 179
+
+  253 setarg: K5TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 333
+
+
+State 180
+
+  254 setarg: K6TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 334
+
+
+State 181
+
+  255 setarg: K7TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 335
+
+
+State 182
+
+  256 setarg: K8TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 336
+
+
+State 183
+
+  234 setarg: LAMDATOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 337
+
+
+State 184
+
+   39 lmask: LIMITTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 338
+
+
+State 185
+
+  246 setarg: MEMTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 339
+
+
+State 186
+
+  244 setarg: NOPOSTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 340
+
+
+State 187
+
+  245 setarg: NOTFTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 341
+
+
+State 188
+
+  247 setarg: NO_ST_TOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 342
+
+
+State 189
+
+  272 setarg: OPTOKEN . EQUALS AWORD
+
+    EQUALS  shift, and go to state 343
+
+
+State 190
+
+  270 setarg: PREFERTOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 344
+
+
+State 191
+
+  263 setarg: P_MAXLEN_TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 345
+
+
+State 192
+
+  262 setarg: P_STEP_TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 346
+
+
+State 193
+
+  261 setarg: P_UNIT_TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 347
+
+
+State 194
+
+  267 setarg: RLOADTOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 348
+
+
+State 195
+
+  242 setarg: SAVETOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 349
+
+
+State 196
+
+  239 setarg: SCOREFUNCTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 350
+
+
+State 197
+
+  248 setarg: ST_TOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 351
+
+
+State 198
+
+  233 setarg: THETATOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 352
+
+
+State 199
+
+  236 setarg: TNPTOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 353
+
+
+State 200
+
+  243 setarg: TYPETOKEN . EQUALS wnumber
+
+    EQUALS  shift, and go to state 354
+
+
+State 201
+
+  232 setarg: VERBOSETOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 355
+
+
+State 202
+
+  208 wfunc: WTFUNCTOKEN .
+
+    $default  reduce using rule 208 (wfunc)
+
+
+State 203
+
+  231 setarg: lmask .
+
+    $default  reduce using rule 231 (setarg)
+
+
+State 204
+
+  238 setarg: wfunc . EQUALS inumber
+
+    EQUALS  shift, and go to state 356
+
+
+State 205
+
+  226 settoken: SETTOKEN $@9 setargs .
+  230 setargs: setargs . setarg
+
+    ACCEPTTOKEN        shift, and go to state 160
+    ATOKEN             shift, and go to state 161
+    AVEDOCLEN_TOKEN    shift, and go to state 162
+    AVEQUERYLEN_TOKEN  shift, and go to state 163
+    BIGNTOKEN          shift, and go to state 164
+    BIGRLOADTOKEN      shift, and go to state 165
+    BIGRTOKEN          shift, and go to state 166
+    BIGSTOKEN          shift, and go to state 167
+    BM25_B_TOKEN       shift, and go to state 168
+    B3_TOKEN           shift, and go to state 169
+    TNT_TOKEN          shift, and go to state 170
+    CTTF_TOKEN         shift, and go to state 171
+    DEBUGTOKEN         shift, and go to state 172
+    FTOKEN             shift, and go to state 173
+    FUNCTOKEN          shift, and go to state 174
+    K1TOKEN            shift, and go to state 175
+    K2TOKEN            shift, and go to state 176
+    K3TOKEN            shift, and go to state 177
+    K4TOKEN            shift, and go to state 178
+    K5TOKEN            shift, and go to state 179
+    K6TOKEN            shift, and go to state 180
+    K7TOKEN            shift, and go to state 181
+    K8TOKEN            shift, and go to state 182
+    LAMDATOKEN         shift, and go to state 183
+    LIMITTOKEN         shift, and go to state 184
+    MEMTOKEN           shift, and go to state 185
+    NOPOSTOKEN         shift, and go to state 186
+    NOTFTOKEN          shift, and go to state 187
+    NO_ST_TOKEN        shift, and go to state 188
+    OPTOKEN            shift, and go to state 189
+    PREFERTOKEN        shift, and go to state 190
+    P_MAXLEN_TOKEN     shift, and go to state 191
+    P_STEP_TOKEN       shift, and go to state 192
+    P_UNIT_TOKEN       shift, and go to state 193
+    RLOADTOKEN         shift, and go to state 194
+    SAVETOKEN          shift, and go to state 195
+    SCOREFUNCTOKEN     shift, and go to state 196
+    ST_TOKEN           shift, and go to state 197
+    THETATOKEN         shift, and go to state 198
+    TNPTOKEN           shift, and go to state 199
+    TYPETOKEN          shift, and go to state 200
+    VERBOSETOKEN       shift, and go to state 201
+    WTFUNCTOKEN        shift, and go to state 202
+
+    $default  reduce using rule 226 (settoken)
+
+    lmask   go to state 203
+    wfunc   go to state 204
+    setarg  go to state 357
+
+
+State 206
+
+  229 setargs: setarg .
+
+    $default  reduce using rule 229 (setargs)
+
+
+State 207
+
+  143 show: SHOWTOKEN $@4 show_args . ENDOFQUERY
+  145 show_args: show_args . show_arg
+
+    NOERRORTOKEN   shift, and go to state 358
+    FINSTRTOKEN    shift, and go to state 359
+    FTOKEN         shift, and go to state 360
+    IRNTOKEN       shift, and go to state 84
+    NTOKEN         shift, and go to state 361
+    RTOKEN         shift, and go to state 110
+    STARTSTRTOKEN  shift, and go to state 362
+    STOKEN         shift, and go to state 68
+    ENDOFQUERY     shift, and go to state 363
+
+    setnum    go to state 364
+    rnum      go to state 365
+    irn       go to state 366
+    show_arg  go to state 367
+
+
+State 208
+
+  116 stem: STEMTOKEN stemfunc EQUALS . word TERM
+
+    AWORD  shift, and go to state 89
+
+    word  go to state 368
+
+
+State 209
+
+  184 weight: WEIGHTTOKEN $@6 weightqualifiers . ENDOFQUERY
+  186 weightqualifiers: weightqualifiers . weightqualifier
+
+    BIGNTOKEN      shift, and go to state 369
+    BIGRLOADTOKEN  shift, and go to state 370
+    BIGRTOKEN      shift, and go to state 371
+    BIGSTOKEN      shift, and go to state 372
+    CTTF_TOKEN     shift, and go to state 373
+    FUNCTOKEN      shift, and go to state 174
+    K3TOKEN        shift, and go to state 374
+    K4TOKEN        shift, and go to state 375
+    K5TOKEN        shift, and go to state 376
+    K6TOKEN        shift, and go to state 377
+    LAMDATOKEN     shift, and go to state 378
+    LIMITTOKEN     shift, and go to state 184
+    NTOKEN         shift, and go to state 379
+    QTFTOKEN       shift, and go to state 380
+    RLOADTOKEN     shift, and go to state 381
+    RTOKEN         shift, and go to state 110
+    STOKEN         shift, and go to state 382
+    THETATOKEN     shift, and go to state 383
+    TNPTOKEN       shift, and go to state 384
+    TTF_TOKEN      shift, and go to state 385
+    WTFUNCTOKEN    shift, and go to state 202
+    WTFACTORTOKEN  shift, and go to state 386
+    ENDOFQUERY     shift, and go to state 387
+
+    rnum             go to state 388
+    lmask            go to state 389
+    weightqualifier  go to state 390
+    wfunc            go to state 391
+
+
+State 210
+
+   35 rnum: RTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 392
+
+
+State 211
+
+   37 frignum: FRIGTOKEN . EQUALS dnumber
+
+    EQUALS  shift, and go to state 393
+
+
+State 212
+
+   61 set: setnum WTOKEN . EQUALS dnumber
+   62    | setnum WTOKEN . EQUALS DOLLAR
+
+    EQUALS  shift, and go to state 394
+
+
+State 213
+
+   50 find: ftoken setnum rnum . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 395
+
+
+State 214
+
+   64 set: setnum frignum .
+
+    $default  reduce using rule 64 (set)
+
+
+State 215
+
+   51 find: ftoken rnum setnum . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 396
+
+
+State 216
+
+   49 find: ftoken irn ENDOFQUERY .
+
+    $default  reduce using rule 49 (find)
+
+
+State 217
+
+   60 sets: sets set .
+   65 set: set . QTFTOKEN EQUALS inumber
+
+    QTFTOKEN  shift, and go to state 219
+
+    $default  reduce using rule 60 (sets)
+
+
+State 218
+
+   56 combcmd: ftoken sets options .
+   67 options: options . option
+
+    AVEDOCLEN_TOKEN    shift, and go to state 397
+    AVEQUERYLEN_TOKEN  shift, and go to state 398
+    AWTOKEN            shift, and go to state 399
+    BM25_B_TOKEN       shift, and go to state 400
+    B3_TOKEN           shift, and go to state 401
+    DELTOKEN           shift, and go to state 402
+    FILETOKEN          shift, and go to state 403
+    GAPTOKEN           shift, and go to state 404
+    GWTOKEN            shift, and go to state 405
+    HOLDTOKEN          shift, and go to state 406
+    K1TOKEN            shift, and go to state 407
+    K2TOKEN            shift, and go to state 408
+    K3TOKEN            shift, and go to state 409
+    K7TOKEN            shift, and go to state 410
+    K8TOKEN            shift, and go to state 411
+    KEEPTOKEN          shift, and go to state 412
+    LIMITTOKEN         shift, and go to state 184
+    MARKTOKEN          shift, and go to state 413
+    MEMTOKEN           shift, and go to state 414
+    MODETOKEN          shift, and go to state 415
+    NOPOSTOKEN         shift, and go to state 416
+    NOSHOW_TOKEN       shift, and go to state 417
+    NOTFTOKEN          shift, and go to state 418
+    NO_ST_TOKEN        shift, and go to state 419
+    OPENTOKEN          shift, and go to state 420
+    OPTOKEN            shift, and go to state 421
+    P_MAXLEN_TOKEN     shift, and go to state 422
+    P_STEP_TOKEN       shift, and go to state 423
+    P_UNIT_TOKEN       shift, and go to state 424
+    QUERYLEN_TOKEN     shift, and go to state 425
+    SAVETOKEN          shift, and go to state 426
+    SCOREFUNCTOKEN     shift, and go to state 427
+    STATS_TOKEN        shift, and go to state 428
+    ST_TOKEN           shift, and go to state 429
+    TARGETTOKEN        shift, and go to state 430
+
+    $default  reduce using rule 56 (combcmd)
+
+    lmask   go to state 431
+    option  go to state 432
+
+
+State 219
+
+   65 set: set QTFTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 433
+
+
+State 220
+
+   57 combcmd: ftoken set TOPTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 434
+
+
+State 221
+
+   38 attr: ATOKEN . EQUALS AWORD
+
+    EQUALS  shift, and go to state 146
+
+
+State 222
+
+  108 qualifier: FILETOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 435
+
+
+State 223
+
+  107 qualifier: HOLDTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 436
+
+
+State 224
+
+  112 qualifier: KEEPTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 437
+
+
+State 225
+
+  106 qualifier: MEMTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 438
+
+
+State 226
+
+  109 qualifier: NOPOSTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 439
+
+
+State 227
+
+  110 qualifier: NOTFTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 440
+
+
+State 228
+
+  111 qualifier: OPENTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 441
+
+
+State 229
+
+  105 qualifier: SAVETOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 442
+
+
+State 230
+
+   54 lkupcmd: ftoken qualifiers TERM .
+
+    $default  reduce using rule 54 (lkupcmd)
+
+
+State 231
+
+  113 qualifier: TYPETOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 443
+
+
+State 232
+
+  115 qualifier: attr .
+
+    $default  reduce using rule 115 (qualifier)
+
+
+State 233
+
+  114 qualifier: lmask .
+
+    $default  reduce using rule 114 (qualifier)
+
+
+State 234
+
+  104 qualifiers: qualifiers qualifier .
+
+    $default  reduce using rule 104 (qualifiers)
+
+
+State 235
+
+   34 setnum: STOKEN EQUALS . NUMBER
+  120 delete: deltoken STOKEN EQUALS . word ENDOFQUERY
+
+    NUMBER  shift, and go to state 255
+    AWORD   shift, and go to state 89
+
+    word  go to state 444
+
+
+State 236
+
+  121 delete: deltoken word ENDOFQUERY .
+
+    $default  reduce using rule 121 (delete)
+
+
+State 237
+
+  119 delete: deltoken numbers ENDOFQUERY .
+
+    $default  reduce using rule 119 (delete)
+
+
+State 238
+
+  125 numbers: numbers number .
+
+    $default  reduce using rule 125 (numbers)
+
+
+State 239
+
+  169 p2qualifier: GSLTOKEN EQUALS . word
+
+    AWORD  shift, and go to state 89
+
+    word  go to state 445
+
+
+State 240
+
+  167 p2qualifier: REGTOKEN EQUALS . word
+
+    AWORD  shift, and go to state 89
+
+    word  go to state 446
+
+
+State 241
+
+  168 p2qualifier: STEMFUNCTIONTOKEN EQUALS . word
+
+    AWORD  shift, and go to state 89
+
+    word  go to state 447
+
+
+State 242
+
+  161 pterm: TERM .
+
+    $default  reduce using rule 161 (pterm)
+
+
+State 243
+
+  166 p1qualifier: attr .
+
+    $default  reduce using rule 166 (p1qualifier)
+
+
+State 244
+
+  154 parse: ptoken p1qualifiers pterm .
+
+    $default  reduce using rule 154 (parse)
+
+
+State 245
+
+  163 p1qualifiers: p1qualifiers p1qualifier .
+
+    $default  reduce using rule 163 (p1qualifiers)
+
+
+State 246
+
+  155 parse: ptoken p2qualifiers pterm .
+
+    $default  reduce using rule 155 (parse)
+
+
+State 247
+
+  165 p2qualifiers: p2qualifiers p2qualifier .
+
+    $default  reduce using rule 165 (p2qualifiers)
+
+
+State 248
+
+  157 superparse: sptoken p1qualifiers pterm .
+
+    $default  reduce using rule 157 (superparse)
+
+
+State 249
+
+  158 superparse: sptoken p2qualifiers pterm .
+
+    $default  reduce using rule 158 (superparse)
+
+
+State 250
+
+   44 chooseargs: DBFLAGSTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 448
+
+
+State 251
+
+   46 dbname: DBTOKEN . EQUALS word
+
+    EQUALS  shift, and go to state 449
+
+
+State 252
+
+   45 dbname: word .
+
+    $default  reduce using rule 45 (dbname)
+
+
+State 253
+
+   42 choose: CHOOSETOKEN $@1 chooseargs dbname . $@2 ENDOFQUERY
+
+    $default  reduce using rule 41 ($@2)
+
+    $@2  go to state 450
+
+
+State 254
+
+   53 combine: COMBTOKEN $@3 sets options . ENDOFQUERY
+   67 options: options . option
+
+    AVEDOCLEN_TOKEN    shift, and go to state 397
+    AVEQUERYLEN_TOKEN  shift, and go to state 398
+    AWTOKEN            shift, and go to state 399
+    BM25_B_TOKEN       shift, and go to state 400
+    B3_TOKEN           shift, and go to state 401
+    DELTOKEN           shift, and go to state 402
+    FILETOKEN          shift, and go to state 403
+    GAPTOKEN           shift, and go to state 404
+    GWTOKEN            shift, and go to state 405
+    HOLDTOKEN          shift, and go to state 406
+    K1TOKEN            shift, and go to state 407
+    K2TOKEN            shift, and go to state 408
+    K3TOKEN            shift, and go to state 409
+    K7TOKEN            shift, and go to state 410
+    K8TOKEN            shift, and go to state 411
+    KEEPTOKEN          shift, and go to state 412
+    LIMITTOKEN         shift, and go to state 184
+    MARKTOKEN          shift, and go to state 413
+    MEMTOKEN           shift, and go to state 414
+    MODETOKEN          shift, and go to state 415
+    NOPOSTOKEN         shift, and go to state 416
+    NOSHOW_TOKEN       shift, and go to state 417
+    NOTFTOKEN          shift, and go to state 418
+    NO_ST_TOKEN        shift, and go to state 419
+    OPENTOKEN          shift, and go to state 420
+    OPTOKEN            shift, and go to state 421
+    P_MAXLEN_TOKEN     shift, and go to state 422
+    P_STEP_TOKEN       shift, and go to state 423
+    P_UNIT_TOKEN       shift, and go to state 424
+    QUERYLEN_TOKEN     shift, and go to state 425
+    SAVETOKEN          shift, and go to state 426
+    SCOREFUNCTOKEN     shift, and go to state 427
+    STATS_TOKEN        shift, and go to state 428
+    ST_TOKEN           shift, and go to state 429
+    TARGETTOKEN        shift, and go to state 430
+    ENDOFQUERY         shift, and go to state 451
+
+    lmask   go to state 431
+    option  go to state 432
+
+
+State 255
+
+   34 setnum: STOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 34 (setnum)
+
+
+State 256
+
+  291 disparg: AVEDOCLEN_TOKEN .
+
+    $default  reduce using rule 291 (disparg)
+
+
+State 257
+
+  290 disparg: BIGNTOKEN .
+
+    $default  reduce using rule 290 (disparg)
+
+
+State 258
+
+  292 disparg: TNT_TOKEN .
+
+    $default  reduce using rule 292 (disparg)
+
+
+State 259
+
+  293 disparg: CTTF_TOKEN .
+
+    $default  reduce using rule 293 (disparg)
+
+
+State 260
+
+  294 disparg: DBTOKEN .
+
+    $default  reduce using rule 294 (disparg)
+
+
+State 261
+
+  296 disparg: NTOKEN .
+
+    $default  reduce using rule 296 (disparg)
+
+
+State 262
+
+  297 disparg: TTF_TOKEN .
+
+    $default  reduce using rule 297 (disparg)
+
+
+State 263
+
+  295 disparg: WTOKEN .
+
+    $default  reduce using rule 295 (disparg)
+
+
+State 264
+
+  301 dispqualifier: attr .
+
+    $default  reduce using rule 301 (dispqualifier)
+
+
+State 265
+
+  300 dispqualifier: lmask .
+
+    $default  reduce using rule 300 (dispqualifier)
+
+
+State 266
+
+  286 display: DISPLAYTOKEN $@11 dispqualifiers disparg .
+
+    $default  reduce using rule 286 (display)
+
+
+State 267
+
+  299 dispqualifiers: dispqualifiers dispqualifier .
+
+    $default  reduce using rule 299 (dispqualifiers)
+
+
+State 268
+
+  308 stat_arg: BIGRTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 452
+
+
+State 269
+
+  311 stat_arg: CODETOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 453
+
+
+State 270
+
+  307 stat_arg: MARKTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 454
+
+
+State 271
+
+  310 stat_arg: MEMTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 455
+
+
+State 272
+
+  309 stat_arg: NTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 456
+
+
+State 273
+
+  312 stat_arg: AWORD .
+
+    $default  reduce using rule 312 (stat_arg)
+
+
+State 274
+
+  303 displaytrecstats: DISPLAYTRECSTATSTOKEN $@12 stat_args ENDOFQUERY .
+
+    $default  reduce using rule 303 (displaytrecstats)
+
+
+State 275
+
+  306 stat_arg: setnum .
+
+    $default  reduce using rule 306 (stat_arg)
+
+
+State 276
+
+  305 stat_args: stat_args stat_arg .
+
+    $default  reduce using rule 305 (stat_args)
+
+
+State 277
+
+  316 doclength: DOCLENGTHTOKEN $@13 doclengthargs ENDOFQUERY .
+
+    $default  reduce using rule 316 (doclength)
+
+
+State 278
+
+  319 doclengtharg: setnum .
+
+    $default  reduce using rule 319 (doclengtharg)
+
+
+State 279
+
+  321 doclengtharg: rnum .
+
+    $default  reduce using rule 321 (doclengtharg)
+
+
+State 280
+
+  320 doclengtharg: irn .
+
+    $default  reduce using rule 320 (doclengtharg)
+
+
+State 281
+
+  322 doclengtharg: attr .
+
+    $default  reduce using rule 322 (doclengtharg)
+
+
+State 282
+
+  318 doclengthargs: doclengthargs doclengtharg .
+
+    $default  reduce using rule 318 (doclengthargs)
+
+
+State 283
+
+  331 dumparg: ATOKEN .
+
+    $default  reduce using rule 331 (dumparg)
+
+
+State 284
+
+  330 dumparg: NTOKEN .
+
+    $default  reduce using rule 330 (dumparg)
+
+
+State 285
+
+  329 dumparg: TTF_TOKEN .
+
+    $default  reduce using rule 329 (dumparg)
+
+
+State 286
+
+  324 dump: DUMPTOKEN $@14 dumpargs ENDOFQUERY .
+
+    $default  reduce using rule 324 (dump)
+
+
+State 287
+
+  327 dumparg: word .
+
+    $default  reduce using rule 327 (dumparg)
+
+
+State 288
+
+  328 dumparg: setnum .
+
+    $default  reduce using rule 328 (dumparg)
+
+
+State 289
+
+  326 dumpargs: dumpargs dumparg .
+
+    $default  reduce using rule 326 (dumpargs)
+
+
+State 290
+
+  179 extractarg: FIELDTOKEN . EQUALS inumber
+  180           | FIELDTOKEN . EQUALS word
+
+    EQUALS  shift, and go to state 457
+
+
+State 291
+
+  178 extractarg: LENGTHTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 458
+
+
+State 292
+
+  177 extractarg: OFFSETTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 459
+
+
+State 293
+
+  181 extractarg: SRCTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 460
+
+
+State 294
+
+  171 extract: EXTRACTTOKEN $@5 extractargs ENDOFQUERY .
+
+    $default  reduce using rule 171 (extract)
+
+
+State 295
+
+  174 extractarg: setnum .
+
+    $default  reduce using rule 174 (extractarg)
+
+
+State 296
+
+  176 extractarg: rnum .
+
+    $default  reduce using rule 176 (extractarg)
+
+
+State 297
+
+  175 extractarg: irn .
+
+    $default  reduce using rule 175 (extractarg)
+
+
+State 298
+
+  182 extractarg: attr .
+
+    $default  reduce using rule 182 (extractarg)
+
+
+State 299
+
+  173 extractargs: extractargs extractarg .
+
+    $default  reduce using rule 173 (extractargs)
+
+
+State 300
+
+  220 gsl: GSLTOKEN $@8 p1qualifiers TERM .
+
+    $default  reduce using rule 220 (gsl)
+
+
+State 301
+
+   38 attr: ATOKEN EQUALS AWORD .
+
+    $default  reduce using rule 38 (attr)
+
+
+State 302
+
+  130 info: INFOTOKEN DBTOKEN EQUALS word . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 461
+
+
+State 303
+
+   36 irn: IRNTOKEN EQUALS inumber .
+
+    $default  reduce using rule 36 (irn)
+
+
+State 304
+
+  283 limitarg: SAVETOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 462
+
+
+State 305
+
+  281 limitarg: setnum .
+
+    $default  reduce using rule 281 (limitarg)
+
+
+State 306
+
+  282 limitarg: lmask .
+
+    $default  reduce using rule 282 (limitarg)
+
+
+State 307
+
+  280 limitargs: limitargs limitarg .
+
+    $default  reduce using rule 280 (limitargs)
+
+
+State 308
+
+  218 rscorequalifier: BIGRTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 463
+
+
+State 309
+
+  216 rscorequalifier: NTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 464
+
+
+State 310
+
+  211 rscore: RSCORETOKEN $@7 rscorequalifiers ENDOFQUERY .
+
+    $default  reduce using rule 211 (rscore)
+
+
+State 311
+
+  217 rscorequalifier: rnum .
+
+    $default  reduce using rule 217 (rscorequalifier)
+
+
+State 312
+
+  215 rscorequalifier: attr .
+
+    $default  reduce using rule 215 (rscorequalifier)
+
+
+State 313
+
+  214 rscorequalifier: lmask .
+
+    $default  reduce using rule 214 (rscorequalifier)
+
+
+State 314
+
+  213 rscorequalifiers: rscorequalifiers rscorequalifier .
+
+    $default  reduce using rule 213 (rscorequalifiers)
+
+
+State 315
+
+  271 setarg: ACCEPTTOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 465
+
+
+State 316
+
+  241 setarg: ATOKEN EQUALS . AWORD
+
+    AWORD  shift, and go to state 466
+
+
+State 317
+
+  259 setarg: AVEDOCLEN_TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 467
+
+
+State 318
+
+  260 setarg: AVEQUERYLEN_TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 468
+
+
+State 319
+
+  268 setarg: BIGNTOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 469
+
+
+State 320
+
+  266 setarg: BIGRLOADTOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 470
+
+
+State 321
+
+  264 setarg: BIGRTOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 471
+
+
+State 322
+
+  265 setarg: BIGSTOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 472
+
+
+State 323
+
+  257 setarg: BM25_B_TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 473
+
+
+State 324
+
+  258 setarg: B3_TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 474
+
+
+State 325
+
+  235 setarg: TNT_TOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 475
+
+
+State 326
+
+  237 setarg: CTTF_TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 476
+
+
+State 327
+
+  269 setarg: DEBUGTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 477
+
+
+State 328
+
+  240 setarg: FTOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 478
+
+
+State 329
+
+  249 setarg: K1TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 479
+
+
+State 330
+
+  250 setarg: K2TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 480
+
+
+State 331
+
+  251 setarg: K3TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 481
+
+
+State 332
+
+  252 setarg: K4TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 482
+
+
+State 333
+
+  253 setarg: K5TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 483
+
+
+State 334
+
+  254 setarg: K6TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 484
+
+
+State 335
+
+  255 setarg: K7TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 485
+
+
+State 336
+
+  256 setarg: K8TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 486
+
+
+State 337
+
+  234 setarg: LAMDATOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 487
+
+
+State 338
+
+   39 lmask: LIMITTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 488
+
+
+State 339
+
+  246 setarg: MEMTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 491
+
+
+State 340
+
+  244 setarg: NOPOSTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 492
+
+
+State 341
+
+  245 setarg: NOTFTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 493
+
+
+State 342
+
+  247 setarg: NO_ST_TOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 494
+
+
+State 343
+
+  272 setarg: OPTOKEN EQUALS . AWORD
+
+    AWORD  shift, and go to state 495
+
+
+State 344
+
+  270 setarg: PREFERTOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 496
+
+
+State 345
+
+  263 setarg: P_MAXLEN_TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 497
+
+
+State 346
+
+  262 setarg: P_STEP_TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 498
+
+
+State 347
+
+  261 setarg: P_UNIT_TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 499
+
+
+State 348
+
+  267 setarg: RLOADTOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 500
+
+
+State 349
+
+  242 setarg: SAVETOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 501
+
+
+State 350
+
+  239 setarg: SCOREFUNCTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 502
+
+
+State 351
+
+  248 setarg: ST_TOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 503
+
+
+State 352
+
+  233 setarg: THETATOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 504
+
+
+State 353
+
+  236 setarg: TNPTOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 505
+
+
+State 354
+
+  243 setarg: TYPETOKEN EQUALS . wnumber
+
+    NUMBER  shift, and go to state 506
+    AWORD   shift, and go to state 507
+
+    wnumber  go to state 508
+
+
+State 355
+
+  232 setarg: VERBOSETOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 509
+
+
+State 356
+
+  238 setarg: wfunc EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 510
+
+
+State 357
+
+  230 setargs: setargs setarg .
+
+    $default  reduce using rule 230 (setargs)
+
+
+State 358
+
+  151 show_arg: NOERRORTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 511
+
+
+State 359
+
+  153 show_arg: FINSTRTOKEN . EQUALS word
+
+    EQUALS  shift, and go to state 512
+
+
+State 360
+
+  148 show_arg: FTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 513
+
+
+State 361
+
+  149 show_arg: NTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 514
+
+
+State 362
+
+  152 show_arg: STARTSTRTOKEN . EQUALS word
+
+    EQUALS  shift, and go to state 515
+
+
+State 363
+
+  143 show: SHOWTOKEN $@4 show_args ENDOFQUERY .
+
+    $default  reduce using rule 143 (show)
+
+
+State 364
+
+  146 show_arg: setnum .
+
+    $default  reduce using rule 146 (show_arg)
+
+
+State 365
+
+  147 show_arg: rnum .
+
+    $default  reduce using rule 147 (show_arg)
+
+
+State 366
+
+  150 show_arg: irn .
+
+    $default  reduce using rule 150 (show_arg)
+
+
+State 367
+
+  145 show_args: show_args show_arg .
+
+    $default  reduce using rule 145 (show_args)
+
+
+State 368
+
+  116 stem: STEMTOKEN stemfunc EQUALS word . TERM
+
+    TERM  shift, and go to state 516
+
+
+State 369
+
+  202 weightqualifier: BIGNTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 517
+
+
+State 370
+
+  201 weightqualifier: BIGRLOADTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 518
+
+
+State 371
+
+  198 weightqualifier: BIGRTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 519
+
+
+State 372
+
+  199 weightqualifier: BIGSTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 520
+
+
+State 373
+
+  206 weightqualifier: CTTF_TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 521
+
+
+State 374
+
+  192 weightqualifier: K3TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 522
+
+
+State 375
+
+  193 weightqualifier: K4TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 523
+
+
+State 376
+
+  194 weightqualifier: K5TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 524
+
+
+State 377
+
+  195 weightqualifier: K6TOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 525
+
+
+State 378
+
+  204 weightqualifier: LAMDATOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 526
+
+
+State 379
+
+  189 weightqualifier: NTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 527
+
+
+State 380
+
+  191 weightqualifier: QTFTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 528
+
+
+State 381
+
+  200 weightqualifier: RLOADTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 529
+
+
+State 382
+
+  197 weightqualifier: STOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 530
+
+
+State 383
+
+  203 weightqualifier: THETATOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 531
+
+
+State 384
+
+  205 weightqualifier: TNPTOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 532
+
+
+State 385
+
+  190 weightqualifier: TTF_TOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 533
+
+
+State 386
+
+  207 weightqualifier: WTFACTORTOKEN . EQUALS NUMBER
+
+    EQUALS  shift, and go to state 534
+
+
+State 387
+
+  184 weight: WEIGHTTOKEN $@6 weightqualifiers ENDOFQUERY .
+
+    $default  reduce using rule 184 (weight)
+
+
+State 388
+
+  196 weightqualifier: rnum .
+
+    $default  reduce using rule 196 (weightqualifier)
+
+
+State 389
+
+  187 weightqualifier: lmask .
+
+    $default  reduce using rule 187 (weightqualifier)
+
+
+State 390
+
+  186 weightqualifiers: weightqualifiers weightqualifier .
+
+    $default  reduce using rule 186 (weightqualifiers)
+
+
+State 391
+
+  188 weightqualifier: wfunc . EQUALS inumber
+
+    EQUALS  shift, and go to state 535
+
+
+State 392
+
+   35 rnum: RTOKEN EQUALS inumber .
+
+    $default  reduce using rule 35 (rnum)
+
+
+State 393
+
+   37 frignum: FRIGTOKEN EQUALS . dnumber
+
+    NUMBER  shift, and go to state 536
+
+    dnumber  go to state 537
+
+
+State 394
+
+   61 set: setnum WTOKEN EQUALS . dnumber
+   62    | setnum WTOKEN EQUALS . DOLLAR
+
+    DOLLAR  shift, and go to state 538
+    NUMBER  shift, and go to state 536
+
+    dnumber  go to state 539
+
+
+State 395
+
+   50 find: ftoken setnum rnum ENDOFQUERY .
+
+    $default  reduce using rule 50 (find)
+
+
+State 396
+
+   51 find: ftoken rnum setnum ENDOFQUERY .
+
+    $default  reduce using rule 51 (find)
+
+
+State 397
+
+   96 option: AVEDOCLEN_TOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 540
+
+
+State 398
+
+   98 option: AVEQUERYLEN_TOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 541
+
+
+State 399
+
+   71 option: AWTOKEN . EQUALS dnumber
+
+    EQUALS  shift, and go to state 542
+
+
+State 400
+
+   94 option: BM25_B_TOKEN . EQUALS dnumber
+
+    EQUALS  shift, and go to state 543
+
+
+State 401
+
+   95 option: B3_TOKEN . EQUALS dnumber
+
+    EQUALS  shift, and go to state 544
+
+
+State 402
+
+   82 option: DELTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 545
+
+
+State 403
+
+   77 option: FILETOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 546
+
+
+State 404
+
+   70 option: GAPTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 547
+
+
+State 405
+
+   72 option: GWTOKEN . EQUALS dnumber
+
+    EQUALS  shift, and go to state 548
+
+
+State 406
+
+   76 option: HOLDTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 549
+
+
+State 407
+
+   89 option: K1TOKEN . EQUALS dnumber
+
+    EQUALS  shift, and go to state 550
+
+
+State 408
+
+   90 option: K2TOKEN . EQUALS dnumber
+
+    EQUALS  shift, and go to state 551
+
+
+State 409
+
+   91 option: K3TOKEN . EQUALS dnumber
+
+    EQUALS  shift, and go to state 552
+
+
+State 410
+
+   92 option: K7TOKEN . EQUALS dnumber
+
+    EQUALS  shift, and go to state 553
+
+
+State 411
+
+   93 option: K8TOKEN . EQUALS dnumber
+
+    EQUALS  shift, and go to state 554
+
+
+State 412
+
+   81 option: KEEPTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 555
+
+
+State 413
+
+  102 option: MARKTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 556
+
+
+State 414
+
+   75 option: MEMTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 557
+
+
+State 415
+
+   87 option: MODETOKEN . EQUALS word
+
+    EQUALS  shift, and go to state 558
+
+
+State 416
+
+   78 option: NOPOSTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 559
+
+
+State 417
+
+   86 option: NOSHOW_TOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 560
+
+
+State 418
+
+   79 option: NOTFTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 561
+
+
+State 419
+
+   83 option: NO_ST_TOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 562
+
+
+State 420
+
+   80 option: OPENTOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 563
+
+
+State 421
+
+   68 option: OPTOKEN . EQUALS word
+
+    EQUALS  shift, and go to state 564
+
+
+State 422
+
+  101 option: P_MAXLEN_TOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 565
+
+
+State 423
+
+  100 option: P_STEP_TOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 566
+
+
+State 424
+
+   99 option: P_UNIT_TOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 567
+
+
+State 425
+
+   97 option: QUERYLEN_TOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 568
+
+
+State 426
+
+   74 option: SAVETOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 569
+
+
+State 427
+
+   69 option: SCOREFUNCTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 570
+
+
+State 428
+
+   85 option: STATS_TOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 571
+
+
+State 429
+
+   84 option: ST_TOKEN . EQUALS tnumber
+
+    EQUALS  shift, and go to state 572
+
+
+State 430
+
+   73 option: TARGETTOKEN . EQUALS inumber
+
+    EQUALS  shift, and go to state 573
+
+
+State 431
+
+   88 option: lmask .
+
+    $default  reduce using rule 88 (option)
+
+
+State 432
+
+   67 options: options option .
+
+    $default  reduce using rule 67 (options)
+
+
+State 433
+
+   65 set: set QTFTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 574
+
+
+State 434
+
+   57 combcmd: ftoken set TOPTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 575
+
+
+State 435
+
+  108 qualifier: FILETOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 576
+
+
+State 436
+
+  107 qualifier: HOLDTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 577
+
+
+State 437
+
+  112 qualifier: KEEPTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 578
+
+
+State 438
+
+  106 qualifier: MEMTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 579
+
+
+State 439
+
+  109 qualifier: NOPOSTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 580
+
+
+State 440
+
+  110 qualifier: NOTFTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 581
+
+
+State 441
+
+  111 qualifier: OPENTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 582
+
+
+State 442
+
+  105 qualifier: SAVETOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 583
+
+
+State 443
+
+  113 qualifier: TYPETOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 584
+
+
+State 444
+
+  120 delete: deltoken STOKEN EQUALS word . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 585
+
+
+State 445
+
+  169 p2qualifier: GSLTOKEN EQUALS word .
+
+    $default  reduce using rule 169 (p2qualifier)
+
+
+State 446
+
+  167 p2qualifier: REGTOKEN EQUALS word .
+
+    $default  reduce using rule 167 (p2qualifier)
+
+
+State 447
+
+  168 p2qualifier: STEMFUNCTIONTOKEN EQUALS word .
+
+    $default  reduce using rule 168 (p2qualifier)
+
+
+State 448
+
+   44 chooseargs: DBFLAGSTOKEN EQUALS inumber .
+
+    $default  reduce using rule 44 (chooseargs)
+
+
+State 449
+
+   46 dbname: DBTOKEN EQUALS . word
+
+    AWORD  shift, and go to state 89
+
+    word  go to state 586
+
+
+State 450
+
+   42 choose: CHOOSETOKEN $@1 chooseargs dbname $@2 . ENDOFQUERY
+
+    ENDOFQUERY  shift, and go to state 587
+
+
+State 451
+
+   53 combine: COMBTOKEN $@3 sets options ENDOFQUERY .
+
+    $default  reduce using rule 53 (combine)
+
+
+State 452
+
+  308 stat_arg: BIGRTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 588
+
+
+State 453
+
+  311 stat_arg: CODETOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 589
+
+
+State 454
+
+  307 stat_arg: MARKTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 590
+
+
+State 455
+
+  310 stat_arg: MEMTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 591
+
+
+State 456
+
+  309 stat_arg: NTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 592
+
+
+State 457
+
+  179 extractarg: FIELDTOKEN EQUALS . inumber
+  180           | FIELDTOKEN EQUALS . word
+
+    NUMBER  shift, and go to state 64
+    AWORD   shift, and go to state 89
+
+    word     go to state 593
+    inumber  go to state 594
+
+
+State 458
+
+  178 extractarg: LENGTHTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 595
+
+
+State 459
+
+  177 extractarg: OFFSETTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 596
+
+
+State 460
+
+  181 extractarg: SRCTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 597
+
+
+State 461
+
+  130 info: INFOTOKEN DBTOKEN EQUALS word ENDOFQUERY .
+
+    $default  reduce using rule 130 (info)
+
+
+State 462
+
+  283 limitarg: SAVETOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 598
+
+
+State 463
+
+  218 rscorequalifier: BIGRTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 599
+
+
+State 464
+
+  216 rscorequalifier: NTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 600
+
+
+State 465
+
+  271 setarg: ACCEPTTOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 271 (setarg)
+
+
+State 466
+
+  241 setarg: ATOKEN EQUALS AWORD .
+
+    $default  reduce using rule 241 (setarg)
+
+
+State 467
+
+  259 setarg: AVEDOCLEN_TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 259 (setarg)
+
+
+State 468
+
+  260 setarg: AVEQUERYLEN_TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 260 (setarg)
+
+
+State 469
+
+  268 setarg: BIGNTOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 268 (setarg)
+
+
+State 470
+
+  266 setarg: BIGRLOADTOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 266 (setarg)
+
+
+State 471
+
+  264 setarg: BIGRTOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 264 (setarg)
+
+
+State 472
+
+  265 setarg: BIGSTOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 265 (setarg)
+
+
+State 473
+
+  257 setarg: BM25_B_TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 257 (setarg)
+
+
+State 474
+
+  258 setarg: B3_TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 258 (setarg)
+
+
+State 475
+
+  235 setarg: TNT_TOKEN EQUALS inumber .
+
+    $default  reduce using rule 235 (setarg)
+
+
+State 476
+
+  237 setarg: CTTF_TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 237 (setarg)
+
+
+State 477
+
+  269 setarg: DEBUGTOKEN EQUALS inumber .
+
+    $default  reduce using rule 269 (setarg)
+
+
+State 478
+
+  240 setarg: FTOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 240 (setarg)
+
+
+State 479
+
+  249 setarg: K1TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 249 (setarg)
+
+
+State 480
+
+  250 setarg: K2TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 250 (setarg)
+
+
+State 481
+
+  251 setarg: K3TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 251 (setarg)
+
+
+State 482
+
+  252 setarg: K4TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 252 (setarg)
+
+
+State 483
+
+  253 setarg: K5TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 253 (setarg)
+
+
+State 484
+
+  254 setarg: K6TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 254 (setarg)
+
+
+State 485
+
+  255 setarg: K7TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 255 (setarg)
+
+
+State 486
+
+  256 setarg: K8TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 256 (setarg)
+
+
+State 487
+
+  234 setarg: LAMDATOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 234 (setarg)
+
+
+State 488
+
+   39 lmask: LIMITTOKEN EQUALS inumber .
+
+    $default  reduce using rule 39 (lmask)
+
+
+State 489
+
+  274 tnumber: NUMBER .
+
+    $default  reduce using rule 274 (tnumber)
+
+
+State 490
+
+  273 tnumber: AWORD .
+
+    $default  reduce using rule 273 (tnumber)
+
+
+State 491
+
+  246 setarg: MEMTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 246 (setarg)
+
+
+State 492
+
+  244 setarg: NOPOSTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 244 (setarg)
+
+
+State 493
+
+  245 setarg: NOTFTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 245 (setarg)
+
+
+State 494
+
+  247 setarg: NO_ST_TOKEN EQUALS tnumber .
+
+    $default  reduce using rule 247 (setarg)
+
+
+State 495
+
+  272 setarg: OPTOKEN EQUALS AWORD .
+
+    $default  reduce using rule 272 (setarg)
+
+
+State 496
+
+  270 setarg: PREFERTOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 270 (setarg)
+
+
+State 497
+
+  263 setarg: P_MAXLEN_TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 263 (setarg)
+
+
+State 498
+
+  262 setarg: P_STEP_TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 262 (setarg)
+
+
+State 499
+
+  261 setarg: P_UNIT_TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 261 (setarg)
+
+
+State 500
+
+  267 setarg: RLOADTOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 267 (setarg)
+
+
+State 501
+
+  242 setarg: SAVETOKEN EQUALS tnumber .
+
+    $default  reduce using rule 242 (setarg)
+
+
+State 502
+
+  239 setarg: SCOREFUNCTOKEN EQUALS inumber .
+
+    $default  reduce using rule 239 (setarg)
+
+
+State 503
+
+  248 setarg: ST_TOKEN EQUALS tnumber .
+
+    $default  reduce using rule 248 (setarg)
+
+
+State 504
+
+  233 setarg: THETATOKEN EQUALS inumber .
+
+    $default  reduce using rule 233 (setarg)
+
+
+State 505
+
+  236 setarg: TNPTOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 236 (setarg)
+
+
+State 506
+
+  276 wnumber: NUMBER .
+
+    $default  reduce using rule 276 (wnumber)
+
+
+State 507
+
+  275 wnumber: AWORD .
+
+    $default  reduce using rule 275 (wnumber)
+
+
+State 508
+
+  243 setarg: TYPETOKEN EQUALS wnumber .
+
+    $default  reduce using rule 243 (setarg)
+
+
+State 509
+
+  232 setarg: VERBOSETOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 232 (setarg)
+
+
+State 510
+
+  238 setarg: wfunc EQUALS inumber .
+
+    $default  reduce using rule 238 (setarg)
+
+
+State 511
+
+  151 show_arg: NOERRORTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 601
+
+
+State 512
+
+  153 show_arg: FINSTRTOKEN EQUALS . word
+
+    AWORD  shift, and go to state 89
+
+    word  go to state 602
+
+
+State 513
+
+  148 show_arg: FTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 603
+
+
+State 514
+
+  149 show_arg: NTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 604
+
+
+State 515
+
+  152 show_arg: STARTSTRTOKEN EQUALS . word
+
+    AWORD  shift, and go to state 89
+
+    word  go to state 605
+
+
+State 516
+
+  116 stem: STEMTOKEN stemfunc EQUALS word TERM .
+
+    $default  reduce using rule 116 (stem)
+
+
+State 517
+
+  202 weightqualifier: BIGNTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 606
+
+
+State 518
+
+  201 weightqualifier: BIGRLOADTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 607
+
+
+State 519
+
+  198 weightqualifier: BIGRTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 608
+
+
+State 520
+
+  199 weightqualifier: BIGSTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 609
+
+
+State 521
+
+  206 weightqualifier: CTTF_TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 610
+
+
+State 522
+
+  192 weightqualifier: K3TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 611
+
+
+State 523
+
+  193 weightqualifier: K4TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 612
+
+
+State 524
+
+  194 weightqualifier: K5TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 613
+
+
+State 525
+
+  195 weightqualifier: K6TOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 614
+
+
+State 526
+
+  204 weightqualifier: LAMDATOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 615
+
+
+State 527
+
+  189 weightqualifier: NTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 616
+
+
+State 528
+
+  191 weightqualifier: QTFTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 617
+
+
+State 529
+
+  200 weightqualifier: RLOADTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 618
+
+
+State 530
+
+  197 weightqualifier: STOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 619
+
+
+State 531
+
+  203 weightqualifier: THETATOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 620
+
+
+State 532
+
+  205 weightqualifier: TNPTOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 621
+
+
+State 533
+
+  190 weightqualifier: TTF_TOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 622
+
+
+State 534
+
+  207 weightqualifier: WTFACTORTOKEN EQUALS . NUMBER
+
+    NUMBER  shift, and go to state 623
+
+
+State 535
+
+  188 weightqualifier: wfunc EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 624
+
+
+State 536
+
+   33 dnumber: NUMBER .
+
+    $default  reduce using rule 33 (dnumber)
+
+
+State 537
+
+   37 frignum: FRIGTOKEN EQUALS dnumber .
+
+    $default  reduce using rule 37 (frignum)
+
+
+State 538
+
+   62 set: setnum WTOKEN EQUALS DOLLAR .
+
+    $default  reduce using rule 62 (set)
+
+
+State 539
+
+   61 set: setnum WTOKEN EQUALS dnumber .
+
+    $default  reduce using rule 61 (set)
+
+
+State 540
+
+   96 option: AVEDOCLEN_TOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 625
+
+
+State 541
+
+   98 option: AVEQUERYLEN_TOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 626
+
+
+State 542
+
+   71 option: AWTOKEN EQUALS . dnumber
+
+    NUMBER  shift, and go to state 536
+
+    dnumber  go to state 627
+
+
+State 543
+
+   94 option: BM25_B_TOKEN EQUALS . dnumber
+
+    NUMBER  shift, and go to state 536
+
+    dnumber  go to state 628
+
+
+State 544
+
+   95 option: B3_TOKEN EQUALS . dnumber
+
+    NUMBER  shift, and go to state 536
+
+    dnumber  go to state 629
+
+
+State 545
+
+   82 option: DELTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 630
+
+
+State 546
+
+   77 option: FILETOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 631
+
+
+State 547
+
+   70 option: GAPTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 632
+
+
+State 548
+
+   72 option: GWTOKEN EQUALS . dnumber
+
+    NUMBER  shift, and go to state 536
+
+    dnumber  go to state 633
+
+
+State 549
+
+   76 option: HOLDTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 634
+
+
+State 550
+
+   89 option: K1TOKEN EQUALS . dnumber
+
+    NUMBER  shift, and go to state 536
+
+    dnumber  go to state 635
+
+
+State 551
+
+   90 option: K2TOKEN EQUALS . dnumber
+
+    NUMBER  shift, and go to state 536
+
+    dnumber  go to state 636
+
+
+State 552
+
+   91 option: K3TOKEN EQUALS . dnumber
+
+    NUMBER  shift, and go to state 536
+
+    dnumber  go to state 637
+
+
+State 553
+
+   92 option: K7TOKEN EQUALS . dnumber
+
+    NUMBER  shift, and go to state 536
+
+    dnumber  go to state 638
+
+
+State 554
+
+   93 option: K8TOKEN EQUALS . dnumber
+
+    NUMBER  shift, and go to state 536
+
+    dnumber  go to state 639
+
+
+State 555
+
+   81 option: KEEPTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 640
+
+
+State 556
+
+  102 option: MARKTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 641
+
+
+State 557
+
+   75 option: MEMTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 642
+
+
+State 558
+
+   87 option: MODETOKEN EQUALS . word
+
+    AWORD  shift, and go to state 89
+
+    word  go to state 643
+
+
+State 559
+
+   78 option: NOPOSTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 644
+
+
+State 560
+
+   86 option: NOSHOW_TOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 645
+
+
+State 561
+
+   79 option: NOTFTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 646
+
+
+State 562
+
+   83 option: NO_ST_TOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 647
+
+
+State 563
+
+   80 option: OPENTOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 648
+
+
+State 564
+
+   68 option: OPTOKEN EQUALS . word
+
+    AWORD  shift, and go to state 89
+
+    word  go to state 649
+
+
+State 565
+
+  101 option: P_MAXLEN_TOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 650
+
+
+State 566
+
+  100 option: P_STEP_TOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 651
+
+
+State 567
+
+   99 option: P_UNIT_TOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 652
+
+
+State 568
+
+   97 option: QUERYLEN_TOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 653
+
+
+State 569
+
+   74 option: SAVETOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 654
+
+
+State 570
+
+   69 option: SCOREFUNCTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 655
+
+
+State 571
+
+   85 option: STATS_TOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 656
+
+
+State 572
+
+   84 option: ST_TOKEN EQUALS . tnumber
+
+    NUMBER  shift, and go to state 489
+    AWORD   shift, and go to state 490
+
+    tnumber  go to state 657
+
+
+State 573
+
+   73 option: TARGETTOKEN EQUALS . inumber
+
+    NUMBER  shift, and go to state 64
+
+    inumber  go to state 658
+
+
+State 574
+
+   65 set: set QTFTOKEN EQUALS inumber .
+
+    $default  reduce using rule 65 (set)
+
+
+State 575
+
+   57 combcmd: ftoken set TOPTOKEN EQUALS inumber .
+
+    $default  reduce using rule 57 (combcmd)
+
+
+State 576
+
+  108 qualifier: FILETOKEN EQUALS tnumber .
+
+    $default  reduce using rule 108 (qualifier)
+
+
+State 577
+
+  107 qualifier: HOLDTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 107 (qualifier)
+
+
+State 578
+
+  112 qualifier: KEEPTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 112 (qualifier)
+
+
+State 579
+
+  106 qualifier: MEMTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 106 (qualifier)
+
+
+State 580
+
+  109 qualifier: NOPOSTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 109 (qualifier)
+
+
+State 581
+
+  110 qualifier: NOTFTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 110 (qualifier)
+
+
+State 582
+
+  111 qualifier: OPENTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 111 (qualifier)
+
+
+State 583
+
+  105 qualifier: SAVETOKEN EQUALS tnumber .
+
+    $default  reduce using rule 105 (qualifier)
+
+
+State 584
+
+  113 qualifier: TYPETOKEN EQUALS inumber .
+
+    $default  reduce using rule 113 (qualifier)
+
+
+State 585
+
+  120 delete: deltoken STOKEN EQUALS word ENDOFQUERY .
+
+    $default  reduce using rule 120 (delete)
+
+
+State 586
+
+   46 dbname: DBTOKEN EQUALS word .
+
+    $default  reduce using rule 46 (dbname)
+
+
+State 587
+
+   42 choose: CHOOSETOKEN $@1 chooseargs dbname $@2 ENDOFQUERY .
+
+    $default  reduce using rule 42 (choose)
+
+
+State 588
+
+  308 stat_arg: BIGRTOKEN EQUALS inumber .
+
+    $default  reduce using rule 308 (stat_arg)
+
+
+State 589
+
+  311 stat_arg: CODETOKEN EQUALS inumber .
+
+    $default  reduce using rule 311 (stat_arg)
+
+
+State 590
+
+  307 stat_arg: MARKTOKEN EQUALS inumber .
+
+    $default  reduce using rule 307 (stat_arg)
+
+
+State 591
+
+  310 stat_arg: MEMTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 310 (stat_arg)
+
+
+State 592
+
+  309 stat_arg: NTOKEN EQUALS inumber .
+
+    $default  reduce using rule 309 (stat_arg)
+
+
+State 593
+
+  180 extractarg: FIELDTOKEN EQUALS word .
+
+    $default  reduce using rule 180 (extractarg)
+
+
+State 594
+
+  179 extractarg: FIELDTOKEN EQUALS inumber .
+
+    $default  reduce using rule 179 (extractarg)
+
+
+State 595
+
+  178 extractarg: LENGTHTOKEN EQUALS inumber .
+
+    $default  reduce using rule 178 (extractarg)
+
+
+State 596
+
+  177 extractarg: OFFSETTOKEN EQUALS inumber .
+
+    $default  reduce using rule 177 (extractarg)
+
+
+State 597
+
+  181 extractarg: SRCTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 181 (extractarg)
+
+
+State 598
+
+  283 limitarg: SAVETOKEN EQUALS tnumber .
+
+    $default  reduce using rule 283 (limitarg)
+
+
+State 599
+
+  218 rscorequalifier: BIGRTOKEN EQUALS inumber .
+
+    $default  reduce using rule 218 (rscorequalifier)
+
+
+State 600
+
+  216 rscorequalifier: NTOKEN EQUALS inumber .
+
+    $default  reduce using rule 216 (rscorequalifier)
+
+
+State 601
+
+  151 show_arg: NOERRORTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 151 (show_arg)
+
+
+State 602
+
+  153 show_arg: FINSTRTOKEN EQUALS word .
+
+    $default  reduce using rule 153 (show_arg)
+
+
+State 603
+
+  148 show_arg: FTOKEN EQUALS inumber .
+
+    $default  reduce using rule 148 (show_arg)
+
+
+State 604
+
+  149 show_arg: NTOKEN EQUALS inumber .
+
+    $default  reduce using rule 149 (show_arg)
+
+
+State 605
+
+  152 show_arg: STARTSTRTOKEN EQUALS word .
+
+    $default  reduce using rule 152 (show_arg)
+
+
+State 606
+
+  202 weightqualifier: BIGNTOKEN EQUALS inumber .
+
+    $default  reduce using rule 202 (weightqualifier)
+
+
+State 607
+
+  201 weightqualifier: BIGRLOADTOKEN EQUALS inumber .
+
+    $default  reduce using rule 201 (weightqualifier)
+
+
+State 608
+
+  198 weightqualifier: BIGRTOKEN EQUALS inumber .
+
+    $default  reduce using rule 198 (weightqualifier)
+
+
+State 609
+
+  199 weightqualifier: BIGSTOKEN EQUALS inumber .
+
+    $default  reduce using rule 199 (weightqualifier)
+
+
+State 610
+
+  206 weightqualifier: CTTF_TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 206 (weightqualifier)
+
+
+State 611
+
+  192 weightqualifier: K3TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 192 (weightqualifier)
+
+
+State 612
+
+  193 weightqualifier: K4TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 193 (weightqualifier)
+
+
+State 613
+
+  194 weightqualifier: K5TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 194 (weightqualifier)
+
+
+State 614
+
+  195 weightqualifier: K6TOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 195 (weightqualifier)
+
+
+State 615
+
+  204 weightqualifier: LAMDATOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 204 (weightqualifier)
+
+
+State 616
+
+  189 weightqualifier: NTOKEN EQUALS inumber .
+
+    $default  reduce using rule 189 (weightqualifier)
+
+
+State 617
+
+  191 weightqualifier: QTFTOKEN EQUALS inumber .
+
+    $default  reduce using rule 191 (weightqualifier)
+
+
+State 618
+
+  200 weightqualifier: RLOADTOKEN EQUALS inumber .
+
+    $default  reduce using rule 200 (weightqualifier)
+
+
+State 619
+
+  197 weightqualifier: STOKEN EQUALS inumber .
+
+    $default  reduce using rule 197 (weightqualifier)
+
+
+State 620
+
+  203 weightqualifier: THETATOKEN EQUALS inumber .
+
+    $default  reduce using rule 203 (weightqualifier)
+
+
+State 621
+
+  205 weightqualifier: TNPTOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 205 (weightqualifier)
+
+
+State 622
+
+  190 weightqualifier: TTF_TOKEN EQUALS inumber .
+
+    $default  reduce using rule 190 (weightqualifier)
+
+
+State 623
+
+  207 weightqualifier: WTFACTORTOKEN EQUALS NUMBER .
+
+    $default  reduce using rule 207 (weightqualifier)
+
+
+State 624
+
+  188 weightqualifier: wfunc EQUALS inumber .
+
+    $default  reduce using rule 188 (weightqualifier)
+
+
+State 625
+
+   96 option: AVEDOCLEN_TOKEN EQUALS inumber .
+
+    $default  reduce using rule 96 (option)
+
+
+State 626
+
+   98 option: AVEQUERYLEN_TOKEN EQUALS inumber .
+
+    $default  reduce using rule 98 (option)
+
+
+State 627
+
+   71 option: AWTOKEN EQUALS dnumber .
+
+    $default  reduce using rule 71 (option)
+
+
+State 628
+
+   94 option: BM25_B_TOKEN EQUALS dnumber .
+
+    $default  reduce using rule 94 (option)
+
+
+State 629
+
+   95 option: B3_TOKEN EQUALS dnumber .
+
+    $default  reduce using rule 95 (option)
+
+
+State 630
+
+   82 option: DELTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 82 (option)
+
+
+State 631
+
+   77 option: FILETOKEN EQUALS tnumber .
+
+    $default  reduce using rule 77 (option)
+
+
+State 632
+
+   70 option: GAPTOKEN EQUALS inumber .
+
+    $default  reduce using rule 70 (option)
+
+
+State 633
+
+   72 option: GWTOKEN EQUALS dnumber .
+
+    $default  reduce using rule 72 (option)
+
+
+State 634
+
+   76 option: HOLDTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 76 (option)
+
+
+State 635
+
+   89 option: K1TOKEN EQUALS dnumber .
+
+    $default  reduce using rule 89 (option)
+
+
+State 636
+
+   90 option: K2TOKEN EQUALS dnumber .
+
+    $default  reduce using rule 90 (option)
+
+
+State 637
+
+   91 option: K3TOKEN EQUALS dnumber .
+
+    $default  reduce using rule 91 (option)
+
+
+State 638
+
+   92 option: K7TOKEN EQUALS dnumber .
+
+    $default  reduce using rule 92 (option)
+
+
+State 639
+
+   93 option: K8TOKEN EQUALS dnumber .
+
+    $default  reduce using rule 93 (option)
+
+
+State 640
+
+   81 option: KEEPTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 81 (option)
+
+
+State 641
+
+  102 option: MARKTOKEN EQUALS inumber .
+
+    $default  reduce using rule 102 (option)
+
+
+State 642
+
+   75 option: MEMTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 75 (option)
+
+
+State 643
+
+   87 option: MODETOKEN EQUALS word .
+
+    $default  reduce using rule 87 (option)
+
+
+State 644
+
+   78 option: NOPOSTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 78 (option)
+
+
+State 645
+
+   86 option: NOSHOW_TOKEN EQUALS tnumber .
+
+    $default  reduce using rule 86 (option)
+
+
+State 646
+
+   79 option: NOTFTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 79 (option)
+
+
+State 647
+
+   83 option: NO_ST_TOKEN EQUALS tnumber .
+
+    $default  reduce using rule 83 (option)
+
+
+State 648
+
+   80 option: OPENTOKEN EQUALS tnumber .
+
+    $default  reduce using rule 80 (option)
+
+
+State 649
+
+   68 option: OPTOKEN EQUALS word .
+
+    $default  reduce using rule 68 (option)
+
+
+State 650
+
+  101 option: P_MAXLEN_TOKEN EQUALS inumber .
+
+    $default  reduce using rule 101 (option)
+
+
+State 651
+
+  100 option: P_STEP_TOKEN EQUALS inumber .
+
+    $default  reduce using rule 100 (option)
+
+
+State 652
+
+   99 option: P_UNIT_TOKEN EQUALS inumber .
+
+    $default  reduce using rule 99 (option)
+
+
+State 653
+
+   97 option: QUERYLEN_TOKEN EQUALS inumber .
+
+    $default  reduce using rule 97 (option)
+
+
+State 654
+
+   74 option: SAVETOKEN EQUALS tnumber .
+
+    $default  reduce using rule 74 (option)
+
+
+State 655
+
+   69 option: SCOREFUNCTOKEN EQUALS inumber .
+
+    $default  reduce using rule 69 (option)
+
+
+State 656
+
+   85 option: STATS_TOKEN EQUALS tnumber .
+
+    $default  reduce using rule 85 (option)
+
+
+State 657
+
+   84 option: ST_TOKEN EQUALS tnumber .
+
+    $default  reduce using rule 84 (option)
+
+
+State 658
+
+   73 option: TARGETTOKEN EQUALS inumber .
+
+    $default  reduce using rule 73 (option)

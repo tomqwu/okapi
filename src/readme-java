@@ -1,0 +1,1 @@
+jar cfm OkapiJNI.jar Manifest.txt *.class

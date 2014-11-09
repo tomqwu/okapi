@@ -1,0 +1,34 @@
+This is the key readme file needed when getting okapi source from the
+source repository.
+
+To build this, you will need:
+
+- java 1.6.0 or higher
+- gcc 3.4.6 or higher
+- bison 2.3 or higher
+- flex 2.5.33 or higher
+
+A few simple commands will build okapi completely -- including the JNI logic.
+A few files to make not of are the site.h file (which you may need to configure
+for your own machine you're building on) and the Makefile. Paricularly the
+line in the Makefile containing:
+
+ CC = gcc -g -march=i586 -ffast-math
+
+These are the primary compile options. The -g option is good for debugging
+(as that option sets up all the debugging libraries), while the -march
+and -ffast-math I think should probably be removed in the future. Not sure
+what benefit these options give us.
+
+1.  Build java classes
+
+  javac *.java
+
+2. Create the newest JNI jar file, which packages the classes created.
+   (see readme-java for details)
+
+  jar cfm OkapiJNI.jar Manifest.txt *.class
+
+3. Build the okapi bss
+
+  make

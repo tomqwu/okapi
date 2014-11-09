@@ -1,0 +1,2097 @@
+
+bss_lookup.c,507
+bss_stype012(61,1899
+bss_pisrch(139,4089
+bss_fftge(205,5947
+bss_getnump(254,7218
+bss_gprt(320,8960
+bss_gprtc(392,11351
+bss_gnxtc(413,11860
+bss_gnxt(457,13169
+skip_itr(608,17344
+bss_getitr_by_addr(639,18020
+bss_rdchunk(657,18640
+parse_itr(686,19528
+read_itr_seq(739,21093
+get_term_itr(766,21908
+get_tnp_itr(797,22667
+get_ttf_itr(823,23067
+get_maxtf_itr(860,23960
+get_ppos_itr(885,24332
+get_pvol_itr(914,24818
+get_plength_itr(946,25289
+get_limits_itr(994,26521
+sats_limit_itr(1040,27600
+
+bss_globs.c,1023
+int Pid 11,242
+int Pagesize 12,252
+int Largefiles 14,285
+int Largefiles 17,389
+int silent 21,495
+int Maxfiles 22,551
+int Maxmergestreams 23,610
+int Num_open_files 24,665
+char *Info_buf 26,756
+char Username[28,811
+int Uid 29,870
+int Gid 30,880
+int N_groups 31,890
+int Groups[32,946
+FILE *stdnothing 34,973
+int stdzero 35,1009
+char *empstr 36,1067
+IFN Stem_fns[37,1087
+char *Okapi,45,1227
+char *Okapi, *BSS 45,1227
+char *Control_dir 46,1247
+char *Temp_dir 47,1281
+char *Bib_dir 48,1309
+char *Localbib_dir 49,1335
+char *Db_names 57,1571
+int Db_num 60,1701
+Db Cdb 62,1811
+Db *Current_db 64,1860
+char *Current_db_name 66,1968
+char Lim_names[68,2067
+int Lim_num 69,2134
+int Current_lim 70,2191
+char *Current_lim_name 71,2246
+int Current_ixnum 73,2317
+char Attr_names[76,2400
+int Attr_num 77,2472
+char *Current_Attr_name 78,2537
+Gsl *Gsls[82,2692
+int Num_gsls 96,3157
+Setrec *Setrecs[104,3361
+int Num_Setrecs 106,3474
+char Hion[115,3764
+char Hioff[116,3792
+struct hugepos Hpos 119,3821
+
+bss_db.c,1057
+#define TRY_OPEN 15,251
+#define TRY_FOPEN 16,294
+#define HOLD_DOCLENS 19,336
+struct field_type_name F_t_names[35,625
+struct ext_reg_name Ext_reg_names[60,1129
+is_db_open(90,1959
+read_db_avail(169,5496
+setup_recbuf(281,8402
+open_bibdir(298,8836
+open_bibfile(333,9903
+open_db(383,11427
+close_db(526,15400
+calc_bign(573,16913
+set_bign(585,17178
+get_bign(591,17229
+read_field_types(612,17780
+read_search_groups(664,19317
+free_search_group(855,24627
+free_search_groups(867,24994
+find_search_group_by_name(895,25775
+find_field_num(940,26922
+read_para_dir(968,27673
+prepare_paras(1029,29475
+prepare_limits(1082,31251
+read_limits(1157,33507
+find_limit(1217,35200
+bss_limits_avail(1239,35801
+ixinit(1320,38622
+ix_free(1565,45798
+read_doclens(1621,47660
+get_doclen(1707,50127
+open_stemfile(1721,50503
+calc_avedoclen(1762,51774
+get_avedoclen(1792,52571
+get_cttf(1815,53205
+get_cttf(1825,53404
+set_avedoclen(1842,53815
+set_avedoclens(1853,54063
+db_availq(1884,54838
+db_show(1912,55420
+record_db(1956,56493
+try_paths(1974,56962
+
+bss_db_desc.c,188
+#define PR(PR11,244
+char *tags[18,475
+store(66,2729
+storen(76,2891
+read_db_desc 88,3057
+free_db(606,18563
+err_mess(627,19456
+int read_parm_line(649,20340
+write_db_desc(713,22690
+
+bss_combine.c,942
+#define DELTA_WT 4,42
+#define CHARS_TO_TOKS 6,66
+#define OK 9,112
+#define EMPTY 11,138
+#define FINISHED 13,170
+#define p6(p616,200
+#define pt(pt17,244
+#define p6(p619,295
+#define pt(pt20,339
+#define DO_MPW(DO_MPW30,622
+#define SETUP_WEIGHT_DIST(SETUP_WEIGHT_DIST93,2846
+#define DO_WEIGHTS(DO_WEIGHTS105,3225
+#define CHECK_CUTOFF 129,3961
+#define MERGE_ALL_POS 156,5024
+#define DO_STATS(DO_STATS188,5973
+#define report_comb 193,6107
+poscmp(211,6629
+int maxopc 240,7486
+#define WTGRAN 242,7504
+bss_combine_0(245,7527
+bss_combine_bm(730,22470
+bss_combine_pass(1083,33716
+bss_willett(1453,44963
+bss_quick_merge(1479,45756
+#define GRAN 1494,46220
+bss_quick_combine(1497,46240
+bss_combine_atomic(1579,48908
+bss_combine_limit(1792,55097
+bss_combine_lr(1912,58653
+struct abcz abcz1933,59271
+cmp(1939,59331
+select_topn(1945,59413
+translate_opcode(2001,61057
+combine_stats(2117,62868
+bss_copy_set(2122,62897
+
+bss_sets.c,1105
+resize_bss_Gp(39,989
+make_bss_Gp(63,1742
+set_alloc_mem(91,2552
+set_get_zeroed_mem(104,2875
+get_dummyset(135,3770
+get_setrec(176,5009
+setup_pstgs_atomic_own_storage(333,10126
+setup_pstgs_atomic_own_storage(428,13149
+setup_pstgs(565,17350
+open_pstgs(645,20145
+set_trim_memory(702,21839
+close_pstgs(775,24213
+map_pf(830,25913
+read_all_pf(856,26684
+s_unmap(883,27475
+s_unmap(900,27896
+s_free(908,27958
+get_next_pstg(940,29050
+write_next_pstg(999,30818
+get_pstg_n(1052,32455
+get_pstg_offset(1113,34020
+bss_limit(1180,35945
+read_pstg_unpacked(1284,39188
+dump_unpacked_pstg(1449,44563
+write_unpacked_pstg(1524,47218
+get_packed_plength(1663,51634
+copy_packed_pstg(1748,53460
+get_numpos_pstg(1767,53851
+get_tf_pstg(1773,53914
+get_rec_pstg(1779,54017
+get_doclen_pstg(1785,54074
+get_wt_pstg(1792,54217
+get_auxwt_pstg(1798,54287
+translate_pstgtype(1814,54649
+translate_output_flags(1835,55593
+translate_set_type(1849,56184
+set_open_pf(1896,58301
+set_close_pf(2029,61648
+set_close_pfs(2044,62066
+bss_pfname(2054,62220
+make_set_from_irn(2071,62634
+make_set_from_rec(2087,62959
+
+bss_show.c,295
+bss_getrec_raw(36,1001
+bss_getfield_raw(118,3267
+struct sbuf sbuf218,7118
+prepare_set_for_output(224,7167
+bss_cmp_wts(412,13648
+set_current_displayset(439,14422
+clear_current_displayset(471,15416
+bss_highlight_field(506,16359
+bss_highlight_para(565,18400
+length_from_header(604,19492
+
+bss_misc.c,719
+bss_np(30,588
+bss_ttf(37,698
+check_setnum(57,1120
+check_recnum(66,1260
+check_set_and_rec(74,1393
+bss_open(88,1762
+bss_fopen(104,2079
+bss_close(120,2412
+bss_fclose(135,2654
+report_files(151,2900
+report_time(158,3025
+#define ALLOC_TABLE_SIZE 176,3596
+int Allocated_mem 178,3627
+int Mapped_mem 179,3651
+struct alloc_table alloc_table180,3672
+} Alloc_table 186,3778
+int Alloc_table_size 187,3814
+struct alloc_table Map_table 189,3857
+alloc_find_slot(206,4308
+bss_malloc(237,5135
+bss_mmap(265,5803
+get_zeroed_mem(318,7181
+bss_strdup(332,7531
+bss_strdup_kl(351,8126
+bss_memdup(362,8334
+bss_calloc(370,8493
+bss_realloc(378,8663
+bss_free(407,9559
+bss_munmap(443,10485
+report_allocation(484,11482
+
+bss_funcs.c,1625
+#define EXTRACT13,321
+bss_startup(41,830
+bss_exit(113,2871
+bss_open_db(159,4087
+bss_findlimit(221,6010
+bss_lkup(292,8210
+bss_lkup_a(417,12157
+bss_lkup_anum(441,12950
+make_set(469,13822
+bss_stem_term(488,14372
+bss_show(530,15540
+bss_parse(903,27314
+bss_parse_rgf(920,27730
+bss_parse_hash(936,28133
+bss_superparse(965,28913
+bss_superparse_rgf(985,29433
+bss_superparse_nosource(1006,29937
+bss_superparse_doc(1024,30427
+bss_do_combine(1127,34271
+bss_assign_weight_ln(1832,57031
+bss_set_limit(1945,60243
+bss_dolimit(1969,60894
+check_db_open(2007,62169
+check_set(2018,62319
+check_set_rec(2033,62594
+check_irn(2048,62921
+check_db_set_rec_irn(2064,63208
+check_limit(2078,63502
+check_attr(2114,64468
+check_ext_reg(2169,66225
+check_stemfn(2194,66882
+check_gsl(2213,67463
+check_index(2234,67982
+check_fdnum(2248,68311
+char *null 2267,68777
+bss_dump_setrec(2270,68806
+bss_display_setstats(2439,75430
+bss_describe_database(2465,76155
+bss_describe_databases(2503,77031
+describe_attribute(2520,77474
+bss_describe_attribute(2541,77986
+find_search_name(2560,78528
+bss_clear_setrec(2588,79298
+bss_purge_setrec(2655,81254
+bss_clear_all_setrecs(2661,81322
+get_rec_info_text(2684,81861
+#define LEN_TO_TOK_FACTOR 2783,85113
+#define CH8K_TO_TERMS_FACTOR 2784,85142
+bss_get_big_n(2788,85244
+bss_get_avedoclen(2797,85450
+bss_get_tnt(2826,86065
+bss_get_doclen(2843,86613
+bss_get_rscore(2864,87219
+bss_get_db_name(2883,87765
+bss_get_stemfunctions(2892,87931
+bss_get_regimes(2908,88272
+bss_get_version(2932,88697
+bss_do_trec_stats(2952,89256
+bss_set_debug(3137,93949
+bss_calc_debug(3164,94692
+
+bss_extract.c,241
+#define EXTRACT9,263
+#define TOKMAPSIZE 16,363
+output_extracted_term(32,1028
+extract(301,8837
+struct ixparms ixparms[660,19331
+int num_ixparms[661,19415
+setup_ixparms(664,19491
+extract_text(740,21942
+extract_text_nosource(853,24865
+
+bss_errors.c,480
+#define _bss_errors_h2,22
+char bss_Err_buf[17,341
+char Err_buf[20,474
+int bss_Errno 22,496
+int bss_Result 24,561
+int bss_Outlength 26,672
+FILE *Err_file,28,693
+FILE *Err_file, *bss_syslog 28,693
+int Dbg 30,724
+struct names debug_names[32,805
+char *bss_Errs[61,1484
+char *bss_Warnings[137,3037
+prepare_error(158,3564
+prepare_warning(184,4262
+mem_err(198,4570
+bss_perror(219,5074
+sys_err(232,5320
+internal_err(239,5430
+} d_keys[263,6058
+dbg_from_string(286,6496
+
+bss_passages.c,909
+int f_num 16,361
+int f_oset 17,373
+int f_len 18,386
+int f_numpars 19,398
+int *firstpara 20,414
+#define Check_parabuf 41,1144
+read_plain_para_rec(56,1601
+get_para_offset(183,4684
+get_para_rec(216,5331
+para_get_field(226,5508
+find_para_len(243,5828
+find_passage_len(252,5972
+find_para_offset(261,6151
+setup_tfs(283,6634
+static int *tot_tfs 335,7900
+static int num_tot_tfs 336,7922
+setup_tot_tfs(339,7954
+find_passage_tf(403,9834
+find_passage_wt_component(445,10971
+do_passage(474,11757
+faster_do_passage(*tfs,501,12491
+faster_do_passage(*tfs, int spara,501,12491
+faster_do_passage(*tfs, int spara, int fpara,501,12491
+faster_do_passage(*tfs, int spara, int fpara, int pl,501,12491
+faster_do_passage(*tfs, int spara, int fpara, int pl, int numstreams,501,12491
+		  int streams[502,12561
+		  int streams[], double streamweights[502,12561
+		  double k1,503,12604
+do_passages(531,13306
+
+bss_readrecs.c,233
+read_bibdir_rec(36,1252
+rdr_extern(122,3383
+rdr_n(226,6112
+rd_recnum(352,10413
+real_reclen(375,11063
+#define BIBDIR_MAXLEN 410,12202
+recnum_to_addr(413,12270
+findfld(478,14289
+findfld_defaultdb(510,15341
+writerec(535,16108
+
+utils.c,2815
+nullfunction(37,987
+movepcs(42,1053
+makepcs(54,1402
+makets(70,1700
+strrncpy(85,1971
+cv2(109,2549
+cv3(117,2716
+w5hl(129,2832
+reverse_16(159,3400
+reverse(170,3555
+reverse_64(185,3753
+getw_reverse(204,4018
+reverse_bits(216,4188
+reverse_int(226,4343
+cv_pos_text_hllh(248,4856
+cvint(274,5370
+itoascii(282,5563
+striplts(300,5925
+slws(314,6351
+stws(322,6477
+real_length(336,6684
+r_len(354,7114
+get_message_size(363,7263
+swapkls(381,7657
+cpbytes(403,8188
+cpssi(428,8789
+cptspcs(436,8950
+cptsks(465,9808
+cpasc(501,10966
+#define equ 503,11027
+#define gtr 504,11044
+#define less 505,11060
+cppasc(521,11415
+strncasecmp(537,11858
+strcasecmp(561,12510
+extwd(618,14808
+findwd(661,16256
+find_tok(696,17484
+find_name(724,18196
+strdcpy(742,18729
+int LWD 759,19102
+cpwd(767,19407
+cptowb(799,20207
+stringscan(824,20829
+#define MAXSUBS 866,22255
+dedup(870,22328
+     struct substring substring886,23026
+repover 1019,27453
+#define		THRESH	1042,28079
+#define		MTHRESH	1043,28129
+static  int		qsz;1045,28178
+static  int		thresh;1047,28291
+static  int		mthresh;1048,28339
+qst(1066,29182
+gqsort(1171,31698
+gqsort_ins_thresh(1227,33173
+qst_int(1299,35487
+gqsort_int(1392,37657
+lmsort(1458,39543
+issub(1553,42196
+srchrep(1587,43407
+replace(1622,44691
+isintab(1654,45647
+inw(1670,45932
+posnondig(1682,46211
+findchars(1699,46542
+countchar(1711,46840
+lg2(1725,47197
+ispower2(1742,47821
+n_choose_r(1762,48251
+lige(1786,48757
+u_char U_to_lc[1801,49043
+lcase(1823,50301
+cvlus(1833,50434
+cvuls(1840,50559
+cvulpcs(1847,50674
+is_upper_text(1869,51279
+is_upper_tok(1879,51431
+is_lower_text(1890,51588
+is_lower_tok(1900,51739
+is_init_upper(1911,51873
+u_int Secs;1928,52281
+getsecs(1931,52365
+elapsed(1941,52518
+ticks_elapsed(1951,52765
+updatesecs(1969,53096
+start_timers(1978,53279
+get_utime(1989,53507
+get_stime(1999,53746
+is_a_num(2017,54243
+pcit(2050,55156
+psit(2082,56075
+rsft(2098,56495
+search_for_command(2123,57421
+read_file_buf(2153,58377
+file_to_buf(2172,58721
+is_a_bit(2201,59443
+bits_to_right(2232,60275
+num_bits(2254,60803
+qaddslash(2275,61271
+readstr(2313,62348
+readcstr(2356,63473
+int readstrstr(2374,63854
+readline(2419,65082
+readln(2459,66243
+readlln(2480,66656
+skip_to_nextline(2526,67636
+lastslash(2558,68683
+dirname(2574,69044
+mget_vshort(2634,70681
+fget_vshort(2647,70846
+mput_vshort(2659,71058
+fput_vshort(2675,71277
+w1to4(2709,72288
+r1to4(2742,72882
+w3or4(2777,73460
+st3or4(2804,73919
+r3or4(2823,74270
+ld3or4(2845,74607
+w1or2(2866,74892
+r1or2(2881,75178
+expand_pos_text(2908,75625
+expand_pos6(2916,75803
+expand_posnf(2924,75977
+expand_pos_text(2934,76149
+expand_pos6(2942,76327
+expand_posnf(2950,76501
+fsize(2968,76926
+ofsize(2976,77134
+dfk(2997,77629
+get(3032,78463
+fget(3041,78659
+put(3077,79403
+
+isdewey.c,16
+isdewey(15,344
+
+porter.c,367
+#define portminl 64,2672
+cons(76,3039
+cvcq(85,3308
+doubq(98,3690
+meas(108,3942
+vowelq(134,4675
+port1(144,4929
+port2(187,6235
+port5(316,10944
+portspell(332,11361
+wstem(372,12734
+wstem_nospell(380,12906
+sstem(387,13059
+sstem_nospell(396,13253
+nostem(405,13429
+nostem_spell(412,13544
+psstem(420,13692
+stem_phrase(444,14439
+stem_phrase_token(475,15378
+
+realport.c,455
+#define TRUE 34,1192
+#define FALSE 35,1207
+static char * b;47,1669
+static int k,48,1728
+static int k,k0,48,1728
+static int k,k0,j;48,1728
+int cons(52,1844
+int m(71,2325
+int vowelinstem(98,2771
+int doublec(105,2939
+int cvc(120,3317
+int ends(130,3567
+void setto(142,3886
+void r(150,4013
+void step1ab(174,4490
+void step1c(198,5224
+void step2(205,5462
+void step3(246,7334
+void step4(263,7965
+void step5(293,9203
+int portrealstem(311,9843
+
+gslsubs.c,307
+realloc_data_space(51,1942
+comp(74,2555
+read_gsl(89,2836
+find_gsl(223,7296
+setup_gsl(335,10995
+setup_gsl_sg(391,12560
+lookup_gsl(439,14227
+do_gsl(499,16318
+char sav_tok[532,17435
+int next_num 533,17465
+gsl_translate_token(536,17530
+new_gsl(578,18662
+free_gsl(608,19440
+free_all_gsls(630,20028
+
+weightsubs.c,574
+nr_wt(40,1333
+double f4_p_theta_ln(58,1957
+plain_f4(71,2307
+double f4_p_loaded_ln(77,2480
+double idf(91,2909
+double f0_r(98,2988
+double f1_r(104,3092
+double f2_r(112,3224
+double f3_r(119,3366
+double f4_r(126,3512
+double f0_p(133,3662
+double f1_p(140,3782
+double f2_p(148,3932
+double f3_p(155,4088
+double f4_p(163,4243
+double f4_p_loaded(178,4646
+double f4_qt(191,5043
+intf4_qt(201,5294
+intf4_p(210,5516
+intf4_qe(216,5622
+emim(226,5903
+weight_to_s_v(269,7277
+s_v_to_weight(277,7484
+rscore(297,7994
+bm25mult(319,8588
+k3mult(325,8717
+keen_1(347,9462
+
+extsubs.c,831
+count_toks(32,891
+#define Sentence_end 97,3043
+get_next_sentence(112,3443
+hl_next_sentence(422,11435
+hl_text(763,20188
+#define pos_t 784,20799
+#define pos6 785,20826
+#define pos_t 787,20858
+#define pos6 788,20885
+#define space 926,24937
+#define init 927,24953
+#define alldigit 928,24968
+phase2(932,24993
+#define outputchar(outputchar938,25175
+#define SPACE 1070,29330
+#define INIT 1071,29346
+#define ALLDIGIT 1072,29361
+phase2_token(1076,29430
+#define outputchar(outputchar1090,29855
+#define outputblank 1093,29967
+#define extrablank 1096,30094
+phase2_token_plainwords(1235,34486
+tokenize_text(1399,39528
+map_tokens(1458,40972
+#define HDIAG 1521,42880
+dohyphs_srch(1520,42837
+extdewey(1627,46561
+dohyphs_ind(1707,49134
+#define NEXT_YEAR 1748,50223
+is_a_year(1752,50259
+expand_date_range(1785,50990
+
+Toktab.c,17
+int Toktab[3,16
+
+setup_toktab.c,485
+static char *setup_toktab_sccsid 2,13
+isintab(22,589
+char Fins[42,1019
+char Space[43,1068
+char Parens[44,1135
+char Starts[45,1158
+char Closing[47,1244
+char Special_chars[48,1317
+char Apunct[49,1375
+char Mpunct[50,1427
+char Stop_punct[51,1476
+char Vowels[52,1542
+char Cons[54,1647
+char Upper[55,1706
+char Lower[56,1752
+char Lsz[57,1798
+char Eils[58,1822
+char Wxy[59,1849
+char Dig[60,1873
+char Q[61,1901
+char Underscore[62,1923
+char Ampersand[63,1949
+main(66,1979
+
+para.c,66
+#define TABSIZE 36,1532
+find_para(39,1555
+count_paras(119,3605
+
+sentence.c,82
+#define LITTLE_BIT_LEFT 72,2657
+find_sentence(75,2688
+count_sentences(195,6186
+
+i0_parse+.y,2183
+#define EXTERN2,3
+static int _wvalue,4,39
+static int _wvalue, _tvalue,4,39
+static int _wvalue, _tvalue, _inumber 4,39
+static int _t_set 5,79
+static double _dnumber 6,99
+static char _word[7,124
+request 157,2882
+command 189,3492
+unknowncommand 217,3858
+word 222,3934
+inumber 228,3982
+dnumber 234,4035
+setnum 240,4088
+rnum 247,4220
+irn 250,4264
+frignum 253,4310
+attr 259,4387
+lmask 266,4475
+choose 272,4551
+chooseargs 291,4831
+dbname 298,4929
+find 302,4993
+combine 346,6025
+lkupcmd	379,6958
+combcmd 393,7303
+ftoken 404,7574
+sets	435,8542
+set	439,8572
+options	478,9495
+option	482,9545
+qualifiers 693,15431
+qualifier 700,15552
+stem 753,16827
+stemfunc 765,17109
+delete	770,17177
+deltoken 804,17818
+numbers 809,17874
+number 814,17936
+info 825,18079
+show	891,19618
+show_args	907,19906
+show_arg	911,19961
+parse 962,20840
+ptoken 972,20973
+superparse 979,21106
+sptoken 989,21251
+pterm 995,21387
+p1qualifiers	1002,21500
+p2qualifiers	1006,21547
+p1qualifier 1010,21621
+p2qualifier 1013,21645
+extract 1027,21920
+extractargs 1095,23792
+extractarg 1099,23855
+weight	1136,24419
+weightqualifiers:1180,25586
+weightqualifier	1185,25648
+wfunc 1281,27026
+rscore	1295,27478
+rscorequalifiers:1316,27879
+rscorequalifier	1321,27941
+gsl	1339,28139
+debug 1353,28270
+findlimit 1368,28522
+settoken:1392,28922
+setargs	1531,33979
+setarg	1536,34019
+tnumber 1806,41248
+wnumber 1817,41496
+limit	1827,41596
+limitargs 1841,41761
+limitarg 1846,41821
+display 1860,42037
+disparg 1890,42563
+dispqualifiers 1972,44050
+dispqualifier 1977,44119
+displaytrecstats 1982,44170
+stat_args 1998,44519
+stat_arg 2002,44577
+perror 2036,45273
+tf	2043,45398
+doclength 2050,45478
+doclengthargs 2067,45880
+doclengtharg 2071,45947
+dump 2089,46137
+dumpargs 2101,46315
+dumparg 2109,46446
+report 2133,46854
+do_limit(2154,47258
+clear(2216,48673
+yyerror(2223,48743
+i0_do_find(2236,48969
+i0_do_combine(2287,50419
+do_display_limits(2369,52874
+do_parse(2389,53293
+do_parse_rgf(2420,54052
+do_superparse(2453,54858
+do_superparse_rgf(2491,55866
+gsl_lookup(2529,56926
+_finish_show(2548,57248
+#define LMIN 2595,58551
+static int get_parse_buf(2597,58568
+
+i0_reader+.l,0
+
+i0_main.c,100
+#define EXTERN 1,0
+void reinit(5,67
+i0(65,1976
+i00(90,2572
+void iinit(112,2994
+iexit(125,3255
+
+win32extras.c,177
+int gettimeofday(3,26
+pid_t getpid(17,405
+uid_t getuid(22,467
+gid_t getgid(27,502
+int getgroups(32,537
+char *cuserid(37,601
+int ftruncate(50,754
+BYTE* GetSetting(55,810
+
+hashsubs.c,255
+IFN Hash_fns[13,342
+make_hashtab(34,1019
+free_tab(101,3004
+bitwisehash(127,3725
+bwhashpwr2137,3948
+bwhash_kl(148,4161
+bwhashpwr2_kl(161,4373
+hash_search(200,5511
+traverse_hash(304,8263
+hash_add_itr(327,8954
+hash_si(382,10369
+hash_ix(418,11408
+
+defines.h,4425
+#define _defines_h2,19
+#define HAVE_LL18,383
+#define NO_ATOMIC_MAP22,422
+#define NO_MLOCK23,444
+#define	_SSIZE_T31,573
+typedef int	ssize_t;ssize_t32,590
+#define FALSE 47,874
+#define TRUE 48,890
+#define TIMER_LOAD_VAL 50,908
+#define MEM_BREAK_1 55,1087
+#define MAXLINE1 59,1210
+#define PATHNAME_MAX 61,1290
+#define NNAME_MAX 62,1352
+#define BLOCKSIZE 65,1463
+#define KSIZE 66,1485
+#define MAXNUMFLDS 68,1516
+#define MAXNUMFIELDS 69,1578
+#define MAXNUMFIELDS_TEXT 70,1635
+#define BSS_MAXIX 71,1690
+#define MAXGSLS 73,1759
+#define MAXRECLEN 77,1939
+#define MAX_TEXTLEN 78,2003
+#define MAX_TEXT 80,2093
+#define MAXTEXTRECLEN 81,2122
+#define MAXRECLEN_TEXT 83,2207
+#define MAXLIMS 84,2258
+#define LIMIT_MASK_SIZE 85,2324
+#define GOODREADSIZE 87,2363
+#define CHUNKSIZE 88,2401
+#define SCHUNKSIZE 89,2436
+#define MAXEXPSTGLEN 91,2466
+#define MAXTERMSPERFIELD 93,2586
+#define MAXMERGESTREAMS 98,2822
+#define MAXMERGE 100,2937
+#define MAXMEMMERGE 101,2974
+#define DEFAULT_PARAFILE_TYPE 103,3031
+#define Delta3 104,3096
+#define TAB 106,3132
+#define DB_CAT_TYPE 109,3218
+#define DB_AI_TYPE 110,3275
+#define DB_TEXT_TYPE 112,3365
+#define DB_EXTERNAL_TYPE 113,3425
+#define DB_FREE_FORMAT_TYPE 114,3487
+#define DB_LARGE_TYPE 115,3545
+#define DB_PROFILE_TYPE 117,3636
+#define DB_XML1_TYPE 118,3677
+#define DB_XML2_TYPE 119,3715
+#define DB_XML_TYPE 120,3753
+#define DB_RAW_TYPE 121,3801
+#define DB_OPEN_NOSEARCH 127,4043
+#define DB_OPEN_SEARCH 128,4070
+#define DB_OPEN_BM 129,4095
+#define DB_OPEN_LIMIT 130,4116
+#define DB_OPEN_SHOW 131,4140
+#define DB_OPEN_PARAS 132,4165
+#define FD_UNCHECKED 134,4233
+#define FD_CANT_OPEN 135,4256
+#define WEIGHT_DIST_GRAD 137,4281
+#define INT_SORT_THRESH 139,4354
+#define RECORD_MARK 145,4575
+#define FIELD_MARK 146,4645
+typedef int BOOL BOOL150,4772
+typedef struct kls{kls151,4791
+} KLS KLS154,4891
+typedef int (*PFI)PFI155,4928
+typedef void (*PFV)PFV156,4974
+typedef char *(*PFPC)PFPC157,4998
+} IFN IFN161,5145
+struct names names163,5154
+#define MAXEXITERMLEN 174,5390
+#define GSLTOKLEN 179,5573
+#define cvlu(cvlu187,5824
+#define cvul(cvul191,6043
+#define cv1(cv1195,6127
+#define cv2hl(cv2hl200,6249
+#define r2hl(r2hl201,6338
+#define cv3hl(cv3hl205,6477
+#define r3hl(r3hl206,6558
+#define cv4hl(cv4hl207,6664
+#define cv8hl(cv8hl209,6740
+#define cv5hl(cv5hl211,6867
+#define cv34hl(cv34hl213,6972
+#define cv2lh(cv2lh215,7046
+#define cv3lh(cv3lh216,7140
+#define cv4lh(cv4lh217,7228
+#define cv5lh(cv5lh219,7304
+#define cv2(cv2223,7419
+#define cv3(cv3224,7443
+#define cv4(cv4225,7467
+#define cv5(cv5226,7491
+#define cv2(cv2228,7521
+#define cv3(cv3229,7545
+#define cv4(cv4230,7569
+#define cv5(cv5231,7593
+#define w2(w2240,7897
+#define w4(w4241,7997
+#define w2(w2243,8096
+#define w3hl(w3hl246,8197
+#define wf2hl(wf2hl250,8332
+#define wf3hl(wf3hl252,8391
+#define round(round256,8518
+#define lg(lg259,8588
+#define alg(alg260,8643
+#define rlg(rlg261,8730
+#define iceil(iceil263,8759
+#define mput_vshort(mput_vshort267,8829
+#define mget_vshort(mget_vshort271,8943
+#define st1or2(st1or2274,9035
+#define ld1or2(ld1or2277,9158
+#define len(len285,9308
+typedef struct strings strings289,9394
+} STRINGS STRINGS296,9714
+} GEN_STORAGE GEN_STORAGE317,10670
+struct index_term index_term326,10928
+typedef struct gsl gsl349,11714
+} Gsl Gsl369,12453
+#define LONGPOS_MAX_F 379,12722
+#define LONGPOS_MAX_S 380,12757
+#define LONGPOS_MAX_T 381,12784
+#define LONGPOS_MAX_NT 382,12810
+#define LONGPOS_MAX_SW 383,12836
+#define TEXTPOS_MAX_F 385,12862
+#define TEXTPOS_MAX_S 386,12906
+#define TEXTPOS_MAX_T 387,12975
+#define TEXTPOS_MAX_NT 388,13001
+#define TEXTPOS_MAX_SW 389,13027
+#define MAXTEXTPOS 391,13053
+#define MAXLONGPOS 392,13078
+#define MAXTF 394,13151
+struct hugepos hugepos397,13231
+} Pos_text Pos_text416,13764
+typedef Pos_text Pos_text_hl Pos_text_hl418,13778
+} Pos_text_lh Pos_text_lh427,13999
+} Pos6 Pos6435,14184
+typedef Pos6 Pos6_hl Pos6_hl437,14194
+typedef Pos6_hl Longpos_hl Longpos_hl439,14218
+} Pos6_lh Pos6_lh447,14363
+typedef Pos6_lh Longpos_lh Longpos_lh449,14376
+} Pos_no_f_hl Pos_no_f_hl456,14502
+} Pos_no_f_lh Pos_no_f_lh463,14615
+} Pos_t_nt_hl Pos_t_nt_hl468,14689
+} Pos_t_nt_lh Pos_t_nt_lh473,14763
+typedef union u_pos u_pos476,14781
+} U_pos U_pos486,14993
+#define isequal(isequal529,16337
+
+parms.h,2987
+#define _parms_h2,17
+#define MAXBIBVOLS 21,481
+#define MAXIXVOLS 22,503
+#define MAXSTEMFILES 23,524
+typedef enum field_type field_type27,583
+  PERS,28,609
+  PERS, CORP,28,609
+  PERS, CORP, NAMES,28,609
+  PERS, CORP, NAMES, TITLE,28,609
+  PERS, CORP, NAMES, TITLE, MAIN_TITLE,28,609
+  PERS, CORP, NAMES, TITLE, MAIN_TITLE, SUBTITLE,28,609
+  PERS, CORP, NAMES, TITLE, MAIN_TITLE, SUBTITLE, DEWEY,28,609
+  PERS, CORP, NAMES, TITLE, MAIN_TITLE, SUBTITLE, DEWEY, SH,28,609
+  PERS, CORP, NAMES, TITLE, MAIN_TITLE, SUBTITLE, DEWEY, SH, SH_SUBDIV,28,609
+  PERS, CORP, NAMES, TITLE, MAIN_TITLE, SUBTITLE, DEWEY, SH, SH_SUBDIV, TEXT,28,609
+  PHRASE,29,687
+  PHRASE, LITERAL,29,687
+  PHRASE, LITERAL, LITERAL_NC,29,687
+  PHRASE, LITERAL, LITERAL_NC, NUMBERS,29,687
+  PHRASE, LITERAL, LITERAL_NC, NUMBERS, YEAR,29,687
+  PHRASE, LITERAL, LITERAL_NC, NUMBERS, YEAR, UDC,29,687
+  PHRASE, LITERAL, LITERAL_NC, NUMBERS, YEAR, UDC, ANY,29,687
+  PHRASE, LITERAL, LITERAL_NC, NUMBERS, YEAR, UDC, ANY, NONE,29,687
+  PHRASE, LITERAL, LITERAL_NC, NUMBERS, YEAR, UDC, ANY, NONE, END29,687
+} FIELD_TYPE FIELD_TYPE30,753
+struct field_type_name field_type_name32,769
+typedef enum ext_reg ext_reg48,1109
+  no_reg 49,1132
+  title_words,50,1146
+  title_phrase,51,1161
+  name_words,52,1177
+  name_phrase,53,1192
+  name_and_inits,54,1207
+  name_and_inits, personal_name,54,1207
+  name_and_inits, personal_name, corp_name_phrase,54,1207
+  surnames,55,1258
+  subject_heading,56,1271
+  words,57,1291
+  words, phrase,57,1291
+  Dewey,58,1309
+  Dewey, udc,58,1309
+  Dewey, udc, literal,58,1309
+  Dewey, udc, literal, literal_nc,58,1309
+  words3,59,1345
+  lines,60,1355
+  profile61,1364
+} Extraction_regime Extraction_regime62,1374
+struct ext_reg_name ext_reg_name64,1401
+enum sg_status sg_status111,2844
+  SG_UNSET 112,2861
+  SG_READ_OK 113,2877
+  SG_GSL_OK 114,2895
+  SG_INDEX_OK 115,2912
+  SG_GSL_FAIL 116,2931
+  SG_INDEX_FAIL 117,2950
+  SG_COMPLETE 118,2972
+  SG_COMPLETE = (SG_READ_OK|118,2972
+  SG_COMPLETE = (SG_READ_OK|SG_GSL_OK|118,2972
+  SG_COMPLETE = (SG_READ_OK|SG_GSL_OK|SG_INDEX_OK)118,2972
+typedef struct search_group search_group121,3028
+} Sg Sg148,4385
+struct limits limits167,4812
+#define LABLENGTH 196,5827
+struct fullparm fullparm198,5849
+#define B_LABLENGTH 233,7177
+#define B_NUMFLDS 234,7200
+struct briefparm briefparm236,7221
+  struct b_p b_p239,7293
+struct bibdir_rec bibdir_rec258,7755
+typedef struct db db279,8234
+} Db Db462,17001
+typedef struct uf_index uf_index464,17009
+} UF_INDEX UF_INDEX471,17230
+#define B_HILO 473,17244
+#define B_LOHI 474,17261
+typedef struct index index476,17279
+} Ix Ix558,20910
+typedef struct memindex memindex563,21050
+} Memindex Memindex572,21234
+typedef struct mitr mitr575,21249
+} Mitr Mitr581,21427
+#define MITR583,21437
+struct mpstg_20 mpstg_20585,21451
+struct mpstg_10 mpstg_10592,21583
+struct mpstg_8 mpstg_8597,21685
+struct ixparms ixparms616,22198
+
+bss.h,6348
+#define _bss_h2,15
+#define NGROUPS_MAX 14,299
+#define LOG_STEM 17,330
+#define SELECTION_TREE_CROSSOVER 19,361
+#define MAXIXREAD 21,433
+#define MAXSETRECS 22,506
+#define MAXWEIGHT 26,631
+#define MINWEIGHT 27,696
+#define WEIGHT_NOT_ASSIGNED 28,723
+#define Legalweight(Legalweight29,776
+  OP_COPY 35,950
+  OP_TOPN 36,1005
+  OP_NOOP 37,1039
+  OP_LKUP 38,1079
+  OP_BM1 39,1136
+  OP_BM2 40,1200
+  OP_BM11 41,1258
+  OP_BM15 42,1308
+  OP_BM1100 43,1323
+  OP_BM1500 44,1380
+  OP_BM25 45,1437
+  OP_BM25R 46,1492
+  OP_BM25S 47,1509
+  OP_BM25W 48,1526
+  OP_BM25W = OP_BM2,48,1526
+  OP_BM250 49,1547
+  OP_BM251 50,1564
+  OP_BM26 54,1719
+  OP_BM2600 55,1735
+  OP_BM30 56,1753
+  OP_BM3000 57,1769
+  OP_BM40 58,1787
+  OP_BM41 59,1839
+  OP_BM42 60,1869
+  OP_AND1 62,1921
+  OP_AND2 63,1978
+  OP_ANDL 64,2015
+  OP_ANDL = OP_AND2,64,2015
+  OP_MARK 65,2036
+  OP_AND3 66,2067
+  OP_AND3 = OP_MARK,66,2067
+  OP_OR1 67,2088
+  OP_NOT1 69,2106
+  OP_NOT2 70,2149
+  OP_NOT3 71,2186
+  OP_UNCOMBINE 72,2237
+  OP_UNCOMBINE = OP_NOT3,72,2237
+  OP_NOTL 73,2263
+  OP_NOTL = OP_NOT2,73,2263
+  OP_ADJ1 74,2284
+  OP_ADJ2 75,2326
+  OP_SAMEF1 76,2367
+  OP_SAMES1 77,2403
+  OP_NEAR1 78,2452
+  OP_LIMIT 80,2519
+FFL_NOPOS 92,3065
+FFL_NOSAVE 94,3154
+FFL_FILE 95,3211
+FFL_MEM 96,3226
+FFL_OPEN 97,3281
+FFL_KEEP 100,3423
+FFL_RECOVER_MEM 102,3502
+FFL_DELETE 105,3667
+FFL_DO_STATS 107,3747
+FFL_HOLD_MEM 108,3813
+FFL_NOTF 109,3879
+FFL_NO_SELECTION_TREE 111,3986
+FFL_SELECTION_TREE 113,4103
+FFL_NOSHOW 114,4178
+FFL_QUICK_COMBINE 116,4289
+#define FFL_GETMARK(FFL_GETMARK123,4514
+#define FFL_DEMARK(FFL_DEMARK124,4549
+enum OP_TYPE OP_TYPE128,4622
+  NO_TYPE 129,4637
+  BMLIKE 131,4653
+  ANDLIKE 132,4668
+  ADJLIKE 133,4684
+  ORLIKE 134,4700
+  NOTLIKE 136,4717
+  LIMITLIKE 137,4734
+  TOPN 138,4754
+  NO_MPW 139,4769
+enum Ptypes Ptypes150,5068
+  HASWT 151,5082
+  HASTF 153,5165
+  LONGPOS 156,5316
+  TEXTPOS 157,5362
+  HASPOS 158,5412
+  HASPOS = (LONGPOS|158,5412
+  HASPOS = (LONGPOS|TEXTPOS)158,5412
+  HASCONTRIBS 159,5478
+  HASPASSAGES 161,5580
+  HASMARKS 162,5601
+  LARGE_RN 163,5652
+  VARI_RN 164,5670
+  HAS_AUXWT 165,5688
+  HASCOORD 166,5753
+  HAS_QTF 168,5833
+  HAS_INDEX_WT 169,5873
+  PTYPE12 176,6191
+  PTYPE12 = (TEXTPOS|176,6191
+  PTYPE12 = (TEXTPOS|HASTF)176,6191
+  PTYPE13 177,6256
+  PTYPE13 = (LONGPOS|177,6256
+  PTYPE13 = (LONGPOS|HASTF)177,6256
+  PTYPE14 178,6323
+  PTYPE14 = HASTF,178,6323
+  PTYPE15 179,6372
+  PTYPE15 = (PTYPE12|179,6372
+  PTYPE15 = (PTYPE12|LARGE_RN)179,6372
+  PTYPE16 180,6424
+  PTYPE16 = (PTYPE13|180,6424
+  PTYPE16 = (PTYPE13|LARGE_RN)180,6424
+  PTYPE17 181,6476
+  PTYPE17 = (PTYPE14|181,6476
+  PTYPE17 = (PTYPE14|LARGE_RN)181,6476
+  PTYPE18 182,6529
+  PTYPE18 = (PTYPE12|182,6529
+  PTYPE18 = (PTYPE12|VARI_RN)182,6529
+  PTYPE19 183,6581
+  PTYPE19 = (PTYPE13|183,6581
+  PTYPE19 = (PTYPE13|VARI_RN)183,6581
+  PTYPE20 184,6633
+  PTYPE20 = (PTYPE14|184,6633
+  PTYPE20 = (PTYPE14|VARI_RN)184,6633
+  PTYPE21 185,6685
+  PTYPE21 = (HAS_QTF|185,6685
+  PTYPE21 = (HAS_QTF|HAS_INDEX_WT)185,6685
+  D_ALL,190,6811
+  D_TTF,191,6820
+  D_NP,192,6829
+  D_ATTR,193,6837
+  D_ERROR194,6847
+typedef struct para_rec para_rec208,7225
+} Para_rec Para_rec213,7416
+#define MAXPARRECS 216,7493
+typedef struct bss_gp bss_gp221,7601
+  struct str_tf str_tf246,8684
+} bss_Gp bss_Gp251,8828
+struct rrec rrec273,9425
+struct rbkt rbkt278,9477
+#define PSTG_REL 290,9750
+enum SET_TYPE SET_TYPE299,10063
+  S_NO_TYPE 300,10079
+  S_P_ATOMIC 301,10096
+  S_A_ATOMIC 302,10133
+  S_O_ATOMIC 303,10181
+  S_Q_ATOMIC 304,10222
+  S_Q_ATOMIC = (S_P_ATOMIC|304,10222
+  S_Q_ATOMIC = (S_P_ATOMIC|S_A_ATOMIC|304,10222
+  S_Q_ATOMIC = (S_P_ATOMIC|S_A_ATOMIC|S_O_ATOMIC)304,10222
+  S_WEIGHTED 305,10273
+  S_MERGE 306,10291
+  S_LIMIT 307,10307
+  S_REMOVE 308,10323
+  S_RLIMIT 309,10340
+  S_PARTIAL 310,10358
+  S_IRN 311,10419
+  S_NOSORT 312,10434
+  S_EPHEMERAL 314,10537
+typedef struct bss_setrec bss_setrec325,10857
+#define MIXED_ATTRIBUTE 343,11737
+#define NO_ATTRIBUTE 344,11764
+#define SET_FILE 452,16950
+#define SET_FILE_EXISTS 453,16969
+#define SET_FOPEN_READ 454,16995
+#define SET_FOPEN_WRITE 455,17020
+#define SET_FOPEN 456,17046
+#define SET_FILE0_PF 457,17097
+#define SET_MEM 460,17230
+#define SET_MEM_MALLOC 461,17250
+#define SET_MEM_MAPPED 462,17277
+#define SET_MEM_EXISTS 463,17305
+#define SET_PF1_RECLEN 465,17363
+#define SET_NATORDER 468,17502
+#define SET_WTORDER 470,17561
+} Setrec Setrec512,19453
+#define Sats_limit(Sats_limit523,19800
+#define Getlimit(Getlimit526,19919
+  One_per_file 551,20636
+  N_per_file552,20656
+} ADDR_TYPE ADDR_TYPE553,20669
+  Doctype1 556,20699
+  Doctype2557,20715
+} DOC_TYPE DOC_TYPE558,20726
+#define TS_STANDARD 567,20982
+#define TS_LONG 568,21004
+#define TS_SHORT 569,21022
+#define TS_LF1 570,21041
+#define TS_LF2 571,21075
+#define TS_LF3 572,21108
+#define TS_NF1 574,21188
+#define TS_NF2 575,21224
+struct highlight_table highlight_table588,21603
+struct hl_rec hl_rec604,21976
+#define EX_FILE 629,22512
+#define EX_STRINGS 630,22530
+#define EX_GEN 631,22551
+#define EX_BUF 632,22568
+#define EX_HASH 633,22585
+#define EX_LARGE_RN 635,22607
+#define EX_VARI_RN 636,22666
+#define EX_IX4 642,22839
+#define EX_IX5 643,22909
+#define EX_IX10 644,22975
+#define EX_IX11 645,23033
+#define EX_IX12 646,23104
+#define EX_IX13 647,23183
+#define EX_IX14 648,23258
+#define EX_IX15 649,23330
+#define EX_IX16 650,23410
+#define EX_IX20 651,23486
+#define EX_PARSE 653,23540
+#define EX_SUPERPARSE 654,23573
+#define IX 656,23604
+#define BLURBY 657,23624
+#define PRECOUNT 659,23706
+#define EX_SOURCE 661,23760
+#define EX_TEXT 662,23787
+#define EX_NO_IRN 663,23813
+#define EX_DIAG 664,23887
+#define EX_OP_IX4 666,23915
+#define EX_OP_IX5 667,23975
+#define EX_OP_IX10 668,24035
+#define EX_OP_IX11 669,24087
+#define EX_OP_IX12 670,24139
+#define EX_OP_IX13 671,24201
+#define EX_OP_IX20 672,24263
+#define EX_USER_PARSE 676,24501
+#define EX_USER_SUPERPARSE 677,24541
+#define EX_USER_SUPERPARSE_NOSOURCE 678,24601
+#define EX_USER_HASH 679,24660
+struct outrec outrec681,24726
+#define MAGIC_MERGEFILE_BE 707,25679
+#define MAGIC_MERGEFILE_LE 708,25756
+#define MAGIC_MERGEFILE 710,25803
+#define MAGIC_MERGEFILE 712,25852
+#define IXF_REPORTLEVEL 715,25914
+
+bss_defaults.h,338
+#define _bss_defaults_h2,24
+#define NONE_ASSIGNED 21,605
+#define DEF_K1_BM11 23,634
+#define DEF_K2_BM11 24,658
+#define DEF_K1_BM15 25,683
+#define DEF_K2_BM15 26,707
+#define DEF_BM25_K1 27,730
+#define DEF_BM25_K2 28,754
+#define DEF_BM25_K3 29,778
+#define DEF_BM25_B 30,802
+#define DEF_BM25_B3 31,825
+#define DEF_K2_BM40 32,849
+
+charclass.h,908
+#define _charclass_h2,21
+#define TOK_IGN 14,311
+#define TOK_START 15,329
+#define TOK_ESTART 16,349
+#define TOK_FIN 17,395
+#define TOK_SPEC 18,414
+#define TOK_APUNCT 19,433
+#define TOK_MPUNCT 20,457
+#define TOK_STOP 21,481
+#define TOK_VOWEL 22,503
+#define TOK_CONS 23,526
+#define TOK_UPPER 24,549
+#define TOK_LOWER 25,573
+#define TOK_LSZ 26,597
+#define TOK_EILS 27,619
+#define TOK_WXY 28,643
+#define TOK_DIG 29,666
+#define TOK_ALPH 30,689
+#define TOK_ALNUM 31,728
+#define TOK_QUOTE 32,765
+#define TOK_PARENS 33,790
+#define TOK_SPACE 34,817
+#define TOK_CLOSING 35,843
+#define TOK_UNDERSCORE 36,871
+#define TOK_AMPERSAND 37,902
+#define tok_alnum(tok_alnum41,960
+#define tok_alpha(tok_alpha42,1017
+#define tok_upper(tok_upper43,1074
+#define tok_lower(tok_lower44,1132
+#define tok_digit(tok_digit45,1190
+#define tok_space(tok_space46,1246
+#define tok_vowel(tok_vowel47,1304
+
+bss_errors.h,6291
+#define D_PSTGS 26,931
+#define DD_PSTGS 27,949
+#define D_MISC 28,968
+#define D_DB 29,985
+#define D_FILES 30,1000
+#define D_MEM 31,1021
+#define DD_MEM 32,1040
+#define D_RECORD_MEM 33,1060
+#define D_COMBINE 34,1086
+#define D_TARGET 35,1110
+#define D_READER 36,1133
+#define D_PARSER 37,1156
+#define D_PARAS 38,1179
+#define D_PASSAGES 39,1202
+#define DD_PASSAGES 40,1228
+#define D_SEARCH 41,1255
+#define D_TEMP_1 42,1279
+#define DD_TEXT 43,1304
+#define D_GSL 44,1328
+#define D_EXTRACT 45,1352
+#define D_SENTENCE 46,1378
+#define D_HASH 47,1406
+#define OK 49,1431
+#define OKmes 50,1444
+#define SPURIOUS_ERROR 51,1463
+#define SPURIOUS_ERRORmes 52,1488
+#define ST_UNTRIED 56,1589
+#define ST_OK 57,1610
+#define ST_FAIL_FOPEN 58,1626
+#define ST_FAIL_MISC 59,1651
+#define ST_FAIL_MEM 60,1675
+#define ST_FAIL_READ 61,1698
+#define ST_FAIL_WRITE 62,1722
+#define ST_FAIL_GSL 63,1747
+#define DB_NOT_AVAIL 67,1787
+#define DB_NOT_AVAILmes 68,1811
+#define NO_DB_AVAIL 69,1867
+#define NO_DB_AVAILmes 70,1890
+#define NO_DB_OPEN 71,1938
+#define NO_DB_OPENmes 72,1960
+#define DB_OPEN_FAIL 73,2001
+#define DB_OPEN_FAILmes 74,2025
+#define NO_SUCH_INDEX 75,2079
+#define NO_SUCH_INDEXmes 76,2104
+#define NO_LIMITS 78,2191
+#define NO_LIMITSmes 79,2212
+#define NO_SUCH_LIMIT 80,2280
+#define NO_SUCH_LIMITmes 81,2305
+#define NO_SUCH_ATTRIBUTE 82,2368
+#define NO_SUCH_ATTRIBUTEmes 83,2397
+#define RECORD_OUT_OF_RANGE 85,2489
+#define RECORD_OUT_OF_RANGEmes 86,2521
+#define RECORD_OUT_OF_RANGE_DB 87,2598
+#define RECORD_OUT_OF_RANGE_DBmes 88,2633
+#define EMPTY_SET 89,2713
+#define EMPTY_SETmes 90,2735
+#define END_OF_INDEX 91,2774
+#define END_OF_INDEXmes 92,2799
+#define BEGINNING_OF_INDEX 93,2838
+#define BEGINNING_OF_INDEXmes 94,2869
+#define NO_FREE_SETS 95,2920
+#define NO_FREE_SETSmes 96,2945
+#define SYS_ERR 97,2984
+#define SYS_ERRmes 98,3004
+#define NO_SUCH_FORMAT 99,3042
+#define NO_SUCH_FORMATmes 100,3069
+#define NO_SUCH_SET 101,3123
+#define NO_SUCH_SETmes 102,3147
+#define NO_SUCH_RECORD 103,3192
+#define NO_SUCH_RECORDmes 104,3219
+#define UNSUPPORTED_OP 105,3278
+#define UNSUPPORTED_OPmes 106,3305
+#define NO_SUCH_OP 107,3381
+#define NO_SUCH_OPmes 108,3404
+#define INCOMPATIBLE_OP 109,3446
+#define INCOMPATIBLE_OPmes 110,3474
+#define NO_SETS 111,3539
+#define NO_SETSmes 112,3559
+#define TOO_MANY_SETS 113,3588
+#define TOO_MANY_SETSmes 114,3614
+#define CANT_READ_SET 115,3673
+#define CANT_READ_SETmes 116,3699
+#define CANT_WRITE_SET 117,3754
+#define CANT_WRITE_SETmes 118,3781
+#define NO_PROX_1 119,3841
+#define NO_PROX_1mes 120,3863
+#define NO_PROX_2 121,3932
+#define NO_PROX_2mes 122,3954
+#define SYNTAX 123,4026
+#define SYNTAXmes 124,4045
+#define NO_SUCH_WEIGHTFUNC 125,4095
+#define NO_SUCH_WEIGHTFUNCmes 126,4126
+#define NO_SUCH_SEARCHTYPE 127,4198
+#define NO_SUCH_SEARCHTYPEmes 128,4229
+#define SYS_NO_MEM_1 129,4296
+#define SYS_NO_MEM_1mes 130,4321
+#define SYS_NO_MEM_2 131,4392
+#define SYS_NO_MEM_2mes 132,4417
+#define NO_SUCH_QEPARM 133,4491
+#define NO_SUCH_QEPARMmes 134,4518
+#define NO_QEPARMS 135,4596
+#define NO_QEPARMSmes 136,4619
+#define RECLIST_FULL 137,4691
+#define RECLIST_FULLmes 138,4716
+#define UNSUPPORTEDCOMMAND 139,4766
+#define UNSUPPORTEDCOMMANDmes 140,4797
+#define NOPASSAGES 141,4861
+#define NOPASSAGESmes 142,4884
+#define NO_PROX_3 143,4961
+#define NO_PROX_3mes 144,4983
+#define SET_NO_WEIGHT 146,5068
+#define SET_NO_WEIGHTmes 147,5094
+#define SILLY_LIMIT 149,5184
+#define SILLY_LIMITmes 150,5208
+#define CANT_SET_LIMIT 151,5262
+#define CANT_SET_LIMITmes 152,5289
+#define BAD_PASSAGE_PARMS 153,5333
+#define BAD_PASSAGE_PARMSmes 154,5363
+#define NO_SET_ASSIGNED 156,5464
+#define NO_SET_ASSIGNEDmes 157,5492
+#define CANT_LIMIT_SET 158,5537
+#define CANT_LIMIT_SETmes 159,5564
+#define NO_SUCH_STEMFUNCTION 160,5616
+#define NO_SUCH_STEMFUNCTIONmes 161,5649
+#define INT_ERR 162,5727
+#define INT_ERRmes 163,5747
+#define DEFECTIVE_INDEX 164,5787
+#define DEFECTIVE_INDEXmes 165,5815
+#define ONLY_ONE_SET 166,5885
+#define ONLY_ONE_SETmes 167,5910
+#define CANT_GET_DOCLENS 168,5983
+#define CANT_GET_DOCLENSmes 169,6012
+#define MORE_THAN_ONE_ATTRIBUTE 170,6084
+#define MORE_THAN_ONE_ATTRIBUTEmes 171,6120
+#define IMPURE_SET 173,6210
+#define IMPURE_SETmes 174,6233
+#define PHONEY_WEIGHT_ARGS 175,6306
+#define PHONEY_WEIGHT_ARGSmes 176,6337
+#define CANT_SETUP_ATTRIBUTE 178,6420
+#define CANT_SETUP_ATTRIBUTEmes 179,6453
+#define UNKNOWN_FIELD_TYPE 181,6527
+#define UNKNOWN_FIELD_TYPEmes 182,6558
+#define CANT_READ_DOC 184,6622
+#define CANT_READ_DOCmes 185,6648
+#define EMPTY_DB 187,6724
+#define EMPTY_DBmes 188,6745
+#define DB_NOT_OPEN 189,6789
+#define DB_NOT_OPENmes 190,6813
+#define PHONEY_BIGN_OR_N 191,6863
+#define PHONEY_BIGN_OR_Nmes 192,6892
+#define TEMPUNSUPPORTEDCOMMAND 194,6982
+#define TEMPUNSUPPORTEDCOMMANDmes 195,7017
+#define NO_SUCH_REGIME 196,7097
+#define NO_SUCH_REGIMEmes 197,7124
+#define INVALID_REGIME 198,7187
+#define INVALID_REGIMEmes 199,7214
+#define CANT_SETUP_GSL 200,7286
+#define CANT_SETUP_GSLmes 201,7313
+#define NO_SUCH_DEBUG_NAME 202,7384
+#define NO_SUCH_DEBUG_NAMEmes 203,7415
+#define DB_NOPARM 204,7475
+#define DB_NOPARMmes 205,7497
+#define PHONEY_RSCORE 206,7568
+#define PHONEY_RSCOREmes 207,7594
+#define DOCLENS_MIXED_ATTRIBUTE 209,7676
+#define DOCLENS_MIXED_ATTRIBUTEmes 210,7712
+#define NO_RECORD_ASSIGNED 212,7804
+#define NO_RECORD_ASSIGNEDmes 213,7835
+#define NO_SUCH_FIELDNUM 214,7886
+#define NO_SUCH_FIELDNUMmes 215,7915
+#define DEFECTIVE_PASSAGES 216,7981
+#define DEFECTIVE_PASSAGESmes 217,8012
+#define NO_SUPERPARSE 218,8079
+#define NO_SUPERPARSEmes 219,8105
+#define NO_INDEX_WEIGHT 220,8184
+#define NO_INDEX_WEIGHTmes 221,8212
+#define NUM_ERRORS 222,8286
+#define TERM_NO_POSTINGS 224,8309
+#define TERM_NO_POSTINGSmes 225,8336
+#define SET_NO_POSTINGS 226,8390
+#define SET_NO_POSTINGSmes 227,8416
+#define SET_NO_WEIGHT_WARNING 228,8463
+#define SET_NO_WEIGHT_WARNINGmes 229,8495
+#define EMPTY_INDEX 230,8565
+#define EMPTY_INDEXmes 231,8587
+#define SYS_WARNING 233,8686
+#define SYS_WARNINGmes 234,8708
+#define NO_TF_WARNING 235,8752
+#define NO_TF_WARNINGmes 236,8776
+#define NO_FIELD_TYPE_FILE 238,8854
+#define NO_FIELD_TYPE_FILEmes 239,8883
+#define NUM_WARNINGS 241,8947
+
+para.h,78
+#define _para_h2,16
+#define INDENT 3,32
+#define GAP 4,80
+#define UC 5,124
+
+bss_protos.h,75
+#define _bss_protos_h2,22
+struct pos pos4,45
+struct tokmap tokmap8,83
+
+win32extras.h,759
+#define _WIN32EXTRAS_H3,24
+#define _X86_5,48
+#define isnan(isnan18,414
+#define strcasecmp(strcasecmp24,651
+#define strncasecmp(strncasecmp25,691
+#define alloca(alloca31,960
+#define ftello(ftello37,1217
+#define read 38,1245
+#define lseek 39,1264
+#define open 40,1288
+#define getenv 41,1307
+#define L_cuserid 42,1333
+typedef unsigned char		u_char;u_char49,1612
+typedef unsigned short		u_short;u_short50,1643
+typedef unsigned int		u_int;u_int51,1676
+typedef int					ssize_t;ssize_t52,1705
+typedef long				time_t;time_t53,1730
+typedef int					uid_t;uid_t59,1963
+typedef uid_t				gid_t;gid_t60,1986
+struct timezone timezone67,2307
+typedef long pid_t;pid_t77,2634
+#define BSS_REG_BASE_KEY	101,3458
+#define BSS_REG_PATH	102,3501
+
+bss_indexing.h,108
+#define _bss_indexing_h10,230
+#define MEMAVAIL 15,297
+#define MAX_TDIRS 18,425
+#define MAX_TDIRS 20,452
+
+hash.h,747
+#define _hash_h9,288
+  H_ADD,12,346
+  H_SEARCH,13,391
+  H_DELETE14,441
+} Hash_action Hash_action15,452
+  HASH_GEN 18,484
+  HASH_MIN 20,574
+  HASH_MED 21,614
+  HASH_FULL 22,659
+  HASH_SPEC1 23,705
+} Hash_type Hash_type24,750
+typedef struct hashtab hashtab34,989
+} Hashtab Hashtab53,1850
+typedef struct genrec genrec64,2197
+} Genrec Genrec67,2261
+typedef struct full_termrec full_termrec80,2621
+} Full_termrec Full_termrec95,3136
+typedef struct med_termrec med_termrec110,3650
+} Med_termrec Med_termrec118,3782
+typedef struct spec1_termrec spec1_termrec120,3799
+} Spec1_termrec Spec1_termrec129,3947
+typedef struct transfer_itr transfer_itr139,4201
+} Transfer_itr Transfer_itr150,4463
+#define HASHSEED 168,5155
+
+i0_defs.h,7670
+#define _i0_defs_h2,19
+#define FLEX6,72
+#define I0_OUTBUFSIZE 15,229
+#define DEFAULT_LMASK 18,312
+#define DEFAULT_TERM 19,336
+#define DEFAULT_DB 20,360
+#define DEFAULT_DEBUG 21,384
+#define DEFAULT_VERBOSE 22,408
+#define DEFAULT_ATTR 23,434
+#define DEFAULT_QATTR 24,465
+#define DEFAULT_CLASSES 25,497
+#define DEFAULT_SOURCES 26,554
+#define DEFAULT_FFL 27,583
+#define DEFAULT_SAVE 28,612
+#define DEFAULT_SEARCH_TYPE 29,635
+#define DEFAULT_OP 30,665
+#define DEFAULT_MAXGAP 31,691
+#define DEFAULT_AW 32,716
+#define DEFAULT_GW 33,745
+#define DEFAULT_TARGET 34,766
+#define DEFAULT_NOPOS 35,791
+#define DEFAULT_K1 36,819
+#define DEFAULT_K2 37,892
+#define DEFAULT_K3 38,925
+#define DEFAULT_K4 39,958
+#define DEFAULT_K5 40,981
+#define DEFAULT_K6 41,1004
+#define DEFAULT_K7 42,1030
+#define DEFAULT_K8 43,1051
+#define DEFAULT_B 44,1072
+#define DEFAULT_B3 45,1104
+#define DEFAULT_AVEDOCLEN 46,1137
+#define DEFAULT_AVEQUERYLEN 47,1165
+#define DEFAULT_QUERYLEN 48,1195
+#define DEFAULT_QTF 49,1222
+#define DEFAULT_P_UNIT 50,1244
+#define DEFAULT_P_STEP 51,1269
+#define DEFAULT_P_MAXLEN 52,1294
+#define DEFAULT_WFUNC 53,1322
+#define DEFAULT_WTFACTOR 54,1346
+#define DEFAULT_SCOREFUNC 55,1373
+#define DEFAULT_WNUMBER 56,1401
+#define DEFAULT_TTF 57,1430
+#define DEFAULT_R 58,1452
+#define DEFAULT_BIGR 59,1472
+#define DEFAULT_S 60,1495
+#define DEFAULT_BIGS 61,1515
+#define DEFAULT_RLOAD 62,1538
+#define DEFAULT_BIGRLOAD 63,1562
+#define DEFAULT_THETA 64,1589
+#define DEFAULT_LAMDA 65,1613
+#define DEFAULT_TNT 66,1637
+#define DEFAULT_TNP 67,1659
+#define DEFAULT_CTTF 68,1681
+#define DEFAULT_BIGN 69,1704
+#define DEFAULT_FORMAT 70,1727
+#define DEFAULT_SHOW_NUMBER 71,1752
+#define DEFAULT_SET 72,1782
+#define DEFAULT_REC 73,1816
+#define DEFAULT_RECNUM 74,1839
+#define DEFAULT_LASTREC 75,1876
+#define DEFAULT_EXTRACT_NUMBER 76,1903
+#define DEFAULT_EXTRACT_WEIGHT_FUNC 77,1937
+#define DEFAULT_EXTRACT_FLAGS 78,1975
+#define DEFAULT_DB_FLAGS 79,2007
+#define DEFAULT_MARK 80,2034
+#define DEFAULT_MEM 81,2057
+#define DEFAULT_WT_FRIG_FACTOR 82,2079
+#define DEFAULT_LASTWEIGHT 83,2112
+#define DEFAULT_LASTN 84,2141
+#define DEFAULT_LAST_TTF 85,2165
+#define DEFAULT_PREFER_LENGTH 86,2192
+#define DEFAULT_ACCEPT_LENGTH 87,2224
+#define DEFAULT_TS 88,2256
+#define DEFAULT_NOERROR 89,2287
+EXTERN unsigned _q_lmask,91,2318
+EXTERN unsigned _q_lmask, _q_index 91,2318
+EXTERN char _q_term[92,2355
+EXTERN char *_q_db 93,2396
+EXTERN char _q_attr[94,2417
+EXTERN char default_attr[95,2450
+EXTERN char _q_fdname[96,2488
+EXTERN char _q_classes[97,2537
+EXTERN char _q_regname[98,2573
+EXTERN char _q_stemfuncname[99,2609
+EXTERN char _q_gslname[100,2650
+EXTERN char _q_startstr[101,2686
+EXTERN char _q_finstr[103,2776
+EXTERN BOOL _q_sources 104,2820
+EXTERN int _q_find_flags,105,2845
+EXTERN int _q_find_flags, default_ffl 105,2845
+EXTERN int _q_type,106,2885
+EXTERN int _q_type, default_search_type 106,2885
+EXTERN int _q_target;107,2927
+EXTERN int _q_op,108,2949
+EXTERN int _q_op, default_op 108,2949
+EXTERN int _q_scorefunc,109,2980
+EXTERN int _q_scorefunc, default_scorefunc 109,2980
+EXTERN double _q_k1,110,3025
+EXTERN double _q_k1, default_k1,110,3025
+EXTERN double _q_k1, default_k1, _q_k2,110,3025
+EXTERN double _q_k1, default_k1, _q_k2, default_k2,110,3025
+EXTERN double _q_k1, default_k1, _q_k2, default_k2, _q_k3,110,3025
+EXTERN double _q_k1, default_k1, _q_k2, default_k2, _q_k3, default_k3,110,3025
+  _q_bm25_b,111,3096
+  _q_bm25_b, default_bm25_b,111,3096
+  _q_bm25_b, default_bm25_b, _q_b3,111,3096
+  _q_bm25_b, default_bm25_b, _q_b3, default_b3 111,3096
+EXTERN double _q_k4,112,3145
+EXTERN double _q_k4, default_k4,112,3145
+EXTERN double _q_k4, default_k4, _q_k5,112,3145
+EXTERN double _q_k4, default_k4, _q_k5, default_k5,112,3145
+EXTERN double _q_k4, default_k4, _q_k5, default_k5, _q_k6,112,3145
+EXTERN double _q_k4, default_k4, _q_k5, default_k5, _q_k6, default_k6 112,3145
+EXTERN double _q_k7,113,3217
+EXTERN double _q_k7, default_k7 113,3217
+EXTERN double _q_k8,114,3251
+EXTERN double _q_k8, default_k8 114,3251
+EXTERN int _q_avedoclen,115,3285
+EXTERN int _q_avedoclen, default_avedoclen,115,3285
+  _q_avequerylen,116,3329
+  _q_avequerylen, default_avequerylen,116,3329
+  _q_avequerylen, default_avequerylen, _q_querylen 116,3329
+EXTERN int _q_qtf 117,3382
+EXTERN int _q_p_unit,118,3402
+EXTERN int _q_p_unit, default_p_unit,118,3402
+EXTERN int _q_p_unit, default_p_unit, _q_p_step,118,3402
+EXTERN int _q_p_unit, default_p_unit, _q_p_step, default_p_step 118,3402
+EXTERN int _q_p_maxlen,119,3468
+EXTERN int _q_p_maxlen, default_p_maxlen 119,3468
+EXTERN double _q_aw,120,3511
+EXTERN double _q_aw, _q_gw;120,3511
+EXTERN int _q_maxgap 121,3539
+EXTERN double _frigvalue 122,3562
+EXTERN double _q_wt_frig_factor[123,3589
+EXTERN double lastweight 124,3644
+EXTERN int lastn,125,3671
+EXTERN int lastn, last_ttf 125,3671
+EXTERN int _number_sets;126,3700
+EXTERN int _q_set,127,3725
+EXTERN int _q_set, _q_rec,127,3725
+EXTERN int _q_set, _q_rec, _q_recnum,127,3725
+EXTERN int _q_set, _q_rec, _q_recnum, _q_lastrec,127,3725
+EXTERN int _q_set, _q_rec, _q_recnum, _q_lastrec, _q_format,127,3725
+EXTERN int _q_set, _q_rec, _q_recnum, _q_lastrec, _q_format, default_format;127,3725
+EXTERN int default_wfunc 128,3802
+EXTERN int _q_r,129,3829
+EXTERN int _q_r, _q_bigr,129,3829
+EXTERN int _q_r, _q_bigr, default_bigr,129,3829
+EXTERN int _q_r, _q_bigr, default_bigr, _q_bign,129,3829
+EXTERN int _q_r, _q_bigr, default_bigr, _q_bign, default_bign 129,3829
+EXTERN int _q_s,130,3893
+EXTERN int _q_s, _q_bigs,130,3893
+EXTERN int _q_s, _q_bigs, default_bigs 130,3893
+EXTERN int _q_rload,131,3934
+EXTERN int _q_rload, _q_bigrload,131,3934
+EXTERN int _q_rload, _q_bigrload, default_rload,131,3934
+EXTERN int _q_rload, _q_bigrload, default_rload, default_bigrload 131,3934
+EXTERN int _q_theta,132,4002
+EXTERN int _q_theta, default_theta 132,4002
+EXTERN double _q_lamda,133,4039
+EXTERN double _q_lamda, default_lamda 133,4039
+EXTERN int _q_tnt,134,4079
+EXTERN int _q_tnt, default_tnt 134,4079
+EXTERN LL_TYPE _q_tnp,136,4127
+EXTERN LL_TYPE _q_tnp, default_tnp 136,4127
+EXTERN LL_TYPE _q_cttf,137,4164
+EXTERN LL_TYPE _q_cttf, default_cttf 137,4164
+EXTERN double _q_tnp,139,4209
+EXTERN double _q_tnp, default_tnp 139,4209
+EXTERN double _q_cttf,140,4245
+EXTERN double _q_cttf, default_cttf 140,4245
+EXTERN int _q_wnumber,142,4290
+EXTERN int _q_wnumber, _q_func,142,4290
+EXTERN int _q_wnumber, _q_func, _q_shownumber;142,4290
+EXTERN double _q_wtfactor;143,4337
+EXTERN int _q_ttf 144,4364
+EXTERN int default_index,145,4384
+EXTERN int default_index, default_lmask 145,4384
+EXTERN int _limit_set;146,4426
+EXTERN int _dump_set 147,4449
+EXTERN int _dump_code 148,4472
+EXTERN int _stat_set 149,4496
+EXTERN int _q_flags;150,4519
+EXTERN int _q_sources;151,4540
+EXTERN BOOL _r_was_set;152,4563
+EXTERN int _q_db_flags 153,4587
+EXTERN int _q_mark 154,4612
+EXTERN int _q_number 155,4633
+EXTERN int _q_prefer_length,156,4656
+EXTERN int _q_prefer_length, _q_accept_length 156,4656
+EXTERN int _q_field,157,4704
+EXTERN int _q_field, _q_offset,157,4704
+EXTERN int _q_field, _q_offset, _q_length 157,4704
+EXTERN int _q_code 158,4748
+EXTERN int _q_debug;159,4769
+EXTERN int _q_verbose;160,4791
+EXTERN BOOL _q_noerror;161,4815
+EXTERN char *yytext 164,4852
+EXTERN char yytext[166,4880
+EXTERN int yydebug,168,4911
+EXTERN int yydebug, yychar;168,4911
+EXTERN int _arg_sets[170,4940
+EXTERN double _arg_weights[171,4983
+EXTERN int _arg_qtfs[172,5032
+EXTERN char *_IN_BUF,173,5077
+EXTERN char *_IN_BUF, *_OUT_BUF;173,5077
+EXTERN char *bss_Outbuf 174,5110
+
+i1_defs.h,92
+#define _i1_defs_h2,19
+#define HUUGE 10,111
+#define ENORMOUS 11,145
+char Command[13,231
+
+i1_main.c,135
+#define EXTERN3,34
+char usage[9,126
+static void cleanup(18,468
+static void initialise(25,527
+read_line_input(36,676
+main(60,1015
+
+ix1.c,2200
+#define NO_TRIAL	38,1621
+FILE *nullfile 55,1908
+FIELD_TYPE field_type 58,1994
+int recnum 60,2038
+int fdnum 61,2051
+int recs_done 62,2112
+int savrecs_done 63,2132
+int srec 64,2151
+int rec_incr 65,2214
+int savrecnum 66,2274
+int savtermnum 68,2354
+int reclen,70,2443
+int reclen, fieldlen,70,2443
+int reclen, fieldlen, origfieldlen 70,2443
+LL_TYPE incharsthisrun 73,2496
+LL_TYPE lastoutchars 74,2521
+LL_TYPE totoutchars 75,2544
+LL_TYPE meanoutchars 76,2566
+LL_TYPE totinchars 77,2589
+double incharsthisrun 79,2616
+double lastoutchars 80,2640
+double totoutchars 81,2662
+double meanoutchars 82,2683
+double totinchars 83,2705
+int recsthisrun 85,2732
+int recslastrun 86,2750
+int totrecs 87,2768
+char *fieldp,89,2783
+char *fieldp, *origfieldp 89,2783
+STRINGS sorttab 91,2812
+Gsl *gs 93,2871
+size_t memavail 95,2911
+int avekeylen[99,3136
+int maxmem,104,3242
+int maxmem, numkeys 104,3242
+char **sortptrs 106,3265
+char *sortspace 107,3316
+char fnames[109,3371
+char fnames[PATHNAME_MAX], fnames1[109,3371
+int lastsuffix 111,3423
+int firstsuffix 113,3547
+int suffix 114,3603
+int suff 115,3649
+int numruns 116,3699
+int estruns 117,3751
+int maxruns 118,3799
+int maxfiles 119,3859
+int num_tdirs 121,3961
+int current_tdir 122,3981
+char *tdirs[123,4038
+int tempspace[124,4108
+int tdir_minfree[126,4203
+int tempsize[127,4259
+int tdirnum[128,4325
+BOOL no_i 130,4393
+BOOL do_doclens 131,4413
+BOOL termunit 132,4439
+BOOL no_merge 134,4564
+BOOL deltmp 135,4588
+BOOL delfinal 138,4735
+BOOL Mmap 139,4789
+BOOL Lock 140,4809
+BOOL silent 142,4915
+BOOL trial 143,4937
+BOOL made_temp_files 145,4988
+int dflg 147,5020
+BOOL finished 151,5181
+int outrunchars 155,5297
+int outflag 157,5360
+int sources 158,5374
+int result 160,5404
+#define DUMP 162,5418
+#define OUTDUMP 163,5459
+char *Usage 165,5505
+char helpstring[187,6206
+char *helpmess 226,8243
+char helpstring[227,8260
+char trialmess[270,10426
+char *progname 276,10686
+main(279,10708
+void initrun(1151,36682
+void delete_temp_files(1168,37084
+void icleanup(1187,37576
+int estimate(1201,37858
+int make_run(1248,39242
+  outrunchars 1309,41416
+  lastoutchars 1316,41659
+  meanoutchars 1318,41721
+
+ixf.c,149
+#define PF_FILL_FACTOR 74,3117
+#define DIAG 76,3228
+#define SPURIOUS_REC_LIMIT 77,3243
+#define OSEQLIM 78,3276
+void Usage(80,3298
+main(92,3695
+
+ixsubs.c,411
+char *inf 9,202
+char *inf_3 10,235
+compitr_4(26,718
+compitr_4_norec(63,1504
+compitr_12(107,2612
+compitr_10(162,3954
+compitr_10_norec(192,4608
+compitr_11(229,5456
+outrun_4(284,6896
+outrun_12(433,11396
+outrun_10(581,15683
+outrun_20(707,19364
+outrun_11(814,22382
+#define REFILL 939,26028
+#define TERM 940,26045
+#define DONE 941,26060
+#define NUMFILES 943,26076
+imerge(948,26178
+merge(1154,32128
+
+mergeonly.c,52
+BOOL silent 12,292
+u_int Secs 13,315
+main(18,430
+
+mergeonly_gen.c,52
+BOOL silent 14,365
+u_int Secs 15,388
+main(19,464
+
+ix_deconstruct.c,77
+static void *inf_3 25,642
+static void *inf_4 26,680
+ix_deconstruct(29,727
+
+convert_runtime.c,3095
+#define VERSION 83,3126
+#define CHECKREC 84,3165
+#define ODD 93,3377
+#define EVEN 94,3391
+#define MAXFCNOLEN 96,3407
+#define MAX_LIM_LENGTH 97,3430
+#define PTOTCHARS 101,3485
+#define PTOTCHARS 103,3561
+#define PTOTCHARS 106,3644
+#define report 111,3788
+char *progname 152,5199
+char *convert_runtime_version 156,5262
+struct db Cdb 158,5305
+int pluscount 160,5322
+int reclen 161,5338
+int outreclen 162,5355
+int newparas 163,5371
+int outrecs 164,5434
+int recs_this_run 165,5452
+int maxfdlens[166,5476
+int maxallowablereclen 167,5504
+int maxreclen 169,5530
+int maxrecnum 170,5571
+int max_paracount 171,5591
+int max_se_num 172,5615
+int maxtoks 174,5637
+LL_TYPE totchars 177,5667
+LL_TYPE real_totchars 178,5731
+double totchars 180,5810
+double real_totchars 181,5873
+LL_TYPE chars_this_vol 184,5967
+int chars_this_vol 186,6002
+BOOL finished 189,6035
+BOOL do_par 190,6059
+BOOL truncated 191,6129
+int trunc_count 193,6207
+int trunc_recs 194,6271
+int tot_parlen 195,6292
+int hl_tot_parlen 196,6313
+char *recbuf 197,6333
+char fcno[199,6382
+BOOL checkpointing 203,6530
+int checkrec 204,6604
+BOOL validate 205,6630
+FILE *nullf 206,6654
+LL_TYPE rec_addr 210,6760
+LL_TYPE out_rec_addr 211,6808
+OFFSET_TYPE rec_addr 213,6879
+OFFSET_TYPE out_rec_addr 214,6930
+int ooffset 216,7006
+int oloffset 217,7020
+int par_addr 219,7036
+int out_par_addr 220,7094
+FILE *runp,222,7114
+FILE *runp, *dirp,222,7114
+FILE *runp, *dirp, *parp,222,7114
+FILE *runp, *dirp, *parp, *pardirp,222,7114
+FILE *runp, *dirp, *parp, *pardirp, *limp,222,7114
+FILE *bibfiles[223,7167
+OFFSET_TYPE maxbibsize[224,7219
+int maxrecs 225,7270
+int skipnum 226,7297
+BOOL istext 227,7315
+int fixedlimit 228,7337
+BOOL treclimits 229,7358
+BOOL halfcollection 231,7477
+BOOL phoney_fcno 233,7556
+BOOL silent 234,7583
+char record_mark 235,7605
+char field_mark 236,7638
+int result 238,7670
+char filenames[239,7683
+#define  XMLBUFFSIZE 244,7729
+#define  XMLMAXSTACKSIZE 245,7755
+int XmlRecInfoLen 247,7785
+int RecOffSize;248,7808
+int RecLenSize;249,7824
+int FieldOffSize;250,7840
+int FieldLenSize;251,7858
+int xml_field_offset;252,7877
+int outxml_field_offset;253,7899
+  LL_TYPE xml_record_offset 256,7963
+  LL_TYPE outxml_record_offset 257,8022
+  LL_TYPE xml_byte_proc;258,8097
+int xml_field_len;260,8129
+int outxml_field_len;261,8148
+int xml_rec_len;262,8170
+int outxml_rec_len;263,8187
+int ofdoffset;264,8207
+int ofdloffset;265,8293
+XML_Parser xmlp;267,8357
+char Xml_Buff[268,8374
+char *xmlrecinfo;269,8479
+struct stack_elem stack_elem270,8574
+struct stack_elem xml_stack[280,8720
+int stack_top;281,8767
+struct xml_field xml_field283,8784
+struct xml_field *xml_fields 289,8873
+int xml_matches 291,9042
+int xml_inside_rec 293,9169
+main(309,9452
+int process_record(860,27980
+void statfield(1065,34031
+void statrec(1075,34276
+int process_xml(1088,34497
+xml_start_el(1138,35749
+xml_end_el(1244,39487
+int XMLPush(1306,41516
+struct stack_elem XMLPop(1315,41724
+int build_fields_struct(1332,42158
+test_bibdir(1380,43546
+#define CONTEXTSIZE 1383,43567
+
+make_parafile.c,187
+#define I0q 18,410
+#define I0 25,585
+#define I0 33,821
+char buf[39,884
+char com[40,901
+char command[41,918
+char *response 42,974
+int res 43,991
+char *Usage 45,1002
+main(48,1056
+
+make_para_rec.c,22
+make_para_rec(33,813

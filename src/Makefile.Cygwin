@@ -1,0 +1,118 @@
+CC = gcc -ffast-math -g -O3
+DFLAG = -DMMPUT -DHOLD_ATOMIC_MAPS=0 -DHOLD_DOCLENS=1
+IFLAG = -I.
+SHELL = /bin/sh
+CFLAGS = $(DFLAG) $(IFLAG) -DSYSV=1 -DHILO=0 -DLARGEFILES=0 -DHAVE_LL=1 -L.
+YACC = bison -y
+YFLAGS = -v -d -S /Cygnus/cygwin-b20/share/bison.simple
+LEX = flex
+LFLAGS = -t
+PARSEFLAGS = -DFLEX
+OKAPI=//cam-01-srv/users00/sw/okapi
+OKLIB=$(OKAPI)/lib
+OKBIN=$(OKAPI)/bin
+
+HEADERS=defines.h parms.h bss.h bss_defaults.h \
+	site.h \
+	charclass.h bss_errors.h para.h \
+	i0_defs.h interface1/defs.h bss_protos.h
+
+SOURCES = bss_lookup.c bss_globs.c bss_db.c bss_db_desc.c bss_combine.c \
+	bss_sets.c bss_show.c bss_misc.c bss_funcs.c \
+	bss_extract.c bss_errors.c bss_passages.c \
+	bss_readrecs.c \
+	utils.c isdewey.c \
+	porter.c gslsubs.c \
+	weightsubs.c phase2.c extsubs.c Toktab.c \
+	setup_toktab.c para.c sentence.c \
+	i0_parse+.y i0_reader+.l i0_main.c
+
+SOURCES1 = interface1/main.c 
+
+ISOURCES = ix1.c ixf.c ixsubs.c mergeonly.c
+
+CONVSOURCES = convert_runtime.c
+
+L_OBJS= bss_lookup.o bss_globs.o bss_db.o bss_db_desc.o bss_combine.o \
+	bss_errors.o bss_readrecs.o \
+	bss_sets.o bss_show.o bss_misc.o bss_funcs.o \
+	bss_extract.o bss_passages.o \
+	utils.o  isdewey.o \
+	porter.o gslsubs.o Toktab.o \
+	weightsubs.o phase2.o extsubs.o \
+	para.o sentence.o 
+
+Y_OBJS=	i0_parse+.o i0_reader+.o i0_main.o
+
+LIBOBJS = $(OKLIB)/gmalloc.o
+
+all:	libbss.a libi0+.a i1+ indexing
+
+libbss.a:	$(L_OBJS) bss_version.o
+	rm -f libbss.a
+	ar -r libbss.a $(L_OBJS) bss_version.o
+
+bss_version.c:
+		version=`cat bss_VERSION`;\
+		echo "char *version=\"$$version\" ;">tmpvers.$$$$;\
+		echo "char *vdate=\"`date +%Y%m%d%H%M`\" ;" >> tmpvers.$$$$;\
+		mv -f tmpvers.$$$$ bss_version.c
+
+bss_version.o:	bss_version.c
+		$(CC) -c bss_version.c
+		rm bss_version.c
+
+libi0+.a: 	$(L_OBJS) $(Y_OBJS) bss_version.o
+		rm -f libi0+.a
+		ar -r libi0+.a $(L_OBJS) $(Y_OBJS) bss_version.o
+
+i1+:	libi0+.a
+	cd interface1; $(MAKE) CC="$(CC)" "CFLAGS=$(CFLAGS)" i1+
+
+indexing:	ix1 ixf mergeonly mergeonly_gen
+
+ix1:	libbss.a ix1.c ixsubs.c
+	$(CC) $(CFLAGS) $@.c ixsubs.c -lbss -lm  -o $@
+
+ixf:	ixf.c libbss.a
+	$(CC) $(CFLAGS) $@.c -lbss  -lm  -o $@
+
+convert_runtime:	convert_runtime.c libbss.a
+	$(CC) $(CFLAGS) convert_runtime.c -o $@ -lbss -lm 
+
+mergeonly:	mergeonly.c ixsubs.c utils.c
+	$(CC) $(CFLAGS) ixsubs.c ../bss/utils.c ../bss//Toktab.c mergeonly.c -o $@
+
+mergeonly_gen:	mergeonly_gen.c ixsubs.c utils.c
+	$(CC) $(CFLAGS) ixsubs.c ../bss/utils.c ../bss//Toktab.c mergeonly_gen.c -o $@
+
+tar:
+	tar cvf bss.tar $(SOURCES) $(SOURCES1) $(ISOURCES) $(HEADERS) bss_VERSION \
+	$(CONVSOURCES) site.*.h Makefile.*
+
+i0_parse+.c: 	i0_parse+.y 
+	$(YACC) $(YFLAGS) i0_parse+.y
+	sed s/yy/_yy/g < y.tab.c > i0_parse+.c
+	rm -f y.tab.c
+
+i0_parse+.o:	i0_parse+.c 
+	$(CC) $(CFLAGS) $(PARSEFLAGS) -c i0_parse+.c
+
+i0_reader+.c:	i0_reader+.l
+	echo "#include \"defines.h\"" > i0_reader+.c
+	$(LEX) $(LFLAGS) i0_reader+.l | sed s/yy/_yy/g >> i0_reader+.c
+
+i0_reader+.o: i0_reader+.c
+	$(CC) $(CFLAGS) $(PARSEFLAGS) -c i0_reader+.c
+
+y.tab.h:	i0_parse+.y
+
+clean:
+	rm -f core *.o *.a i0_parse+.c i0_reader+.c bss_version.c \
+	y.tab.h *.a *.so y.output *.exe
+
+etags:	 TAGS
+
+TAGS:	$(SOURCES) $(HEADERS) $(SOURCES1) $(ISOURCES)
+	etags -t $(SOURCES) $(HEADERS) $(SOURCES1) $(ISOURCES)
+

@@ -1,0 +1,7 @@
+#CC should be in environment
+#CC = cc -fast -xO5 -xchip=ultra -xarch=v8plusa
+#CC = gcc -O3 -march=i586 -ffast-math
+
+xml_path: xml_path.c
+	cc -DMMPUT -DHOLD_ATOMIC_MAPS=0 -DHOLD_DOCLENS=1 -g -I. -L . xml_path.c -o xml_path -lexpat -lm
+

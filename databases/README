@@ -1,0 +1,61 @@
+Database parameter files.
+
+<DB_ROOT> is the full pathname to the location of the database parameter
+          files.
+
+The parameter files are held in the sub-directory "databases" of
+<INSTALL_ROOT>.
+
+For each database four parameter files are required:
+
+1. main parameter file:     <database_name>
+2. field types:             <database_name>.field_types
+
+The type of data to be found in each field specified in (1).
+
+3. search groups:           <database_name>.search_groups
+
+For each index - specified in (1) - a line consisting of:
+
+   <index_name> <v1> <v2> <keyword_type> <stemming_type> <gsl_file>
+   <fno> 0 [<fno> 0]
+
+where:
+
+   <index_name>
+          <v1>               Anything (not used)
+          <v2>               Index number
+          <keyword type>     [ words3 | phrase | literal[_nc] ]
+                             _nc means convert to lowercase (no case)
+          <stemming type>    [ nostem | wstem | sstem ]
+          <gsl name>         name of gsl file to be used.
+          <fno> 0 [<f> 0]    A list of fields to be indexed, separated by
+                             zeros. -1 is the end of field list marker.
+
+4. gsl file
+
+This is a file containing lines of the form:
+
+     <gsl_class><term_list>:
+
+where <gsl_class> IN [FGHIPS]
+
+     F: stop-term
+     G: a set of two or more terms to be indexed as a phrase
+     H: stop-term
+     I: semi-stop-term
+     P: pre-fix
+     S: synonym group
+
+and <term_list> is a <space> separated list of terms, each ending in a
+comma. e.g.
+
+     advertising, advertisement, adverts,:
+
+Only when <gsl_class> = 'S' will <term_list> contain more than one term.
+
+See the file gsl.sample in the directory <INSTALL_ROOT>/databases
+
+In addition a fifth file, "db_avail" contains, for each database, a list
+of allowable users.
+

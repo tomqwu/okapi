@@ -1,0 +1,394 @@
+# gsl.lisa created 28 June 90 from gsl.lisa.new and gsl.new (catalogue gsl)
+# last modified 20 Sep 90 SW in light of inspec indexing run
+Fabout,:
+Fand,:
+Fet,:
+Fin,:
+Fnot,:
+Fof,:
+For,:
+Fsince,:
+Fund,:
+Gstandard deviation,:
+Gcomputer analysis,:
+Gcomputer engineering,:
+Glinear algebra,:
+Gsimultaneous equations,:
+Ha,:
+Hafter,:
+Halong,:
+Halso,:
+Halthough,:
+Hamong,:
+Han,:
+Hare,:
+Has,:
+Hat,:
+Hbe,:
+Hbeen,:
+Hbefore,:
+Hbehind,:
+Hbeing,:
+Hbetween,:
+Hbeyond,:
+Hbut,:
+Hby,:
+Hcan,:
+Hdas,:
+Hde,:
+Hder,:
+Hdo,:
+Hdon't,:
+Hdown,:
+Heen,:
+Hfor,:
+Hfrom,:
+Hgo,:
+Hhad,:
+Hhas,:
+Hhave,:
+Hhe,:
+Hher,:
+Hhere,:
+Hhers,:
+Hhet,:
+Hhim,:
+Hhis,:
+Hhow,:
+Hhowever,:
+Hif,:
+Hinto,:
+His,:
+Hits,:
+Hla,:
+Hle,:
+Hme,:
+Hmore,:
+Hmy,:
+Hmyself,:
+Hno,:
+Hoff,:
+Hon,:
+Hour,:
+Hover,:
+Hso,:
+Hsome,:
+Hthan,:
+Hthat,:
+Hthe,:
+Htheir,:
+Hthem,:
+Hthen,:
+Hthere,:
+Hthese,:
+Hthey,:
+Hthis,:
+Hthose,:
+Hthrough,:
+Hthroughout,:
+Hthus,:
+Hto,:
+Htoward,:
+Hunder,:
+Hup,:
+Hupon,:
+Hvol,:
+Hwas,:
+Hwe,:
+Hwere,:
+Hwhat,:
+Hwhatever,:
+Hwhen,:
+Hwhence,:
+Hwhere,:
+Hwherein,:
+Hwhether,:
+Hwhich,:
+Hwho,:
+Hwhose,:
+Hwhy,:
+Hwith,:
+Hwithin,:
+Hy,:
+Hyou,:
+Hyour,:
+Hyourself,:
+Iaddress,:
+Iadvance,:
+Iadvanced,:
+Ial,:
+Iall,:
+Ianother,:
+Iany,:
+Iapplication,:
+Iapproach,:
+Iarea,:
+Iaspect,:
+Ibecause,:
+Ibeginning,:
+Ibook,:
+Iboth,:
+Ibrief,:
+Ibriefly,:
+Ica,:
+Icame,:
+Icant,:
+Icentury,:
+Icirca,:
+Icollected,:
+Icollection,:
+Icome,:
+Icompared,:
+Iconcept,:
+Icondition,:
+Iconference,:
+Iconsider,:
+Iconsidered,:
+Iconsist,:
+Iconsisted,:
+Icontemporary,:
+Icontribution,:
+Icould,:
+Icourse,:
+Icriticism,:
+Icritique,:
+Icurrently,:
+Idemonstrate,:
+Idemonstrated,:
+Idetail,:
+Idevelopment,:
+Idie,:
+Idifferent,:
+Idifficult,:
+Idiscuss,:
+Idiscussed,:
+Idone,:
+Iduring,:
+Ieach,:
+Iearly,:
+Ieasy,:
+Ieasily,:
+Iedited,:
+Iedition,:
+Ieditor,:
+Ieffect,:
+Ieg,:
+Iel,:
+Ielementary,:
+Ien,:
+Iespecially,:
+Iessay,:
+Iessential,:
+Ietc,:
+Ievaluation,:
+Iexample,:
+Iexercise,:
+Ifew,:
+Ifinally,:
+Ifoundation,:
+Ifurther,:
+Igive,:
+Igiven,:
+Iglobal,:
+Igood,:
+Iguide,:
+Ihandbook,:
+Ihappen,:
+Ihappened,:
+Iheld,:
+Iie,:
+Iillustrated,:
+Iimpact,:
+Iimplication,:
+Iimportance,:
+Iincluding,:
+Iinfluence,:
+Iinside,:
+Iintermediate,:
+Iinternational,:
+Iintroduce,:
+Iintroduction,:
+Iintroductory,:
+Iinvestigating,:
+Iinvestigation,:
+Iinvolving,:
+Iissue,:
+Iiv,:
+Iix,:
+Ijournal,:
+Ikind,:
+Ikingdom,:
+Ila,:
+Ile,:
+Ilecture notes,:
+Ilecture,:
+Ilibrary,:
+Ilike,:
+Ilo,:
+Imade,:
+Imain,:
+Imake,:
+Imaking,:
+Imanual,:
+Imany,:
+Imethod,:
+Imodern,:
+Imonograph,:
+Imost,:
+Imuch,:
+Imust,:
+Inew,:
+Inow,:
+Inum,:
+Inumber,:
+Iobtain,:
+Iobtained,:
+Ioften,:
+Iold,:
+Ionly,:
+Iorganisation,:
+Ioriginal,:
+Iother,:
+Iout,:
+Ioutline,:
+Ioutlined,:
+Ioutside,:
+Ioverall,:
+Ioverview,:
+Ipamphlet,:
+Ipaper,:
+Ipaperback,:
+Iparticular,:
+Iparticularly,:
+Iparty,:
+Ipast,:
+Iperspective,:
+Ipossible,:
+Ipossibility,:
+Ipractical,:
+Ipractice,:
+Ipresented,:
+Iprevious,:
+Ipreviously,:
+Iprinciple,:
+Iproblem,:
+Iproceeding,:
+Iprocess,:
+Iproject,:
+Iproposed,:
+Ipublication,:
+Ipublished,:
+Ipublisher,:
+Irather,:
+Ireader,:
+Ireading,:
+Irecent,:
+Irecently,:
+Ireference,:
+Irelated,:
+Irelating,:
+Ireport,:
+Irespect,:
+Ireview,:
+Irole,:
+Isame,:
+Iseen,:
+Iselected,:
+Iseminar,:
+Iseries,:
+Iservice,:
+Iseveral,:
+Ishort,:
+Ishould,:
+Isimilar,:
+Isimple,:
+Isource,:
+Isourcebook,:
+Ispecial,:
+Istate of the art,:
+Istudies,:
+Istudy,:
+Isubject,:
+Isuch,:
+Isuggest,:
+Isuggested,:
+Isuitable,:
+Isupplement,:
+Isurvey,:
+Isystem,:
+Itake,:
+Itechnique,:
+Itext,:
+Itheme,:
+Itheories,:
+Itheory,:
+Itherefore,:
+Itoday,:
+Itogether,:
+Itomorrow,:
+Itopic,:
+Itowards,:
+Iunderstand,:
+Iunited,:
+Iup to date,:
+Iuse,:
+Iused,:
+Iuseful,:
+Iusing,:
+Ivery,:
+Ivia,:
+Iview,:
+Ivolume,:
+Iwhile,:
+Iwithout,:
+Iworkbook,:
+Iwould,:
+Iyear,:
+S1000, thousand,:
+S100th, hundred, 100,:
+S10th, tenth, ten, 10,:
+S16th, sixteenth, sixteen, 16,:
+S17th, seventeenth, seventeen, 17,:
+S18th, eighteenth, eighteen, 18,:
+S19th, nineteenth, nineteen, 19,:
+S1st, first, one, 1,:
+S20th, twentieth, twenty, 20,:
+S2nd, second, ii, two, 2,:
+S3rd, third, iii, three, 3,:
+S4gl, fourth generation language,:
+S4th, fourth, iv, four, 4,:
+S5th, fifth, five, 5,:
+S6th, sixth, vi, six, 6,:
+S7th, seventh, vii, seven, 7,:
+S8th, eighth, viii, eight, 8,:
+S9th, ninth, ix, nine, 9,:
+Sanalytical, analytic,:
+Sanalyze, analyze,:
+Saristotle, aristotelean, aristotelian,:
+Scad, computer aided design,:
+Scal, cai, computer aided instruction, computer aided learning, computer assisted learning,:
+Sclassify, classification,:
+Scomputation, computational,:
+Scomputer science, computing,:
+Scurriculum, curricula, curricular,:
+Sdisc, disk,:
+Sdp, edp, electronic data processing, data processing,:
+Sdti, department of trade and industry,:
+Sexperiment, experimental, experimentally, experimentation,:
+Sfoot, feet,:
+Sgeometrical, geometry,:
+Sgraphical, graphic,:
+Siq, intelligence quotient,:
+Sir, computerised information retrieval, computerised information storage and retrieval, information storage and retrieval, information retrieval,:
+Smaths, mathematics,:
+Smatrix, matrices,:
+Smicro computers, microcomputers, micro-computers,:
+Smicroelectronics, micro electronics, micro-electronics,:
+Son line, online, on-line,:
+Soperations research, operational research,:
+Soptimum, optimal,:
+Sphilosophical, philosophy,:
+Sram, random access memory,:
+Ssquare-root, square root,:
+Sstats, statistics, statistical,:
+

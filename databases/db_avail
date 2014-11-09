@@ -1,0 +1,55 @@
+## <DB_ROOT>/databases/db_avail
+##
+##  Where <DB_ROOT> is the pathname to the "databases" directory
+##  where all parameter files are stored.
+##
+##  Each line contains:
+##
+##    <database_name> <user_list>
+##
+##  <user_list> defines allowed / disallowed users for <database_name>
+##  and is made up of combinations of all or some of:
+##
+##             *     available to anyone
+##           gid     available to group
+##          -gid     not available to group
+##  <login name>     available to user with given login name
+##
+##  NOTE: gid must be numeric
+##
+##  The <user_list> is read until a parameter that applies to
+##  the current user is found or to the end of the list if none
+##  is found. Individual users are automatically excluded if their
+##  <login_name> is not included in <user_list> and <user_list>
+##  does not contain a <gid> that the user is in, or a *
+##
+##  Example entries:
+##
+##     inspec -34 *             database "inspec" is available to
+##                              everyone except those in group 34
+##
+##     d25_96 okapi sw mg ntd   database "d25_96" is available only to
+##                              users with login names  sw, mg, ntd
+##
+##     bible *                  database "bible" is available to
+##                              everyone.
+2004gendoc *
+2009trec *
+09article *
+100sample *
+10ksample *
+101sample *
+100ksample *
+200kpat *
+100k_1 *
+100k_2 *
+100k_3 *
+200k_1 *
+200k_2 *
+200k_3 *
+200k_4 *
+200k_5 *
+200k_6 *
+first *
+second *
+19gb *

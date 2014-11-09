@@ -1,0 +1,6 @@
+1 [TITLE]Ferroportin-1 in humans[/TITLE] [NEED]Find articles about Ferroportin-1,
+an iron transporter, in humans.[/NEED] [CONTEXT]Ferroportin1 (also known as SLC40A1;
+Ferroportin 1; FPN1; HFE4; IREG1; Iron regulated gene 1; Iron-regulated transporter
+1; MTP1; SLC11A3; and Solute carrier family 11 (proton-coupled divalent metal ion
+transporters), member 3) may play a role in iron transport.[/CONTEXT]
+
