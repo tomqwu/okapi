@@ -1,7 +1,0 @@
-<100> open, cell, electroporation
-<101> glutathione S transferase, GST, cleavage, affinity, chromatography
-<102> pouring, gel, porous
-<103> green fluorescent protein, GFP, tagged, proteins, tagged, proteins
-<104> microsomal, budding, assay, vesicles, microsomes, vitro
-<105> rat, IgM
-<106> chromatin IP, Immuno Precipitations, proteins, precipitate, proteins

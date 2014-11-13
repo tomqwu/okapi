@@ -1,3 +1,0 @@
-2004gendoc-kw-dn-2004topics.txt-0.25-100-10-1/
-Program cannot create a directory to output results.
-Please make sure there is the program has permission to do so.

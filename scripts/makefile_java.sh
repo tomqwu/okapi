@@ -1,5 +1,5 @@
 #!/bin/bash
-source /home/okapi/okapi-2.4.1/environmentSettings.bshrc
+source /home/okapi/okapi/environmentSettings.bshrc
 cd $OKAPI_BINDIR
 echo $OKAPI_BINDIR
 javac -cp . relex.java

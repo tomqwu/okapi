@@ -3,7 +3,7 @@
 TMPDIR=/tmp
 
 ## OKAPI_ROOT: The full pathname of the package installation directory
-OKAPI_ROOT=/home/okapi/okapi-2.4.1
+OKAPI_ROOT=/home/okapi/okapi
 
 ## OKAPI_LIBDIR: The pathname of the BSS library, libi0+.a
 OKAPI_LIBDIR=$OKAPI_ROOT/lib
@@ -15,7 +15,6 @@ OKAPI_BINDIR=$OKAPI_ROOT/bin
 BSS_TEMPPATH=/tmp
 
 ## BSS_PARMPATH: The full pathname of the database parameter files.
-## BSS_PARMPATH /TB/genomics-data/2006/genomic06-data/databases
 BSS_PARMPATH=$OKAPI_ROOT/databases
 
 ## GUI_CONFIG_FILES: The full pathname of the location of the GUI configuration files.
