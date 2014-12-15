@@ -3,7 +3,7 @@
 TMPDIR=/tmp
 
 ## OKAPI_ROOT: The full pathname of the package installation directory
-OKAPI_ROOT=/home/okapi/okapi
+OKAPI_ROOT=/home/okapi
 
 ## OKAPI_LIBDIR: The pathname of the BSS library, libi0+.a
 OKAPI_LIBDIR=$OKAPI_ROOT/lib
