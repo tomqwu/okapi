@@ -2,7 +2,7 @@
 #CC = cc -fast -xO5 -xchip=ultra -xarch=v8plusa
 #CC = gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE -g -march=i586 -ffast-math
 
-CC = gcc -g -march=x86-64 -ffast-math -fPIC
+CC = gcc -m32 -g -march=x86-64 -ffast-math -fPIC
 
 DFLAG = -DMMPUT -DHOLD_ATOMIC_MAPS=0 -DHOLD_DOCLENS=1
 IFLAG = -I.

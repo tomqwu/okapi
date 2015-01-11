@@ -27,7 +27,7 @@
 #define CONTROL_DIR "/home/okapi/databases/"
 #define SYSTEM_TEMPDIR "/tmp/"
 #define TEMP_DIR "/tmp/" 
-#define BIB_DIR "/home/okapi/bibfiles"
+#define BIB_DIR "/home/okapi/data/bibfiles"
 #define LOCALBIB_DIR "."
 #define MAXFILES 125
 #define BSS_WT_PWR
