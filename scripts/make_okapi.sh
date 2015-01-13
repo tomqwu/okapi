@@ -5,3 +5,5 @@ rm -rf *.o
 make clean
 make
 cp -f ix1 ixf convert_runtime i1+ $OKAPI_BINDIR
+
+exit 0

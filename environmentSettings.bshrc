@@ -11,6 +11,15 @@ OKAPI_LIBDIR=$OKAPI_ROOT/lib
 ## OKAPI_BINDIR: Okapi binaries. You might like to add this to your search PATH
 OKAPI_BINDIR=$OKAPI_ROOT/bin
 
+## OKAPI_SCRIPTS
+OKAPI_SCRIPTS=$OKAPI_ROOT/scripts
+
+## OKAPI_JAVASRC
+OKAPI_JAVASRC=$OKAPI_ROOT/javasrc
+
+## OKAPI_JAVABIN
+OKAPI_JAVABIN=$OKAPI_ROOT/javabin
+
 ## BSS_TEMPPATH: Directory for temporary files produced by all parts of the system.
 BSS_TEMPPATH=/tmp
 
