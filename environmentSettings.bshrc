@@ -121,3 +121,4 @@ ulimit -s unlimited
 export CLASSPATH=$CLASSPATH:$OKAPI_SOURCE:$OKAPI_BINDIR
 LD_LIBRARY_PATH=$OKAPI_BINDIR:$OKAPI_SOURCE
 export LD_LIBRARY_PATH
+export PATH=/usr/lib/jvm/java-6-openjdk-i386/bin:$PATH
