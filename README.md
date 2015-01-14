@@ -2,7 +2,7 @@
 
 ## convert runtime format from exchange format
 ```bash
-/convert_runtime 09article < /home/irlab/exchange_file/09article.exch
+/convert_runtime 09article < /home/okapi/input/Chem_para_1000.exch
 ```
 
 ## convert index
