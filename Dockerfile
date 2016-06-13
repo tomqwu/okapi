@@ -4,15 +4,15 @@
 ############################################################
 
 # Set the base image to Ubuntu
-FROM ubuntu
+FROM ubuntu:14.04
 
 # File Author / Maintainer
 MAINTAINER Maintaner Tom Wu <tomoodesign@gmail.com>
 
 # Pre-requisite for compiling Okapi
-RUN dpkg --add-architecture i386
-RUN apt-get update
-RUN apt-get install -y \
+RUN dpkg --add-architecture i386 && \
+    apt-get update && \
+    apt-get install -y \
 	gcc \
 	gcc-multilib \
 	libc6-i386 \
@@ -21,17 +21,16 @@ RUN apt-get install -y \
 	flex \
 	openjdk-6-jdk:i386 \
 	git \
-	vim
+	vim && \
+    rm -rf /var/lib/apt/lists/* && \
+    cp /usr/lib/jvm/java-1.6.0-openjdk-i386/include/jni.h /usr/lib/gcc/x86_64-linux-gnu/4.8/include && \
+    cp /usr/lib/jvm/java-1.6.0-openjdk-i386/include/jni_md.h /usr/lib/gcc/x86_64-linux-gnu/4.8/include && \
+    mkdir -p /home/okapi
 
-# jdk 6 and gcc 4.8
-RUN cp /usr/lib/jvm/java-1.6.0-openjdk-i386/include/jni.h /usr/lib/gcc/x86_64-linux-gnu/4.8/include
-RUN cp /usr/lib/jvm/java-1.6.0-openjdk-i386/include/jni_md.h /usr/lib/gcc/x86_64-linux-gnu/4.8/include
-
-RUN mkdir -p /home/okapi
 ADD okapi/* /home/okapi/
 
 # initialize okapi
-RUN /home/okapi/scripts/init.sh
+ENTRYPOINT  ["/home/okapi/scripts/init.sh"]
 
 WORKDIR /home/okapi
 
