@@ -28,9 +28,7 @@ RUN cp /usr/lib/jvm/java-1.6.0-openjdk-i386/include/jni.h /usr/lib/gcc/x86_64-li
 RUN cp /usr/lib/jvm/java-1.6.0-openjdk-i386/include/jni_md.h /usr/lib/gcc/x86_64-linux-gnu/4.8/include
 
 RUN mkdir -p /home/okapi
-RUN git clone https://github.com/canadatom/okapi.git /home/okapi
-RUN git config --global user.email "tomoodesign@gmail.com"
-RUN git config --global user.name "Tom Wu"
+ADD okapi/* /home/okapi/
 
 # initialize okapi
 RUN /home/okapi/scripts/init.sh
